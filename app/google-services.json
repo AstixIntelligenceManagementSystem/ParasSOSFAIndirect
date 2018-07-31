@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "721098137658",
+    "firebase_url": "https://parassosfaindirect.firebaseio.com",
+    "project_id": "parassosfaindirect",
+    "storage_bucket": "parassosfaindirect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721098137658:android:e23408cd1e5038d2",
+        "android_client_info": {
+          "package_name": "project.astix.com.parassosfaindirect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721098137658-7roiu7cc5um4a31cimmfkseq0d08t15v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtKFMf6SqtPUgwN93q1MNVahC9B0rB_RU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
