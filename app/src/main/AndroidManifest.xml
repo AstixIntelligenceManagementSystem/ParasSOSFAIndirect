@@ -415,7 +415,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC7k7-7qQuEwv-XwK3hQ9fMHGdfB2dtPzw" />
+            android:value="AIzaSyBYHg5Z8LoRkkOFHtIHIKAEZcpCRJb20V4" />
 
         <service
             android:name="project.astix.com.parassosfaindirect.GeocodeAddressIntentService"
