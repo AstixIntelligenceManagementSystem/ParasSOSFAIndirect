@@ -412,6 +412,8 @@
             android:name="project.astix.com.parassosfaindirect.Delivery_Details_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/detailActivityTheme"></activity>
+        <activity android:name=".DialogActivity_Report"
+            android:theme="@style/marketVisitTheme"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -486,6 +488,9 @@
         <activity android:name="project.astix.com.parassosfaindirect.StorelistActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".DialogActivity_MarketVisit"
+            android:theme="@style/marketVisitTheme"></activity>
 
     </application>
 

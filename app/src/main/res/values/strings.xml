@@ -1,9 +1,23 @@
 <resources>
 
-     <string name="app_name">Paras SO SFA</string>
+     <!--<string name="app_name">Paras SO SFA</string>-->
     <!-- <string name="app_name">Paras SO SFA Stagging</string>-->
     <!--<string name="app_name">Paras SO SFA Test</string>-->
-   <!--<string name="app_name">Paras SO SFA Dev</string>-->
+   <string name="app_name">Paras SO SFA Dev</string>
+
+    <string name="ChangeDSR">Change Salesman</string>
+    <string name="select_report_scope">Summary Reports</string>
+    <string name="selectDistributorProceeds">Please select Distributor to Proceed.</string>
+    <string name="individual_dsr">Individual Salesman</string>
+    <string name="full_territory">Full Territory</string>
+    <string name="distributor_scope">Distributor Scope</string>
+    <string name="view_new_added_store">View New Added Store</string>
+    <string name="select_attendance_scope">View Attendance Report</string>
+    <string name="select_attendance_report">DSR Attendance Report</string>
+
+    <string name="selectDSMProceeds">Please select Salesman to Proceed.</string>
+    <string name="selectOptionProceeds">Please select atleast one option to Proceeds.</string>
+    <string name="selectDSRProceeds">Please select Salesman to Proceeds.</string>
 
     <string name="StoreSale">Store Sale </string>
     <string name="InvoiceReview">Invoice Review</string>
@@ -808,11 +822,22 @@
     <string name="DayStart">Day Start</string>
     <string name="Warehouse">Warehouse Check In</string>
     <string name="DayStartCheckIN">Day Start</string>
+    <string name="warehousemapping">Warehouse Mapping</string>
     <string name="WarehouseStock">Warehouse  Stock</string>
     <string name="WarehouseDataSubmit">Warehouse Data Submit Successfully.</string>
 
     <string name="strRemainingStockStatus">Stock In Van</string>
     <string name="strDataLostIfNotSubmitted">The Filled data will be lost if not submitted?</string>
     <string name="prodlstPurchaseAmtBeforeTax">In.Val Before Tax:</string>
+
+    <string name="NoCityMapped">There is no city mapped to this phone</string>
+    <string name="NoStateMapped">There is no state mapped to this phone</string>
+    <string name="SubmittingDetails">Submitting  Details...</string>
+    <string name="SubmittingDbrInfo">Do you want to submit distributor information?</string>
+    <string name="SelectDbr">Select Distributor.</string>
+    <string name="PleaseSelectCity">Please Select City Name</string>
+    <string name="PleaseState">Please Select State Name</string>
+    <string name="DbrMapped">Distributor is Already Mapped</string>
+    <string name="PleaseCity">Please Fill Other City Name</string>
 
 </resources>

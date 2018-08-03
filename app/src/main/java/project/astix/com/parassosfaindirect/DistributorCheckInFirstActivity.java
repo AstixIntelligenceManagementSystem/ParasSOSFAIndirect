@@ -1935,7 +1935,7 @@ public class DistributorCheckInFirstActivity extends BaseActivity implements Loc
         String finalCity=etCity.getText().toString().trim();
         String finalState=etState.getText().toString().trim();
 
-        helperDb.open();
+       /* helperDb.open();
         helperDb.savetblDistributorMappingData(UniqueDistribtrMapId,""+DistribtrId_Global,""+DistributorNodeType_Global,flgGSTCapture,flgGSTCompliance,
                 GSTNumber,finalAddress,finalPinCode,finalCity,finalState,SOLattitudeFromLauncher,SOLongitudeFromLauncher,
                 SOAccuracyFromLauncer,"0",SOProviderFromLauncher,SOAllProvidersLocationFromLauncher,fnAddressFromLauncher,
@@ -1945,12 +1945,7 @@ public class DistributorCheckInFirstActivity extends BaseActivity implements Loc
                 SOFusedLocationLatitudeWithFirstAttemptFromLauncher,SOFusedLocationLongitudeWithFirstAttemptFromLauncher,
                 SOFusedLocationAccuracyWithFirstAttemptFromLauncher,3,flgLocationServicesOnOff,flgGPSOnOff,flgNetworkOnOff,flgFusedOnOff,flgInternetOnOffWhileLocationTracking,flgRestart);
 
-
-        //Nitika
-        //  By Nitika dbengine.savetblDistributorSavedData(header,Short_name,pID,Date, Et_value,DistID,DistNodeType,ProductNodeType,StockDate,Sstat,EntryType,StockPcsCaseType);
-
-
-        helperDb.close();
+        helperDb.close();*/
         try
         {
            // FullSyncDataNow task = new FullSyncDataNow(DistributorCheckInFirstActivity.this);

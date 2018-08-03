@@ -476,7 +476,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
         ll_distrbtrCheckIn = (LinearLayout) findViewById(R.id.ll_distrbtrCheckIn);
         ll_execution = (LinearLayout) findViewById(R.id.ll_execution);
         ll_stockCheckOut= (LinearLayout) findViewById(R.id.ll_stockCheckOut);
-        ll_distrbtnMap = (LinearLayout) findViewById(R.id.ll_distrbtnMap);
+        ll_distrbtnMap = (LinearLayout) findViewById(R.id.ll_warehose_mapping);
         ll_dsrTracker = (LinearLayout) findViewById(R.id.ll_dsrTracker);
         ll_DayEnd = (LinearLayout) findViewById(R.id.ll_DayEnd);
         ll_warehose= (LinearLayout) findViewById(R.id.ll_warehose);
@@ -523,7 +523,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
         //distributorStockWorking();
       //  executionWorking();
        // noVisitWorking();
-       // distributorMapWorking();
+        distributorMapWorking();
         dayEndWorking();
 
         imgVw_logout=(ImageView) findViewById(R.id.imgVw_logout);
@@ -1428,38 +1428,9 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                 else
                     ll_distrbtnMap.setSelected(true);*/
 
-               // Intent intent=new Intent(AllButtonActivity.this,DistributorMapActivity.class);
-               // startActivity(intent);
-
-                final Dialog dialogLanguage = new Dialog(AllButtonActivity.this);
-                dialogLanguage.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialogLanguage.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-
-                dialogLanguage.setCancelable(false);
-                dialogLanguage.setContentView(R.layout.language_popup);
-
-                TextView textviewEnglish=(TextView) dialogLanguage.findViewById(R.id.textviewEnglish);
-                TextView textviewHindi=(TextView) dialogLanguage.findViewById(R.id.textviewHindi);
-
-                textviewEnglish.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v) {
-                        dialogLanguage.dismiss();
-                        setLanguage("en");
-                    }
-                });
-                textviewHindi.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v) {
-                        dialogLanguage.dismiss();
-                        setLanguage("hi");
-                    }
-                });
-
-                dialogLanguage.show();
-
+                /*Intent intent=new Intent(AllButtonActivity.this,DistributorMapActivity.class);
+                startActivity(intent);*/
+                // finish();
 
             }
         });
@@ -1938,62 +1909,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
             public void onClick(View view)
             {
 
-               /* int alreadyLocFind=dbengine.fetchtblIsDBRStockSubmitted();
-                if(alreadyLocFind==0)
-                {
-                   *//* int checkData= dbengine.checkDSRCheckIntblDistributorMapping();
-                    if(checkData==1)
-                    {*//*
-                        int checkDataNotSync = dbengine.CheckUserDoneGetStoreOrNot();
-                        Date date1 = new Date();
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-                        fDate = sdf.format(date1).toString().trim();
-                        if (checkDataNotSync == 1)
-                        {
-                            dbengine.open();
-                            String rID = dbengine.GetActiveRouteID();
-                            dbengine.close();
-
-                            // Date date=new Date();
-                            sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-                            String fDateNew = sdf.format(date1).toString();
-                            //fDate = passDate.trim().toString();
-
-
-                            // In Splash Screen SP, we are sending this Format "dd-MMM-yyyy"
-                            // But InLauncher Screen SP, we are sending this Format "dd-MM-yyyy"
-
-
-                            Intent storeIntent = new Intent(AllButtonActivity.this, StoreSelection.class);
-                            storeIntent.putExtra("imei", imei);
-                            storeIntent.putExtra("userDate", fDate);
-                            storeIntent.putExtra("pickerDate", fDateNew);
-                            storeIntent.putExtra("rID", rID);
-                            startActivity(storeIntent);
-                            finish();
-
-                        }
-                        else
-                        {
-                            if(isOnline())
-                            {
-                                GetStoresForDay task = new GetStoresForDay(AllButtonActivity.this);
-                                task.execute();
-                            }
-                            else
-                            {
-                                showAlertSingleButtonError(getResources().getString(R.string.NoDataConnectionFullMsg));
-                            }
-                        }
-                   *//* }
-                    else
-                    {
-                        showAlertSingleButtonInfo(getResources().getString(R.string.DistributorCheckInMsg));
-                    }*//*
-                }
-                else
-                {*/
-                    int checkDataNotSync = dbengine.CheckStoreListPresentOrNot();
+               /*int checkDataNotSync = dbengine.CheckStoreListPresentOrNot();
                     Date date1 = new Date();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
                     fDate = sdf.format(date1).toString().trim();
@@ -2003,15 +1919,8 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                         String rID = dbengine.GetActiveRouteID();
                         dbengine.close();
 
-                        // Date date=new Date();
                         sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
                         String fDateNew = sdf.format(date1).toString();
-                        //fDate = passDate.trim().toString();
-
-
-                        // In Splash Screen SP, we are sending this Format "dd-MMM-yyyy"
-                        // But InLauncher Screen SP, we are sending this Format "dd-MM-yyyy"
-
 
                         Intent storeIntent = new Intent(AllButtonActivity.this, StoreSelection.class);
                         storeIntent.putExtra("imei", imei);
@@ -2043,10 +1952,14 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                         {
                             showAlertSingleButtonError(getResources().getString(R.string.NoDataConnectionFullMsg));
                         }
-                    }
-               // }
+                    }*/
 
 
+                Intent storeIntent = new Intent(AllButtonActivity.this, DialogActivity_MarketVisit.class);
+                storeIntent.putExtra("PageFrom", "0");
+                storeIntent.putExtra("imei", imei);
+
+                startActivity(storeIntent);
 
 
             }
@@ -2072,20 +1985,26 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
             public void onClick(View view)
             {
 
+
                 SharedPreferences.Editor editor = sharedPrefReport .edit();
                 editor.putString("fromPage", "1");
                 editor.commit();
-                Intent intent=new Intent(AllButtonActivity.this,DetailReportSummaryActivity.class);
+
+
+               /* Intent intent=new Intent(AllButtonActivity.this,DetailReportSummaryActivity.class);
 
                 intent.putExtra("imei", imei);
                 intent.putExtra("userDate",currSysDate);
                 intent.putExtra("pickerDate", fDate);
                 intent.putExtra("rID", rID);
                 intent.putExtra("back", "0");
-               // intent.putExtra("fromPage","AllButtonActivity");
 
                 startActivity(intent);
-                finish();
+                finish();*/
+
+                Intent storeIntent = new Intent(AllButtonActivity.this, DialogActivity_Report.class);
+
+                startActivity(storeIntent);
 
 
             }

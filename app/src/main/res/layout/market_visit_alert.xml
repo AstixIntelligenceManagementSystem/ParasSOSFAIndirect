@@ -33,7 +33,7 @@
     <RadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Visit on behalf of DSM"
+        android:text="Visit on behalf of Salesman"
         android:padding="4dp"
         android:id="@+id/rb_dsrVisit"/>
 

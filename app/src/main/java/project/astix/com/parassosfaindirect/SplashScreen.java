@@ -328,6 +328,11 @@ public class SplashScreen extends BaseActivity implements  TaskListner
 
 
       //  imei="354010084603910";  // paras imei like Godrej
+
+        imei="352742062583530";  // Paras SO IMei
+
+
+
         CommonInfo.imei = imei;
         sPrefAttandance=getSharedPreferences(CommonInfo.AttandancePreference, MODE_PRIVATE);
         Date date1 = new Date();
@@ -1366,7 +1371,7 @@ public class SplashScreen extends BaseActivity implements  TaskListner
 
             try
             {
-                for(int mm = 1; mm<12; mm++)
+                for(int mm = 1; mm<13; mm++)
                 {
                     System.out.println("Error at = "+mm);
                     if(mm==1)
@@ -1494,6 +1499,21 @@ public class SplashScreen extends BaseActivity implements  TaskListner
                                 chkFlgForErrorToCloseApp = 1;
                                 break;
                             }*/
+
+                        }
+
+
+                    }
+                    if(mm==12)
+                    {
+                        int DatabaseVersion = dbengine.DATABASE_VERSION;
+                        int ApplicationID = dbengine.Application_TypeID;
+                        newservice = newservice.getfnGetLTFoodsSODSRRoutesTempByAbhinavDetails(getApplicationContext(), imei, fDate, DatabaseVersion, ApplicationID);
+                        if (!newservice.director.toString().trim().equals("1")) {
+                            if (chkFlgForErrorToCloseApp == 0) {
+                                chkFlgForErrorToCloseApp = 1;
+                                break;
+                            }
 
                         }
 

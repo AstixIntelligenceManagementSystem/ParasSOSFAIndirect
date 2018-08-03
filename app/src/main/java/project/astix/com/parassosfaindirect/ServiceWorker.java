@@ -3533,7 +3533,7 @@ String RouteType="0";
 					flgTodayRoute=0;
 				}
 
-				dbengine.saveRoutesInfo(stID.trim(),RouteType.trim(), deDescr,Active,flgTodayRoute,RouteDate);
+				dbengine.saveRoutesInfo(stID.trim(),RouteType.trim(), deDescr,Active,flgTodayRoute,RouteDate,"0","0");
 
 
 			}
@@ -13221,11 +13221,16 @@ String RouteType="0";
 				
 				// System.out.println("Summary new SKUWise occur value bydate"+ dateVAL.toString());
 				// System.out.println("Summary new SKUWise occur value IMEINo"+ uuid.toString());
-				
-				
+
+				int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+				int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+				int flgDataScope=CommonInfo.flgDataScope;
 				
 				client.addProperty("IMEINo", uuid.toString());
 				client.addProperty("bydate", dateVAL.toString());
+				client.addProperty("SalesmanNodeId", SalesmanNodeId);
+				client.addProperty("SalesmanNodeType", SalesmanNodeType);
+				client.addProperty("flgDataScope", flgDataScope);
 				
 				
 				sse.setOutputSoapObject(client);
@@ -13548,11 +13553,19 @@ String RouteType="0";
 				
 				// System.out.println("Summary new SKUWise occur value bydate"+ dateVAL.toString());
 				// System.out.println("Summary new SKUWise occur value IMEINo"+ uuid.toString());
-				
-				
-				
+
+
+
+				int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+				int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+				int flgDataScope=CommonInfo.flgDataScope;
+
+
 				client.addProperty("IMEINo", uuid.toString());
 				client.addProperty("bydate", dateVAL.toString());
+				client.addProperty("SalesmanNodeId", SalesmanNodeId);
+				client.addProperty("SalesmanNodeType", SalesmanNodeType);
+				client.addProperty("flgDataScope", flgDataScope);
 				
 				
 				sse.setOutputSoapObject(client);
@@ -13787,11 +13800,20 @@ String RouteType="0";
 				
 				// System.out.println("Summary new SKUWise occur value bydate"+ dateVAL.toString());
 				// System.out.println("Summary new SKUWise occur value IMEINo"+ uuid.toString());
-				
-				
-				
+
+
+
+				int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+				int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+				int flgDataScope=CommonInfo.flgDataScope;
+
+
+
 				client.addProperty("IMEINo", uuid.toString());
 				client.addProperty("bydate", dateVAL.toString());
+				client.addProperty("SalesmanNodeId", SalesmanNodeId);
+				client.addProperty("SalesmanNodeType", SalesmanNodeType);
+				client.addProperty("flgDataScope", flgDataScope);
 				
 				
 				sse.setOutputSoapObject(client);
@@ -14264,13 +14286,22 @@ String RouteType="0";
 				
 				// System.out.println("Summary new SKUWise occur value bydate"+ dateVAL.toString());
 				// System.out.println("Summary new SKUWise occur value IMEINo"+ uuid.toString());
-				
-				
-				
+
+
+
+				int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+				int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+				int flgDataScope=CommonInfo.flgDataScope;
+
+
 				client.addProperty("IMEINo", uuid.toString());
 				client.addProperty("bydate", dateVAL.toString());
-				
-				
+				client.addProperty("SalesmanNodeId", SalesmanNodeId);
+				client.addProperty("SalesmanNodeType", SalesmanNodeType);
+				client.addProperty("flgDataScope", flgDataScope);
+
+
+
 				sse.setOutputSoapObject(client);
 				sse.bodyOut = client;
 				androidHttpTransport.call(SOAP_ACTION, sse);
@@ -14590,11 +14621,19 @@ String RouteType="0";
 				
 				// System.out.println("Summary new SKUWise occur value bydate"+ dateVAL.toString());
 				// System.out.println("Summary new SKUWise occur value IMEINo"+ uuid.toString());
-				
-				
-				
+
+
+
+				int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+				int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+				int flgDataScope=CommonInfo.flgDataScope;
+
+
 				client.addProperty("IMEINo", uuid.toString());
 				client.addProperty("bydate", dateVAL.toString());
+				client.addProperty("SalesmanNodeId", SalesmanNodeId);
+				client.addProperty("SalesmanNodeType", SalesmanNodeType);
+				client.addProperty("flgDataScope", flgDataScope);
 				
 				
 				sse.setOutputSoapObject(client);
@@ -14829,11 +14868,19 @@ String RouteType="0";
 				
 				// System.out.println("Summary new SKUWise occur value bydate"+ dateVAL.toString());
 				// System.out.println("Summary new SKUWise occur value IMEINo"+ uuid.toString());
-				
-				
-				
+
+
+
+				int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+				int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+				int flgDataScope=CommonInfo.flgDataScope;
+
+
 				client.addProperty("IMEINo", uuid.toString());
 				client.addProperty("bydate", dateVAL.toString());
+				client.addProperty("SalesmanNodeId", SalesmanNodeId);
+				client.addProperty("SalesmanNodeType", SalesmanNodeType);
+				client.addProperty("flgDataScope", flgDataScope);
 				
 				
 				sse.setOutputSoapObject(client);
@@ -17717,8 +17764,15 @@ String RouteType="0";
 
 			//client.addProperty("bydate", dateVAL.toString());
 
+			int SalesmanNodeId=CommonInfo.SalesmanNodeId;
+			int SalesmanNodeType=CommonInfo.SalesmanNodeType;
+			int flgDataScope=CommonInfo.flgDataScope;
+
 			client.addProperty("IMEINo", uuid.toString());
 			client.addProperty("bydate", dateVAL.toString());
+			client.addProperty("SalesmanNodeId", SalesmanNodeId);
+			client.addProperty("SalesmanNodeType", SalesmanNodeType);
+			client.addProperty("flgDataScope", flgDataScope);
 
 
 			sse.setOutputSoapObject(client);
@@ -20968,6 +21022,312 @@ int flgProcessedInvoice=0;
 
 
 
+
+
+
+
+			setmovie.director = "1";
+			dbengine.close();
+			return setmovie;
+
+		} catch (Exception e) {
+
+			// System.out.println("Aman Exception occur in GetIMEIVersionDetailStatusNew :"+e.toString());
+			setmovie.director = e.toString();
+			setmovie.movie_name = e.toString();
+			dbengine.close();
+
+			return setmovie;
+		}
+
+
+
+
+
+	}
+
+	public ServiceWorker getfnGetLTFoodsSODSRRoutesTempByAbhinavDetails(Context ctx,String uuid,String CurDate,int DatabaseVersion,int ApplicationID)
+	{
+
+		this.context = ctx;
+		PRJDatabase dbengine = new PRJDatabase(context);
+
+
+		decimalFormat.applyPattern(pattern);
+
+		int chkTblStoreListContainsRow=1;
+		StringReader read;
+		InputSource inputstream;
+		final String SOAP_ACTION = "http://tempuri.org/fnGetLTFoodsSODSRRoutesTempByAbhinav";
+		final String METHOD_NAME = "fnGetLTFoodsSODSRRoutesTempByAbhinav";
+		final String NAMESPACE = "http://tempuri.org/";
+		final String URL = UrlForWebService;
+		//Create request
+		SoapObject table = null; // Contains table of dataset that returned
+		// through SoapObject
+		SoapObject client = null; // Its the client petition to the web service
+		SoapObject tableRow = null; // Contains row of table
+		SoapObject responseBody = null; // Contains XML content of dataset
+
+		//SoapObject param
+		HttpTransportSE transport = null; // That call webservice
+		SoapSerializationEnvelope sse = null;
+
+		sse = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+		sse.dotNet = true;
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL,timeout);
+
+		ServiceWorker setmovie = new ServiceWorker();
+
+		try {
+			client = new SoapObject(NAMESPACE, METHOD_NAME);
+
+
+
+
+			client.addProperty("bydate", CurDate);
+			client.addProperty("uuid", uuid.toString());
+			client.addProperty("DatabaseVersion", DatabaseVersion);
+			client.addProperty("ApplicationID", ApplicationID);
+
+
+
+			// // System.out.println("Kajol 102");
+			sse.setOutputSoapObject(client);
+			// // System.out.println("Kajol 103");
+			sse.bodyOut = client;
+			// // System.out.println("Kajol 104");
+
+			androidHttpTransport.call(SOAP_ACTION, sse);
+
+			// // System.out.println("Kajol 1");
+
+			responseBody = (SoapObject)sse.bodyIn;
+			// This step: get file XML
+			//responseBody = (SoapObject) sse.getResponse();
+			int totalCount = responseBody.getPropertyCount();
+
+			// // System.out.println("Kajol 2 :"+totalCount);
+			String resultString=androidHttpTransport.responseDump;
+
+			String name=responseBody.getProperty(0).toString();
+
+			// // System.out.println("Kajol 3 :"+name);
+
+			XMLParser xmlParser = new XMLParser();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource();
+			is.setCharacterStream(new StringReader(name));
+			Document doc = db.parse(is);
+			dbengine.open();
+
+			//dbengine.delete_all_storeDetailTables();
+
+
+
+
+			NodeList tblDSRCoverageMasterNode = doc.getElementsByTagName("tblDSRCoverageMaster");
+			for (int i = 0; i < tblDSRCoverageMasterNode.getLength(); i++)
+			{
+
+				String CoverageAreaNodeID="0";
+				String CoverageAreaNodeType ="0";
+				String CoverageArea ="0";
+				String PersonNodeID ="0";
+				String PersonNodeType ="0";
+				String PersonName ="0";
+
+				Element element = (Element) tblDSRCoverageMasterNode.item(i);
+
+				if(!element.getElementsByTagName("CoverageAreaNodeID").equals(null))
+				{
+					NodeList CoverageAreaNodeIDNode = element.getElementsByTagName("CoverageAreaNodeID");
+					Element     line = (Element) CoverageAreaNodeIDNode.item(0);
+					if (CoverageAreaNodeIDNode.getLength()>0)
+					{
+						CoverageAreaNodeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("CoverageAreaNodeType").equals(null))
+				{
+					NodeList CoverageAreaNodeTypeNode = element.getElementsByTagName("CoverageAreaNodeType");
+					Element     line = (Element) CoverageAreaNodeTypeNode.item(0);
+					if (CoverageAreaNodeTypeNode.getLength()>0)
+					{
+						CoverageAreaNodeType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("CoverageArea").equals(null))
+				{
+					NodeList CoverageAreaNode = element.getElementsByTagName("CoverageArea");
+					Element     line = (Element) CoverageAreaNode.item(0);
+					if (CoverageAreaNode.getLength()>0)
+					{
+						CoverageArea=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("PersonNodeID").equals(null))
+				{
+					NodeList PersonNodeIDNode = element.getElementsByTagName("PersonNodeID");
+					Element     line = (Element) PersonNodeIDNode.item(0);
+					if (PersonNodeIDNode.getLength()>0)
+					{
+						PersonNodeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("PersonNodeType").equals(null))
+				{
+					NodeList PersonNodeTypeNode = element.getElementsByTagName("PersonNodeType");
+					Element     line = (Element) PersonNodeTypeNode.item(0);
+					if (PersonNodeTypeNode.getLength()>0)
+					{
+						PersonNodeType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("PersonName").equals(null))
+				{
+					NodeList PersonNameNode = element.getElementsByTagName("PersonName");
+					Element     line = (Element) PersonNameNode.item(0);
+					if (PersonNameNode.getLength()>0)
+					{
+						PersonName=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+
+
+				dbengine.savetblDSRCoverageMaster(CoverageAreaNodeID, CoverageAreaNodeType, CoverageArea, PersonNodeID, PersonNodeType,PersonName);
+
+			}
+
+
+
+
+			NodeList tblDSRRouteMasterWithCoverageMapping = doc.getElementsByTagName("tblDSRRouteMasterWithCoverageMapping");
+			for (int i = 0; i < tblDSRRouteMasterWithCoverageMapping.getLength(); i++)
+			{
+
+
+				String CoverageAreaNodeID="0";
+				String CoverageAreaNodeType="0";
+				String CoverageArea="0";
+				String RouteNodeID="0";
+				String RouteNodeType="0";
+				String Route="0";
+				String PersonNodeID="0";
+				String PersonNodeType="0";
+				String Active="0";
+				int flgTodayRoute=0;
+				String RouteDate="06-Aug-2015";
+
+
+				Element element = (Element) tblDSRRouteMasterWithCoverageMapping.item(i);
+
+				if(!element.getElementsByTagName("CoverageAreaNodeID").equals(null))
+				{
+					NodeList CoverageAreaNodeIDNode = element.getElementsByTagName("CoverageAreaNodeID");
+					Element     line = (Element) CoverageAreaNodeIDNode.item(0);
+					if (CoverageAreaNodeIDNode.getLength()>0)
+					{
+						CoverageAreaNodeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageAreaNodeType").equals(null))
+				{
+					NodeList CoverageAreaNodeTypeNode = element.getElementsByTagName("CoverageAreaNodeType");
+					Element     line = (Element) CoverageAreaNodeTypeNode.item(0);
+					if (CoverageAreaNodeTypeNode.getLength()>0)
+					{
+						CoverageAreaNodeType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageArea").equals(null))
+				{
+					NodeList CoverageAreaNode = element.getElementsByTagName("CoverageArea");
+					Element     line = (Element) CoverageAreaNode.item(0);
+					if (CoverageAreaNode.getLength()>0)
+					{
+						CoverageArea=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("RouteNodeID").equals(null))
+				{
+					NodeList RouteIDNode = element.getElementsByTagName("RouteNodeID");
+					Element     line = (Element) RouteIDNode.item(0);
+					if (RouteIDNode.getLength()>0)
+					{
+						RouteNodeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("RouteNodeType").equals(null))
+				{
+					NodeList RouteTypeNode = element.getElementsByTagName("RouteNodeType");
+					Element     line = (Element) RouteTypeNode.item(0);
+					if (RouteTypeNode.getLength()>0)
+					{
+						RouteNodeType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("Route").equals(null))
+				{
+					NodeList RouteNode = element.getElementsByTagName("Route");
+					Element     line = (Element) RouteNode.item(0);
+					if (RouteNode.getLength()>0)
+					{
+						Route=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("PersonNodeID").equals(null))
+				{
+					NodeList DSRNodeIDNode = element.getElementsByTagName("PersonNodeID");
+					Element     line = (Element) DSRNodeIDNode.item(0);
+					if (DSRNodeIDNode.getLength()>0)
+					{
+						PersonNodeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("PersonNodeType").equals(null))
+				{
+					NodeList DSRNodeTypeNode = element.getElementsByTagName("PersonNodeType");
+					Element     line = (Element) DSRNodeTypeNode.item(0);
+					if (DSRNodeTypeNode.getLength()>0)
+					{
+						PersonNodeType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("Active").equals(null))
+				{
+					NodeList CflgActiveDSRRouteNode = element.getElementsByTagName("Active");
+					Element     line = (Element) CflgActiveDSRRouteNode.item(0);
+					if (CflgActiveDSRRouteNode.getLength()>0)
+					{
+						Active=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(Integer.parseInt(Active)==1)
+				{
+					flgTodayRoute=1;
+
+				}
+				else
+				{
+					flgTodayRoute=0;
+				}
+
+				dbengine.saveRoutesInfo(RouteNodeID.trim(),RouteNodeType.trim(), Route,Integer.parseInt(Active),flgTodayRoute,RouteDate,CoverageAreaNodeID,CoverageAreaNodeType);
+
+
+			}
 
 
 

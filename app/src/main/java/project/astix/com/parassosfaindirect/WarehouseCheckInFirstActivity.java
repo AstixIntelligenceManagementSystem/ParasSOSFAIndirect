@@ -1978,7 +1978,7 @@ public class WarehouseCheckInFirstActivity extends BaseActivity implements Locat
         String finalCity=etCity.getText().toString().trim();
         String finalState=etState.getText().toString().trim();
 
-        helperDb.open();
+       /* helperDb.open();
         helperDb.savetblDistributorMappingData(UniqueDistribtrMapId,""+userId,""+"0",flgGSTCapture,flgGSTCompliance,
                 GSTNumber,finalAddress,finalPinCode,finalCity,finalState,SOLattitudeFromLauncher,SOLongitudeFromLauncher,
                 SOAccuracyFromLauncer,"0",SOProviderFromLauncher,SOAllProvidersLocationFromLauncher,fnAddressFromLauncher,
@@ -1990,7 +1990,7 @@ public class WarehouseCheckInFirstActivity extends BaseActivity implements Locat
 
 
 
-        helperDb.close();
+        helperDb.close();*/
         try
         {
            // FullSyncDataNow task = new FullSyncDataNow(DistributorCheckInFirstActivity.this);

@@ -99,6 +99,7 @@ import org.json.JSONObject;
 
 public class StoreSelection extends BaseActivity implements com.google.android.gms.location.LocationListener,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
+	SharedPreferences sharedPref;
 	//public static HashMap<String, String> hmapStoreIdSstat=new HashMap<String, String>();
 	public String currSysDate;
 	public int chkFlgForErrorToCloseApp=0;
@@ -2259,6 +2260,44 @@ public void DayEndWithoutalert()
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_store_selection);
+
+
+
+		sharedPref = getSharedPreferences(CommonInfo.Preference, MODE_PRIVATE);
+		if(sharedPref.contains("CoverageAreaNodeID"))
+		{
+			if(sharedPref.getInt("CoverageAreaNodeID",0)!=0)
+			{
+				CommonInfo.CoverageAreaNodeID=sharedPref.getInt("CoverageAreaNodeID",0);
+				CommonInfo.CoverageAreaNodeType=sharedPref.getInt("CoverageAreaNodeType",0);
+			}
+		}
+		if(sharedPref.contains("SalesmanNodeId"))
+		{
+			if(sharedPref.getInt("SalesmanNodeId",0)!=0)
+			{
+				CommonInfo.SalesmanNodeId=sharedPref.getInt("SalesmanNodeId",0);
+				CommonInfo.SalesmanNodeType=sharedPref.getInt("SalesmanNodeType",0);
+			}
+		}
+		if(sharedPref.contains("flgDataScope"))
+		{
+			if(sharedPref.getInt("flgDataScope",0)!=0)
+			{
+				CommonInfo.flgDataScope=sharedPref.getInt("flgDataScope",0);
+
+			}
+		}
+		if(sharedPref.contains("flgDSRSO"))
+		{
+			if(sharedPref.getInt("flgDSRSO",0)!=0)
+			{
+				CommonInfo.FlgDSRSO=sharedPref.getInt("flgDSRSO",0);
+
+			}
+		}
+
+
 		tl2 = (TableLayout) findViewById(R.id.dynprodtable);
 		imei=getIMEI();
 		pickerDate=getDateInMonthTextFormat();
@@ -2288,7 +2327,8 @@ public void DayEndWithoutalert()
 		relativeLayout1=(RelativeLayout) findViewById(R.id.relativeLayout1);
 
 		dbengine.open();
-		rID=dbengine.GetActiveRouteID();
+		//rID=dbengine.GetActiveRouteID();
+		rID= dbengine.GetActiveRouteIDCrntDSR(CommonInfo.CoverageAreaNodeID,CommonInfo.CoverageAreaNodeType);
 		if(rID.equals("0"))
 		{
 			rID=dbengine.GetNotActiveRouteID();
@@ -2499,8 +2539,9 @@ public void DayEndWithoutalert()
 		setUpVariable();
 
 
-		//
-		String routeNametobeSelectedInSpinner=dbengine.GetActiveRouteDescr();
+
+		//String routeNametobeSelectedInSpinner=dbengine.GetActiveRouteDescr();
+		String routeNametobeSelectedInSpinner=dbengine.GetActiveRouteDescrBasedCoverageIDandNodeTyep();
 		int index=0;
 		if(hmapRouteIdNameDetails!=null)
 		{
@@ -3364,6 +3405,30 @@ public void DayEndWithoutalert()
 	        parms.gravity = Gravity.TOP | Gravity.LEFT;
 	        parms.height=parms.MATCH_PARENT;
 	        parms.dimAmount = (float) 0.5;
+
+
+		 final   Button butn_Change_dsr = (Button) dialog.findViewById(R.id.butn_Change_dsr);
+		 // butn_Change_dsr.setVisibility(View.GONE);
+		 butn_Change_dsr.setOnClickListener(new OnClickListener()
+		 {
+			 @Override
+			 public void onClick(View view)
+			 {
+
+				 dialog.dismiss();
+				 Intent storeIntent = new Intent(StoreSelection.this, DialogActivity_MarketVisit.class);
+				 storeIntent.putExtra("PageFrom", "1");
+				 storeIntent.putExtra("imei", imei);
+
+
+				 startActivity(storeIntent);
+			 }
+		 });
+		 int FlgDSRSO=CommonInfo.FlgDSRSO;
+		 if(FlgDSRSO==1)
+		 {
+			 butn_Change_dsr.setVisibility(View.GONE);
+		 }
 	        
 
 	        final   Button butn_refresh_data = (Button) dialog.findViewById(R.id.butn_refresh_data);

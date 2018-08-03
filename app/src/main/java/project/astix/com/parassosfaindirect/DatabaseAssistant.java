@@ -143,7 +143,8 @@ public class DatabaseAssistant
 			exportTable("tblStoreCloseLocationDetails");
 			exportTable("tblStoreClosedPhotoDetail");
 			exportTable("tblStoreCloseReasonSaving");
-				exportTableAttandance("tblAttandanceDetails");
+			exportTableAttandance("tblAttandanceDetails");
+				exportTable("tblDsrLocationDetails");
 
 
 
