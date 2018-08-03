@@ -96,9 +96,12 @@ public class CommonInfo
 	public static String DATABASE_NAME = "DbParasSOSFAApp";
 	public static int AnyVisit = 0;
 
-	public static int DATABASE_VERSIONID = 12;      // put this field value based on value in table on the server
+	public static int DATABASE_VERSIONID = 18;      // put this field value based on value in table on the server
 	public static String AppVersionID = "1.0";   // put this field value based on value in table on the server
-	public static int Application_TypeID = 4; //1=Parag Store Mapping,2=Parag SFA Indirect,3=Parag SFA Direct
+	public static int Application_TypeID = 9; //1=Parag Store Mapping,2=Parag SFA Indirect,3=Parag SFA Direct
+
+    // application id will be 9 because its its is copy of Godrej
+
 	public static String OrderSyncPath="http://103.20.212.194/ReadXML_ParasDevelopment/DefaultSOSFA.aspx";
 	public static String ImageSyncPath="http://103.20.212.194/ReadXML_ParasImagesDevelopment/Default.aspx";
 	public static String OrderTextSyncPath="http://103.20.212.194/ReadTxtFileForParasSFADevelopment/default.aspx";
