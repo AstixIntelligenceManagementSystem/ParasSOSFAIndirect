@@ -1371,7 +1371,7 @@ public class SplashScreen extends BaseActivity implements  TaskListner
 
             try
             {
-                for(int mm = 1; mm<13; mm++)
+                for(int mm = 1; mm<14; mm++)
                 {
                     System.out.println("Error at = "+mm);
                     if(mm==1)
@@ -1518,6 +1518,15 @@ public class SplashScreen extends BaseActivity implements  TaskListner
                         }
 
 
+                    }
+                    if(mm==13) {
+                        newservice = newservice.getWarehouseMappingMstr(getApplicationContext(), imei, fDate);
+                        if (!newservice.director.toString().trim().equals("1")) {
+                            if (chkFlgForErrorToCloseApp == 0) {
+                                chkFlgForErrorToCloseApp = 1;
+                                break;
+                            }
+                        }
                     }
 
                 }

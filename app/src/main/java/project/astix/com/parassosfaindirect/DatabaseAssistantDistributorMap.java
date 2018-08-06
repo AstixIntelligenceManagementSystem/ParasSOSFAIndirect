@@ -85,6 +85,7 @@ public class DatabaseAssistantDistributorMap
           //  exportTable("tblsameLocationForStoreRestartDone");
             exportTable("tblDistributorMapping");
 
+
         }
         String xmlString = xmlBuilder.end();
         writeToFile(xmlString, exportFileNamePrefix + ".xml");

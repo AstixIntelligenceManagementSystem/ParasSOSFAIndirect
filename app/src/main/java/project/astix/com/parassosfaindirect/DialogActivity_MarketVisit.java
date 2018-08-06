@@ -74,6 +74,8 @@ import java.util.regex.Pattern;
 
 public class DialogActivity_MarketVisit extends BaseActivity implements LocationListener,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
+
+    int flgOwnRouteClick=0;
     String whereTo = "11";
     ProgressDialog pDialog2;
     DatabaseAssistant DASFA = new DatabaseAssistant(this);
@@ -365,6 +367,7 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
                     }
                     else
                     {
+                        flgOwnRouteClick=1;
                         marketVisitGetRoutesClick();
                     }
 
@@ -1156,13 +1159,13 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
                         FusedLocationLatitudeWithFirstAttempt+"--"+FusedLocationLongitudeWithFirstAttempt+"--"+FusedLocationAccuracyWithFirstAttempt);
 */
                 dbengine.close();
-                flgJointWorking=1;
+
 
                 whatTask = 2;
                 if(isOnline())
                 {
                     try {
-
+                        flgJointWorking=1;
                         new bgTasker().execute().get();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -1758,15 +1761,15 @@ private void marketVisitGetRoutesClick(){
                 //    Toast.makeText(AllButtonActivity.this,"Please fill Stock out first for starting your market visit.",Toast.LENGTH_SHORT).show();
                 //  showSyncError();
             }
-            else if(flgStockOut==0)
+            else if(flgStockOut==0 && flgOwnRouteClick==1)
             {
-                showAlertStockOut(getResources().getString(R.string.genTermNoDataConnection),getResources().getString(R.string.AlertVANStockStockOut));
-
-
+                flgOwnRouteClick=0;
+                showAlertStockOut(getResources().getString(R.string.genTermNoDataConnection),getResources().getString(R.string.AlertVANStockStockOut)); // message change by Avinash Sir on 3 Aug 2018 on Paras SO SFA
                 //   Toast.makeText(AllButtonActivity.this,"Error while retrieving data.",Toast.LENGTH_SHORT).show();
             }
-            else if(dbengine.flgConfirmedWareHouse()==0)
+            else if(dbengine.flgConfirmedWareHouse()==0 && flgOwnRouteClick==1)
             {
+                flgOwnRouteClick=0;
                 showAlertStockOut(getResources().getString(R.string.genTermNoDataConnection),getResources().getString(R.string.AlertVANStockStockValidate));
             }
             else

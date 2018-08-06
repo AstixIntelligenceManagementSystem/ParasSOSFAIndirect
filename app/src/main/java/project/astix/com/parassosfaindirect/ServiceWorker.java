@@ -21352,6 +21352,161 @@ int flgProcessedInvoice=0;
 
 	}
 
+	public ServiceWorker getWarehouseMappingMstr(Context ctx,String uuid,String CurDate)
+	{
+		this.context = ctx;
+		PRJDatabase dbengine = new PRJDatabase(context);
+
+		decimalFormat.applyPattern(pattern);
+
+		int chkTblStoreListContainsRow=1;
+		StringReader read;
+		InputSource inputstream;
+		final String SOAP_ACTION = "http://tempuri.org/fnGetWareHouseMstrListForBasedOnIMEI";
+		final String METHOD_NAME = "fnGetWareHouseMstrListForBasedOnIMEI";
+		final String NAMESPACE = "http://tempuri.org/";
+		final String URL = UrlForWebService;
+		//Create request
+		SoapObject table = null; // Contains table of dataset that returned
+		// through SoapObject
+		SoapObject client = null; // Its the client petition to the web service
+		SoapObject tableRow = null; // Contains row of table
+		SoapObject responseBody = null; // Contains XML content of dataset
+
+		//SoapObject param
+		HttpTransportSE transport = null; // That call webservice
+		SoapSerializationEnvelope sse = null;
+
+		sse = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+		sse.dotNet = true;
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL,timeout);
+
+		ServiceWorker setmovie = new ServiceWorker();
+
+		try {
+			client = new SoapObject(NAMESPACE, METHOD_NAME);
+			client.addProperty("uuid", uuid.toString());
+			client.addProperty("SysDate", CurDate.toString());
+
+			sse.setOutputSoapObject(client);
+
+			sse.bodyOut = client;
+
+			androidHttpTransport.call(SOAP_ACTION, sse);
+
+			responseBody = (SoapObject)sse.bodyIn;
+			// This step: get file XML
+			//responseBody = (SoapObject) sse.getResponse();
+			int totalCount = responseBody.getPropertyCount();
+
+			// // System.out.println("Kajol 2 :"+totalCount);
+			String resultString=androidHttpTransport.responseDump;
+
+			String name=responseBody.getProperty(0).toString();
+
+			XMLParser xmlParser = new XMLParser();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource();
+			is.setCharacterStream(new StringReader(name));
+			Document doc = db.parse(is);
+
+			dbengine.open();
+
+
+			dbengine.Delete_tblWarehouseMstr();
+
+			NodeList tblDistributorListForSONode = doc.getElementsByTagName("tblWareHouseMstrList");
+			for (int i = 0; i < tblDistributorListForSONode.getLength(); i++)
+			{
+
+				String NodeID="0";
+				String NodeType="0";
+				String Descr="0";
+				String latCode="0";
+				String LongCode="0";
+				String flgMapped="0";
+
+				Element element = (Element) tblDistributorListForSONode.item(i);
+				if(!element.getElementsByTagName("NodeID").equals(null))
+				{
+					NodeList NodeIDNode = element.getElementsByTagName("NodeID");
+					Element     line = (Element) NodeIDNode.item(0);
+					if (NodeIDNode.getLength()>0)
+					{
+						NodeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("NodeType").equals(null))
+				{
+					NodeList NodeTypeNode = element.getElementsByTagName("NodeType");
+					Element     line = (Element) NodeTypeNode.item(0);
+					if (NodeTypeNode.getLength()>0)
+					{
+						NodeType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("Descr").equals(null))
+				{
+					NodeList DescrNode = element.getElementsByTagName("Descr");
+					Element     line = (Element) DescrNode.item(0);
+					if (DescrNode.getLength()>0)
+					{
+						Descr=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("latCode").equals(null))
+				{
+					NodeList latCodeNode = element.getElementsByTagName("latCode");
+					Element     line = (Element) latCodeNode.item(0);
+					if (latCodeNode.getLength()>0)
+					{
+						latCode=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("LongCode").equals(null))
+				{
+					NodeList LongCodeNode = element.getElementsByTagName("LongCode");
+					Element     line = (Element) LongCodeNode.item(0);
+					if (LongCodeNode.getLength()>0)
+					{
+						LongCode=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("flgMapped").equals(null))
+				{
+					NodeList flgMappedNode = element.getElementsByTagName("flgMapped");
+					Element     line = (Element) flgMappedNode.item(0);
+					if (flgMappedNode.getLength()>0)
+					{
+						flgMapped=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				flgMapped="1";
+
+
+				dbengine.saveWarehouseMstrData(Integer.parseInt(NodeID),Integer.parseInt(NodeType),Descr,latCode,LongCode,Integer.parseInt(flgMapped));
+
+				}
+
+
+
+			setmovie.director = "1";
+			dbengine.close();
+			return setmovie;
+
+		} catch (Exception e) {
+			setmovie.exceptionCode=e.getCause().getMessage();
+			setmovie.director = e.toString();
+			setmovie.movie_name = e.toString();
+			dbengine.close();
+
+			return setmovie;
+		}
+	}
+
 
 
 }

@@ -106,6 +106,8 @@ public class CommonInfo
 	public static String ImageSyncPath="http://103.20.212.194/ReadXML_ParasImagesDevelopment/Default.aspx";
 	public static String OrderTextSyncPath="http://103.20.212.194/ReadTxtFileForParasSFADevelopment/default.aspx";
 	public static String OrderSyncPathDistributorMap="http://103.20.212.194/ReadXML_ParasDevelopment/DefaultSODistributorMapping.aspx";
+	public static String OrderSyncPathWarehouseMap="http://103.20.212.194/ReadXML_ParasDevelopment/DefaultSOWarehouseMapping.aspx";
+
 	public static String InvoiceSyncPath="http://103.20.212.194/ReadXML_ParasInvoiceDevelopment/Default.aspx";
 	public static String DistributorSyncPath="http://103.20.212.194/ReadXML_ParasSFADistributionDevelopment/Default.aspx";
 	public static String WebStockOutUrl="http://103.20.212.194/Parassfa/manageorder/frmStockTransferToVanDetail_PDA.aspx";

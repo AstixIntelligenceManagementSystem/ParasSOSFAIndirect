@@ -568,10 +568,11 @@ public class SyncMaster extends Activity
 		AlertDialog.Builder alertDialogSyncOK = new AlertDialog.Builder(SyncMaster.this);
 		alertDialogSyncOK.setTitle(getText(R.string.genTermInformation));
 		alertDialogSyncOK.setCancelable(false);
-		/*alertDialogSyncOK
-				.setMessage("Sync was successful!");*/
-		//alertDialogSyncOK.setMessage(getText(R.string.syncAlertOKMsg));
-		if(StoreSelection.flgChangeRouteOrDayEnd==3)
+		if(whereTo.contentEquals("WarehouseMap"))
+		{
+			alertDialogSyncOK.setMessage(getText(R.string.SubmitDistrbtr));
+		}
+		else if(StoreSelection.flgChangeRouteOrDayEnd==3)
 		{
 			alertDialogSyncOK.setMessage(getText(R.string.syncAlertStoreQuotationOKMsg));
 		}
@@ -651,7 +652,13 @@ public class SyncMaster extends Activity
 
 
 						// finishing activity & stepping back
-						if(whereTo.contentEquals("11"))
+						if(whereTo.contentEquals("WarehouseMap"))
+						{
+							Intent submitStoreIntent = new Intent(SyncMaster.this, AllButtonActivity.class);
+							startActivity(submitStoreIntent);
+							finish();
+						}
+						else if(whereTo.contentEquals("11"))
 						{
 							int chkSct=0;
 							/*db.open();
@@ -1996,7 +2003,11 @@ if(NoOfOutletID.length>0)
 				}
 
 			    pDialogGetStores.setTitle(getText(R.string.genTermPleaseWaitNew));
-			    if(StoreSelection.flgChangeRouteOrDayEnd==1)
+			 if(whereTo.contentEquals("WarehouseMap"))
+          {
+              pDialogGetStores.setMessage(getResources().getString(R.string.SubmitDistrbtrMapDetail));
+          }
+			    else if(StoreSelection.flgChangeRouteOrDayEnd==1)
 				{
 				 pDialogGetStores.setMessage(getResources().getString(R.string.txtEndingDay));
 				}else if(StoreSelection.flgChangeRouteOrDayEnd==2)
@@ -2007,6 +2018,11 @@ if(NoOfOutletID.length>0)
 				{
 					 pDialogGetStores.setMessage(getResources().getString(R.string.txtSubmitQuoteDetail));
 					}
+				else if(DialogActivity_MarketVisit.flgJointWorking==1)
+				{
+					pDialogGetStores.setMessage("Submitting Joint Working Details...");
+					DialogActivity_MarketVisit.flgJointWorking=0;
+				}
 				else if(DayStartActivity.flgDaySartWorking==1)
 				{
 					pDialogGetStores.setMessage(getResources().getString(R.string.submittingDayStart));
@@ -2074,7 +2090,32 @@ if(NoOfOutletID.length>0)
 						 // String urlString = "http://115.124.126.184/ReadXML_PragaSFA/default.aspx?CLIENTFILENAME=" + zipFileName;
 
 
-						 String urlString = CommonInfo.OrderSyncPath.trim() + "?CLIENTFILENAME=" + xmlFileName+".xml";
+						// String urlString = CommonInfo.OrderSyncPath.trim() + "?CLIENTFILENAME=" + xmlFileName+".xml";
+
+						 String filetype="0";
+						 String urlString="0";
+						 filetype=dbengine.getfiletype(xmlFileName);
+						 if(filetype.equals("1"))
+						 {
+							 urlString = CommonInfo.OrderSyncPath.trim() + "?CLIENTFILENAME=" + xmlFileName + ".xml";
+						 }
+						 else if(filetype.equals("2"))
+						 {
+							 urlString = CommonInfo.OrderSyncPathWarehouseMap.trim() + "?CLIENTFILENAME=" + xmlFileName + ".xml";
+						 }
+						 else if(filetype.equals("4"))
+						 {
+							// urlString = CommonInfo.NewStoreSyncPath.trim() + "?CLIENTFILENAME=" + xmlFileName + ".xml";
+						 }
+						 else if(filetype.equals("6"))
+						 {
+							 //urlString = CommonInfo.OrderSyncPathDistributorTarget.trim() + "?CLIENTFILENAME=" + xmlFileName + ".xml";
+						 }
+						 else
+						 {
+							 urlString = CommonInfo.OrderSyncPath.trim() + "?CLIENTFILENAME=" + xmlFileName + ".xml";
+						 }
+
 
 
 						 try {
@@ -2265,7 +2306,7 @@ if(NoOfOutletID.length>0)
 			            		else
 			            		{
 
-			            			Intent submitStoreIntent = new Intent(SyncMaster.this, LauncherActivity.class);
+			            			Intent submitStoreIntent = new Intent(SyncMaster.this, AllButtonActivity.class);
 									startActivity(submitStoreIntent);
 									finish();
 			            		}

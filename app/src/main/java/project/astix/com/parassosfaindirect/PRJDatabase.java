@@ -37,6 +37,24 @@ public class PRJDatabase
     private static final String TAG = "PRJDatabase";
 
 
+
+    // WareHouse Mapping
+    private static final String TABLE_tblWarehouseMstr = "tblWarehouseMstr";
+    private static final String DATABASE_CREATE_TABLE_tblWarehouseMstr = "create table tblWarehouseMstr(NodeID int null," +
+            "NodeType int null,Descr text null,latCode text null,LongCode text null,flgMapped int null);";
+
+    private static final String TABLE_tblWarehouseMapping="tblWarehouseMapping";
+    private static final String DATABASE_CREATE_TABLE_tblWarehouseMapping="create table tblWarehouseMapping(" +
+            "WarehouseUniqueId text null, WarehouseNodeID text null,WarehouseNodeType text null,flgGSTCapture text null," +
+            "flgGSTCompliance text null,GSTNumber text null, Address text null,PinCode text null, City text null, State text null," +
+            "fnLati text null,fnLongi text null,fnAccuracy text null," +
+            "flgLocNotFound text null,fnAccurateProvider text null,AllProvidersLocation text null,fnAddress text null," +
+            "GpsLat text null, GpsLong text null, GpsAccuracy text null, GpsAddress text null, NetwLat text null, " +
+            "NetwLong text null, NetwAccuracy text null, NetwAddress text null, FusedLat text null, FusedLong text null, " +
+            "FusedAccuracy text null, FusedAddress text null,FusedLocationLatitudeWithFirstAttempt text null," +
+            "FusedLocationLongitudeWithFirstAttempt text null,FusedLocationAccuracyWithFirstAttempt text null,Sstat int null,flgLocationServicesOnOff int null,flgGPSOnOff int null,flgNetworkOnOff int null,flgFusedOnOff int null,flgInternetOnOffWhileLocationTracking int null,flgRestart int null,MapAddress text null,MapCity text null,MapPinCode text null,MapState text null,CityId text null,StateId text null,LandlineNo text null,EmailID text null);";
+
+
     //market visit proceed btn loc fetchoncr
     private static final String TABLE_tblDsrLocationDetails="tblDsrLocationDetails";
     private static final String DATABASE_CREATE_TABLE_tblDsrLocationDetails="create table tblDsrLocationDetails(" +
@@ -4953,7 +4971,7 @@ public class PRJDatabase
 
     public void reCreateDB()
     {
-
+        db.execSQL("DELETE FROM  tblWarehouseMstr");
         db.execSQL("DELETE FROM  tblActualVisitStock");
         db.execSQL("DELETE FROM tblAttandanceDetails");
         db.execSQL("DELETE FROM tblInvoiceDetails");
@@ -29044,6 +29062,22 @@ String fetchdate=fnGetDateTimeString();
 
     }
 
+    public void UpdatetblWarehouseMappingFlag(String WarehouseUniqueId, int flag2set)
+    {
+
+        try
+        {
+            final ContentValues values = new ContentValues();
+            values.put("Sstat", flag2set);
+            int affected = db.update("tblWarehouseMapping", values, "WarehouseUniqueId=?",new String[] { WarehouseUniqueId });
+        }
+        catch (Exception ex)
+        {
+            String ex1=ex.getMessage();
+        }
+
+    }
+
     public void UpdateDistributerFlag(String DistribtrUniqueId, int flag2set)
     {
 
@@ -29064,8 +29098,36 @@ String fetchdate=fnGetDateTimeString();
     {
 
         String flgCheckIfStoreExists="0^0";
-        //tblStoreDetails(StoreID
+
         Cursor cursor2 = db.rawQuery("SELECT DistribtrId,DistributorNodeType FROM tblDistributorMapping WHERE tblDistributorMapping.DistribtrUniqueId='"+DistribtrUniqueId+"'", null);
+        try {
+            if(cursor2.getCount()>0)
+            {
+                if(cursor2.moveToFirst())
+                {
+
+                    flgCheckIfStoreExists=(String) cursor2.getString(0).toString()+"^"+(String) cursor2.getString(1).toString();
+
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            String ex1=e.getMessage();
+        }
+        finally {
+            cursor2.close();
+
+        }
+        return flgCheckIfStoreExists;
+    }
+
+    public String fngetWIdAndWType(String DistribtrUniqueId)
+    {
+
+        String flgCheckIfStoreExists="0^0";
+
+        Cursor cursor2 = db.rawQuery("SELECT NodeID,NodeType FROM tblWarehouseMstr WHERE tblWarehouseMapping.WarehouseUniqueId='"+DistribtrUniqueId+"'", null);
         try {
             if(cursor2.getCount()>0)
             {
@@ -29096,11 +29158,25 @@ String fetchdate=fnGetDateTimeString();
         close();
 
     }
+    public void fnupdateWarehouseMstrLocationtrackRemapFlg(String DistribtrUniqueId)
+    {
+        open();
+        String DIdAndDType=fngetWIdAndWType(DistribtrUniqueId);
+        db.execSQL("UPDATE tblWarehouseMstr SET flgRemap=0 WHERE tblWarehouseMstr.NodeID='"+DIdAndDType.split(Pattern.quote("^"))[0]+"' AND tblWarehouseMstr.NodeType='"+DIdAndDType.split(Pattern.quote("^"))[1]+"'");
+        close();
 
-    public void Delete_tblDistributorMstr()
+    }
+
+       public void Delete_tblDistributorMstr()
     {
         db.execSQL("DELETE FROM tblDistribtorMstr");
     }
+
+    public void Delete_tblWarehouseMstr()
+    {
+        db.execSQL("DELETE FROM tblWarehouseMstr");
+    }
+
 
     //map distributor
     public long  saveDistributorMstrData(int DBRNodeID, int DistributorNodeType, String Distributor, int flgRemap)
@@ -32424,6 +32500,9 @@ close();
 
             try
             {
+
+                db.execSQL(DATABASE_CREATE_TABLE_tblWarehouseMapping);
+                db.execSQL(DATABASE_CREATE_TABLE_tblWarehouseMstr);
                 db.execSQL(DATABASE_CREATE_TABLE_tblDsrLocationDetails);
                 // SO Tables
                 db.execSQL(Table_tblDSRCoverageMaster_Definition);
@@ -32697,6 +32776,8 @@ close();
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try
             {
+                db.execSQL("DROP TABLE IF EXISTS tblWarehouseMapping");
+                db.execSQL("DROP TABLE IF EXISTS tblWarehouseMstr");
                 db.execSQL("DROP TABLE IF EXISTS tblDsrLocationDetails");
                 db.execSQL("DROP TABLE IF EXISTS tblDSRCoverageMaster");
                 db.execSQL("DROP TABLE IF EXISTS tblUserName");
@@ -34408,7 +34489,168 @@ close();
         return SONodeIdAndNodeType;
     }
 
+    //map distributor
+    public long  saveWarehouseMstrData(int NodeID, int NodeType, String Descr,String latCode,
+                                       String LongCode, int flgMapped)
+    {
+        ContentValues initialValues = new ContentValues();
 
+        initialValues.put("NodeID", NodeID);
+        initialValues.put("NodeType", NodeType);
+        initialValues.put("Descr", Descr.trim());
+        initialValues.put("latCode", latCode.trim());
+        initialValues.put("LongCode", LongCode.trim());
+        initialValues.put("flgMapped", flgMapped);   //0=Not To be mapped Again,1=Can Map Distributor
+
+        return db.insert(TABLE_tblWarehouseMstr, null, initialValues);
+    }
+
+    public String[] getWarehouseDataForMapActivity()
+    {
+        String strStoreTypeNamesDetais[] =null;
+        String phoneNum="0",email="NA";
+        try {
+            Cursor cursor2 = db.rawQuery("SELECT NodeID,NodeType,Descr,flgMapped,latCode,LongCode FROM tblWarehouseMstr", null);
+
+            if(cursor2.getCount()>0)
+            {
+                strStoreTypeNamesDetais=new String[cursor2.getCount()+1];
+                if (cursor2.moveToFirst())
+                {
+                    for (int i = 0; i < cursor2.getCount(); i++)
+                    {
+                        if(i==0)
+                        {
+                            strStoreTypeNamesDetais[i]="0^0^Select Warehouse^0^0^0";
+                        }
+                        if(cursor2.getString(4).equals(""))
+                        {
+                            phoneNum="0";
+                        }
+                        if(cursor2.getString(5).equals(""))
+                        {
+                            email="NA";
+                        }
+                        strStoreTypeNamesDetais[i+1] = cursor2.getString(0) +"^"+cursor2.getString(1)+"^"+cursor2.getString(2)+"^"+cursor2.getString(3)+"^"+phoneNum+"^"+email;
+                        cursor2.moveToNext();
+                    }
+                }
+            }
+            else
+            {
+                strStoreTypeNamesDetais=new String[1];
+                strStoreTypeNamesDetais[0]="0^0^Select Warehouse^0^0^0";
+            }
+            return strStoreTypeNamesDetais;
+        } finally {
+
+        }
+    }
+
+    public long savetblWarehouseMappingData(String DistribtrUniqueId,String  DistribtrId ,String DistributorNodeType ,
+                                              String flgGSTCapture,String flgGSTCompliance ,String GSTNumber, String Address,
+                                              String PinCode,String City,String State,String fnLati,
+                                              String fnLongi ,String fnAccuracy ,String flgLocNotFound,String fnAccurateProvider,
+                                              String AllProvidersLocation ,String fnAddress ,String GpsLat ,String  GpsLong ,
+                                              String GpsAccuracy ,String GpsAddress ,String NetwLat ,String NetwLong ,
+                                              String NetwAccuracy ,String  NetwAddress ,String  FusedLat ,String  FusedLong ,
+                                              String FusedAccuracy ,String  FusedAddress ,String FusedLocationLatitudeWithFirstAttempt,
+                                              String FusedLocationLongitudeWithFirstAttempt ,String FusedLocationAccuracyWithFirstAttempt,
+                                              int Sstat,int flgLocationServicesOnOff,int flgGPSOnOff,int flgNetworkOnOff,
+                                              int flgFusedOnOff,int flgInternetOnOffWhileLocationTracking,int flgRestart,
+                                              String CityId,String StateId,String MapAddress,String MapCity,
+                                              String MapPinCode,String MapState,String PhoneNo,String EmailID)
+    {
+        ContentValues initialValues = new ContentValues();
+
+        initialValues.put("WarehouseUniqueId", DistribtrUniqueId.trim());
+        initialValues.put("WarehouseNodeID", DistribtrId.trim());
+        initialValues.put("WarehouseNodeType", DistributorNodeType.trim());
+        initialValues.put("flgGSTCapture", flgGSTCapture.trim());
+        initialValues.put("flgGSTCompliance", flgGSTCompliance.trim());
+        initialValues.put("GSTNumber", GSTNumber.trim());
+
+        initialValues.put("Address", Address.trim());
+        initialValues.put("PinCode", PinCode.trim());
+        initialValues.put("City", City.trim());
+        initialValues.put("State", State.trim());
+
+        initialValues.put("fnLati", fnLati.trim());
+        initialValues.put("fnLongi", fnLongi.trim());
+        initialValues.put("fnAccuracy", fnAccuracy.trim());
+        initialValues.put("flgLocNotFound", flgLocNotFound.trim());
+        initialValues.put("fnAccurateProvider", fnAccurateProvider.trim());
+        initialValues.put("AllProvidersLocation", AllProvidersLocation.trim());
+        initialValues.put("fnAddress", fnAddress.trim());
+
+        initialValues.put("GpsLat", GpsLat.trim());
+        initialValues.put("GpsLong", GpsLong.trim());
+        initialValues.put("GpsAccuracy", GpsAccuracy.trim());
+        initialValues.put("GpsAddress", GpsAddress.trim());
+
+        initialValues.put("NetwLat", NetwLat.trim());
+        initialValues.put("NetwLong", NetwLong.trim());
+        initialValues.put("NetwAccuracy", NetwAccuracy.trim());
+        initialValues.put("NetwAddress", NetwAddress.trim());
+
+        initialValues.put("FusedLat", FusedLat.trim());
+        initialValues.put("FusedLong", FusedLong.trim());
+        initialValues.put("FusedAccuracy", FusedAccuracy.trim());
+        initialValues.put("FusedAddress", FusedAddress.trim());
+
+        initialValues.put("FusedLocationLatitudeWithFirstAttempt", FusedLocationLatitudeWithFirstAttempt.trim());
+        initialValues.put("FusedLocationLongitudeWithFirstAttempt", FusedLocationLongitudeWithFirstAttempt.trim());
+        initialValues.put("FusedLocationAccuracyWithFirstAttempt", FusedLocationAccuracyWithFirstAttempt.trim());
+        initialValues.put("Sstat", Sstat);
+
+        initialValues.put("flgLocationServicesOnOff", flgLocationServicesOnOff);
+        initialValues.put("flgGPSOnOff", flgGPSOnOff);
+        initialValues.put("flgNetworkOnOff", flgNetworkOnOff);
+        initialValues.put("flgFusedOnOff", flgFusedOnOff);
+        initialValues.put("flgInternetOnOffWhileLocationTracking", flgInternetOnOffWhileLocationTracking);
+        initialValues.put("flgRestart", flgRestart);
+
+        initialValues.put("MapAddress", MapAddress);
+        initialValues.put("MapCity", MapCity);
+        initialValues.put("MapPinCode", MapPinCode);
+        initialValues.put("MapState", MapState);
+        initialValues.put("CityId", CityId);
+        initialValues.put("StateId", StateId);
+
+       // initialValues.put("PhoneNo", PhoneNo);
+        initialValues.put("LandlineNo", PhoneNo);
+        initialValues.put("EmailID", EmailID);
+
+        return db.insert(TABLE_tblWarehouseMapping, null, initialValues);
+    }
+    public String getfiletype(String XmlFileName)
+    {
+        open();
+        String filetype ="1";
+        try {
+
+
+            Cursor cursor2 = db.rawQuery("SELECT filetype FROM tbl_XMLfiles where XmlFileName='"+XmlFileName+"'",null);
+
+            if(cursor2.getCount()>0)
+            {
+                if (cursor2.moveToFirst())
+                {
+                    for (int i = 0; i < cursor2.getCount(); i++)
+                    {
+
+                        filetype = cursor2.getString(0);
+                        cursor2.moveToNext();
+                    }
+                }
+            }
+
+            return filetype;
+        } finally {
+            close();
+
+        }
+    }
 }
 
 

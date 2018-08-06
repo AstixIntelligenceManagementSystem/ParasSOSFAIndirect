@@ -433,7 +433,10 @@
             android:screenOrientation="portrait"
             ></activity>
         <activity
-            android:name="project.astix.com.parassosfaindirect.DistributorMapActivity"
+        android:name="project.astix.com.parassosfaindirect.DistributorMapActivity"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name="project.astix.com.parassosfaindirect.WarehouseMapActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="project.astix.com.parassosfaindirect.SyncMasterDistributor"

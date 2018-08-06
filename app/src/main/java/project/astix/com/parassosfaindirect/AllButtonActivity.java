@@ -1428,8 +1428,8 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                 else
                     ll_distrbtnMap.setSelected(true);*/
 
-                /*Intent intent=new Intent(AllButtonActivity.this,DistributorMapActivity.class);
-                startActivity(intent);*/
+                Intent intent=new Intent(AllButtonActivity.this,WarehouseMapActivity.class);
+                startActivity(intent);
                 // finish();
 
             }

@@ -5,6 +5,8 @@
     <!--<string name="app_name">Paras SO SFA Test</string>-->
    <string name="app_name">Paras SO SFA Dev</string>
 
+    <string name="SubmitDistrbtrMapDetail">Submitting Warehouse Map Details...</string>
+    <string name="SubmitDistrbtr">Warehouse Data is Submitted Succcessfully</string>
     <string name="ChangeDSR">Change Salesman</string>
     <string name="select_report_scope">Summary Reports</string>
     <string name="selectDistributorProceeds">Please select Distributor to Proceed.</string>
@@ -815,7 +817,7 @@
 
     <string name="VANStockStockOut">Stock Out</string>
     <string name="VANStockStockIn">Stock In</string>
-    <string name="AlertVANStockStockOut">Please fill Stock out first for starting your market visit</string>
+    <string name="AlertVANStockStockOut">Please Load Stock to start your market visit.</string>
     <string name="AlertVANStockStockOutWareHouse">Please fill Stock out first for starting your </string>
     <string name="AlertVANStockStockValidate">Please Confirm WareHouse Stock first for starting your market visit</string>
 
@@ -833,7 +835,7 @@
     <string name="NoCityMapped">There is no city mapped to this phone</string>
     <string name="NoStateMapped">There is no state mapped to this phone</string>
     <string name="SubmittingDetails">Submitting  Details...</string>
-    <string name="SubmittingDbrInfo">Do you want to submit distributor information?</string>
+    <string name="SubmittingDbrInfo">Do you want to submit Warehouse information?</string>
     <string name="SelectDbr">Select Distributor.</string>
     <string name="PleaseSelectCity">Please Select City Name</string>
     <string name="PleaseState">Please Select State Name</string>
