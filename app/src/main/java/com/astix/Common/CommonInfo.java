@@ -89,7 +89,6 @@ public class CommonInfo
 	public static String newQuottionID="NULL";
 	public static String globalValueOfPaymentStage="0"+"_"+"0"+"_"+"0";
 	public static String WebServicePath="http://103.20.212.194/WebServiceAndroidParasDevelopment/Service.asmx";
-	//public static String WebServicePath="http://103.20.212.194/WebServiceAndroidRSPLDevelopment/Service.asmx";
 
 	public static String VersionDownloadPath="http://103.20.212.194/downloads/";
 	public static String VersionDownloadAPKName="ParasSOSFADev.apk";

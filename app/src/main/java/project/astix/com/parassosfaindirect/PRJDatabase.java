@@ -4971,7 +4971,7 @@ public class PRJDatabase
 
     public void reCreateDB()
     {
-        db.execSQL("DELETE FROM  tblWarehouseMstr");
+       // db.execSQL("DELETE FROM  tblWarehouseMstr");
         db.execSQL("DELETE FROM  tblActualVisitStock");
         db.execSQL("DELETE FROM tblAttandanceDetails");
         db.execSQL("DELETE FROM tblInvoiceDetails");
@@ -29127,7 +29127,7 @@ String fetchdate=fnGetDateTimeString();
 
         String flgCheckIfStoreExists="0^0";
 
-        Cursor cursor2 = db.rawQuery("SELECT NodeID,NodeType FROM tblWarehouseMstr WHERE tblWarehouseMapping.WarehouseUniqueId='"+DistribtrUniqueId+"'", null);
+        Cursor cursor2 = db.rawQuery("SELECT WarehouseNodeID,WarehouseNodeType FROM tblWarehouseMapping WHERE tblWarehouseMapping.WarehouseUniqueId='"+DistribtrUniqueId+"'", null);
         try {
             if(cursor2.getCount()>0)
             {
@@ -29158,11 +29158,11 @@ String fetchdate=fnGetDateTimeString();
         close();
 
     }
-    public void fnupdateWarehouseMstrLocationtrackRemapFlg(String DistribtrUniqueId)
+    public void fnupdateWarehouseMstrLocationtrackRemapFlg(String DistribtrUniqueId,String Descr)
     {
         open();
         String DIdAndDType=fngetWIdAndWType(DistribtrUniqueId);
-        db.execSQL("UPDATE tblWarehouseMstr SET flgRemap=0 WHERE tblWarehouseMstr.NodeID='"+DIdAndDType.split(Pattern.quote("^"))[0]+"' AND tblWarehouseMstr.NodeType='"+DIdAndDType.split(Pattern.quote("^"))[1]+"'");
+        db.execSQL("UPDATE tblWarehouseMstr SET flgRemap=0 WHERE tblWarehouseMstr.NodeID='"+DIdAndDType.split(Pattern.quote("^"))[0]+"' AND tblWarehouseMstr.NodeType='"+DIdAndDType.split(Pattern.quote("^"))[1]+"' AND tblWarehouseMstr.Descr='"+Descr+"'");
         close();
 
     }
@@ -34531,7 +34531,7 @@ close();
                         {
                             email="NA";
                         }
-                        strStoreTypeNamesDetais[i+1] = cursor2.getString(0) +"^"+cursor2.getString(1)+"^"+cursor2.getString(2)+"^"+cursor2.getString(3)+"^"+phoneNum+"^"+email;
+                        strStoreTypeNamesDetais[i+1] = cursor2.getString(0) +"^"+cursor2.getString(1)+"^"+cursor2.getString(2)+"^"+cursor2.getString(3)+"^"+cursor2.getString(4)+"^"+cursor2.getString(5);
                         cursor2.moveToNext();
                     }
                 }

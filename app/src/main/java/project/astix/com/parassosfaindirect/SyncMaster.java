@@ -2007,6 +2007,11 @@ if(NoOfOutletID.length>0)
           {
               pDialogGetStores.setMessage(getResources().getString(R.string.SubmitDistrbtrMapDetail));
           }
+			 else if(DialogActivity_MarketVisit.flgJointWorking==1)
+			 {
+				 pDialogGetStores.setMessage("Submitting Joint Working Details...");
+				 DialogActivity_MarketVisit.flgJointWorking=0;
+			 }
 			    else if(StoreSelection.flgChangeRouteOrDayEnd==1)
 				{
 				 pDialogGetStores.setMessage(getResources().getString(R.string.txtEndingDay));
@@ -2018,11 +2023,7 @@ if(NoOfOutletID.length>0)
 				{
 					 pDialogGetStores.setMessage(getResources().getString(R.string.txtSubmitQuoteDetail));
 					}
-				else if(DialogActivity_MarketVisit.flgJointWorking==1)
-				{
-					pDialogGetStores.setMessage("Submitting Joint Working Details...");
-					DialogActivity_MarketVisit.flgJointWorking=0;
-				}
+
 				else if(DayStartActivity.flgDaySartWorking==1)
 				{
 					pDialogGetStores.setMessage(getResources().getString(R.string.submittingDayStart));
@@ -2401,10 +2402,19 @@ if(NoOfOutletID.length>0)
 						pDialogGetStores.dismiss();
 					}
 
+                    if(DayStartActivity.flgDaySartWorking==1)
+                    {
+                        Intent submitStoreIntent = new Intent(SyncMaster.this, AllButtonActivity.class);
+                        startActivity(submitStoreIntent);
+                        finish();
+                    }
+                    else
+                    {
+                        Intent submitStoreIntent = new Intent(SyncMaster.this, LauncherActivity.class);
+                        startActivity(submitStoreIntent);
+                        finish();
+                    }
 
-					Intent submitStoreIntent = new Intent(SyncMaster.this, LauncherActivity.class);
-					startActivity(submitStoreIntent);
-					finish();
 				}});
 		}
 

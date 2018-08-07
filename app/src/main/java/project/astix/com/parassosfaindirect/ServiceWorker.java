@@ -21484,7 +21484,7 @@ int flgProcessedInvoice=0;
 					}
 				}
 
-				flgMapped="1";
+				//flgMapped="1";
 
 
 				dbengine.saveWarehouseMstrData(Integer.parseInt(NodeID),Integer.parseInt(NodeType),Descr,latCode,LongCode,Integer.parseInt(flgMapped));
