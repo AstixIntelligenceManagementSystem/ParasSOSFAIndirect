@@ -20960,7 +20960,6 @@ open();
         try{
             if(cursor.getCount()>0)
             {
-
                 if(cursor.moveToFirst())
                 {
                     for(int i=0;i<cursor.getCount();i++)
