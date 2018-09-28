@@ -119,7 +119,13 @@ public class ServiceWorker
 						
 			currSysDate = currDateFormat.format(currDate).toString();
 			SysDate = currSysDate.trim().toString();
-			
+			int CoverageAreaNodeID=0;
+			int coverageAreaNodeType=0;
+			if(CommonInfo.FlgDSRSO==2)
+			{
+				CoverageAreaNodeID=CommonInfo.CoverageAreaNodeID;
+				coverageAreaNodeType=CommonInfo.CoverageAreaNodeType;
+			}
 			client.addProperty("bydate", dateVAL.toString());
 			client.addProperty("IMEINo", uuid.toString());
 			client.addProperty("rID", rID.toString());
@@ -127,8 +133,8 @@ public class ServiceWorker
 			client.addProperty("SysDate", SysDate.toString());
 			client.addProperty("AppVersionID", dbengine.AppVersionID.toString());
 			client.addProperty("flgAllRoutesData", CommonInfo.flgAllRoutesData);
-			client.addProperty("CoverageAreaNodeID", 0);
-			client.addProperty("coverageAreaNodeType", 0);
+			client.addProperty("CoverageAreaNodeID", CoverageAreaNodeID);
+			client.addProperty("coverageAreaNodeType", coverageAreaNodeType);
 
 
 
@@ -751,7 +757,7 @@ public class ServiceWorker
 	            }
 	                       
 
-	            NodeList tblStoreSomeProdQuotePriceMstr = doc.getElementsByTagName("tblStoreSomeProdQuotePriceMstr");
+	        /*    NodeList tblStoreSomeProdQuotePriceMstr = doc.getElementsByTagName("tblStoreSomeProdQuotePriceMstr");
 	            for (int i = 0; i < tblStoreSomeProdQuotePriceMstr.getLength(); i++)
 	            {
 	          
@@ -863,15 +869,15 @@ public class ServiceWorker
 					
 					dbengine.insertMinDelQty(prdId, StoreID, QPBT, QPTaxAmt, MinDlvryQty, UOMID,QPAT); 	
 	            }
-	            
+	            */
 	            
 	            setmovie.director = "1";
 				// System.out.println("ServiceWorkerNitish getallStores Completed ");
 				flagExecutedServiceSuccesfully=1;
 			hmapStoreIdSstat=null;
 			hmapStoreIdVisitStatus=null;
-		int dwq=1/0;
-			int dwq11=0/2;
+	/*	int dwq=1/0;
+			int dwq11=0/2;*/
 				return setmovie;
 			
 			
@@ -1045,6 +1051,8 @@ public class ServiceWorker
 					String SelfieName="0";
 					String SelfieNameURL="0";
 					String SalesAreaName="0";
+					int CoverageAreaNodeID=0;
+					int CoverageAreaNodeType=0;
 
 					Element element = (Element) tblSchemeStoreMappingNode.item(i);
 
@@ -1164,7 +1172,19 @@ public class ServiceWorker
 
 
 
+						NodeList CoverageAreaNodeIDNode = element.getElementsByTagName("CoverageAreaNodeID");
+						line = (Element) CoverageAreaNodeIDNode.item(0);
+						if(CoverageAreaNodeIDNode.getLength()>0)
+						{
+							CoverageAreaNodeID=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+						}
 
+						NodeList CoverageAreaNodeTypeNode = element.getElementsByTagName("CoverageAreaNodeType");
+						line = (Element) CoverageAreaNodeTypeNode.item(0);
+						if(CoverageAreaNodeTypeNode.getLength()>0)
+						{
+							CoverageAreaNodeType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+						}
 
 
 
@@ -1173,7 +1193,7 @@ public class ServiceWorker
 
 					dbengine.savetblUserAuthenticationMstr(flgUserAuthenticated,PersonName,FlgRegistered,
 							flgAppStatus,DisplayMessage,flgValidApplication,MessageForInvalid,flgPersonTodaysAtt,
-							PersonNodeID,PersonNodeType,ContactNo,DOB,SelfieName,SelfieNameURL,SalesAreaName);
+							PersonNodeID,PersonNodeType,ContactNo,DOB,SelfieName,SelfieNameURL,SalesAreaName,CoverageAreaNodeID,CoverageAreaNodeType);
 
 				}
 
@@ -4071,7 +4091,8 @@ String RouteType="0";
 				String answerHint="N/A";
 
 				String QuestDescHindi="0";
-
+				int flgNewStore=1;
+				int flgStoreValidation=1;
 
 				int flgQuestIDForOutChannel=0;
 
@@ -4238,9 +4259,27 @@ String RouteType="0";
 				}
 
 
+				if(!element.getElementsByTagName("flgNewStore").equals(null))
+				{
+					NodeList flgNewStoreNode = element.getElementsByTagName("flgNewStore");
+					Element     line = (Element) flgNewStoreNode.item(0);
+					if (flgNewStoreNode.getLength()>0)
+					{
+						flgNewStore=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
 
+				if(!element.getElementsByTagName("flgStoreValidation").equals(null))
+				{
+					NodeList flgStoreValidationNode = element.getElementsByTagName("flgStoreValidation");
+					Element     line = (Element) flgStoreValidationNode.item(0);
+					if (flgStoreValidationNode.getLength()>0)
+					{
+						flgStoreValidation=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
 
-				dbengine.savetblQuestionMstr(QuestID, QuestCode, QuestDesc, QuestType, AnsControlType, AsnControlInputTypeID, AnsControlInputTypeMaxLength, AnsMustRequiredFlg, QuestBundleFlg, ApplicationTypeID, Sequence,AnsControlInputTypeMinLength,answerHint,flgQuestIDForOutChannel,QuestDescHindi);
+				dbengine.savetblQuestionMstr(QuestID, QuestCode, QuestDesc, QuestType, AnsControlType, AsnControlInputTypeID, AnsControlInputTypeMaxLength, AnsMustRequiredFlg, QuestBundleFlg, ApplicationTypeID, Sequence,AnsControlInputTypeMinLength,answerHint,flgQuestIDForOutChannel,QuestDescHindi,flgNewStore,flgStoreValidation);
 
 			}
 
@@ -4261,7 +4300,8 @@ String RouteType="0";
 				String GrpCopyID="0";
 				String QuestCopyID="0";
 				String sequence="0";
-
+				int flgNewStore=1;
+				int flgStoreValidation=1;
 				Element element = (Element) tblGetPDAQuestGrpMappingNode.item(i);
 
 
@@ -4360,8 +4400,26 @@ String RouteType="0";
 						sequence=xmlParser.getCharacterDataFromElement(line);
 					}
 				}
+				if(!element.getElementsByTagName("flgNewStore").equals(null))
+				{
+					NodeList flgNewStoreNode = element.getElementsByTagName("flgNewStore");
+					Element     line = (Element) flgNewStoreNode.item(0);
+					if (flgNewStoreNode.getLength()>0)
+					{
+						flgNewStore=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
 
-				dbengine.savetblPDAQuestGrpMappingMstr(GrpQuestID, QuestID, GrpID, GrpNodeID, GrpDesc, SectionNo, GrpCopyID, QuestCopyID,sequence);
+				if(!element.getElementsByTagName("flgStoreValidation").equals(null))
+				{
+					NodeList flgStoreValidationNode = element.getElementsByTagName("flgStoreValidation");
+					Element     line = (Element) flgStoreValidationNode.item(0);
+					if (flgStoreValidationNode.getLength()>0)
+					{
+						flgStoreValidation=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+				dbengine.savetblPDAQuestGrpMappingMstr(GrpQuestID, QuestID, GrpID, GrpNodeID, GrpDesc, SectionNo, GrpCopyID, QuestCopyID,sequence,flgNewStore,flgStoreValidation);
 
 			}
 
@@ -7449,7 +7507,7 @@ String RouteType="0";
 		this.context = ctx;
 
 		ServiceWorker setmovie = new ServiceWorker();
-		/*PRJDatabase dbengine = new PRJDatabase(context);
+		PRJDatabase dbengine = new PRJDatabase(context);
 		dbengine.open();
 		
 		final String SOAP_ACTION = "http://tempuri.org/GetCategoryMstr";
@@ -7610,10 +7668,7 @@ String RouteType="0";
 			dbengine.close();
 			return setmovie;
 		}
-*/
-		setmovie.director = "1";
-		flagExecutedServiceSuccesfully=3;
-		return setmovie;
+
 	}
 	public ServiceWorker getalllastTransactionDetails(Context ctx, String dateVAL, String uuid, String rID) {
 		this.context = ctx;
@@ -17710,7 +17765,8 @@ String RouteType="0";
 //nitika
 
 
-	public ServiceWorker getfnCallspPDAGetDayAndMTDSummary(Context ctx ,String dateVAL,String uuid)
+	public ServiceWorker getfnCallspPDAGetDayAndMTDSummary(Context ctx ,String dateVAL,String uuid,int SalesmanNodeId,
+														   int SalesmanNodeType,int flgDataScope)
 	{
 		this.context = ctx;
 		PRJDatabase dbengine = new PRJDatabase(context);
@@ -17763,10 +17819,6 @@ String RouteType="0";
 
 
 			//client.addProperty("bydate", dateVAL.toString());
-
-			int SalesmanNodeId=CommonInfo.SalesmanNodeId;
-			int SalesmanNodeType=CommonInfo.SalesmanNodeType;
-			int flgDataScope=CommonInfo.flgDataScope;
 
 			client.addProperty("IMEINo", uuid.toString());
 			client.addProperty("bydate", dateVAL.toString());
@@ -17900,7 +17952,7 @@ String RouteType="0";
 			return setmovie;
 			//return counts;
 		} catch (Exception e) {
-			setmovie.exceptionCode=e.getCause().getMessage();
+
 			// System.out.println("Aman Exception occur in GetStoreListMR :"+e.toString());
 			setmovie.director = e.toString();
 			setmovie.movie_name = e.toString();
@@ -19214,7 +19266,7 @@ int flgProcessedInvoice=0;
 
 
 
-
+/*
 			NodeList tblPrdctMstrNode = doc.getElementsByTagName("tblProductListMaster");
 			for (int i = 0; i < tblPrdctMstrNode.getLength(); i++)
 
@@ -19757,7 +19809,7 @@ int flgProcessedInvoice=0;
 
 				dbengine.saveCategory(stID.trim(), deDescr.trim(),CatOrdr);
 				//System.out.println("Column DESC TBL..."+IncId+"-"+ReportColumnName+"-"+DisplayColumnName);
-			}
+			}*/
 			flagExecutedServiceSuccesfully=39;
 
 
@@ -20709,7 +20761,7 @@ int flgProcessedInvoice=0;
         }
 
     }
-	public ServiceWorker getStoreAllDetails(Context ctx,String uuid,String CurDate,int DatabaseVersion,int ApplicationID,String RegistrationID)
+	/*public ServiceWorker getStoreAllDetails(Context ctx,String uuid,String CurDate,int DatabaseVersion,int ApplicationID)
 	{
 
 		this.context = ctx;
@@ -20755,7 +20807,7 @@ int flgProcessedInvoice=0;
 			client.addProperty("uuid", uuid.toString());
 			client.addProperty("DatabaseVersion", DatabaseVersion);
 			client.addProperty("ApplicationID", ApplicationID);
-			client.addProperty("RegistrationID", RegistrationID);
+			client.addProperty("RegistrationID", "");
 
 			// // System.out.println("Kajol 102");
 			sse.setOutputSoapObject(client);
@@ -20785,9 +20837,15 @@ int flgProcessedInvoice=0;
 			InputSource is = new InputSource();
 			is.setCharacterStream(new StringReader(name));
 			Document doc = db.parse(is);
+			String StoreListOld="";
 
+			dbengine.open();
 
-			dbengine.delete_all_storeDetailTables();
+			//HashMap<String,String> hmapStoreIdSstat=dbengine.checkForStoreIdSstat();
+			HashMap<String,String> hmapStoreIdSstat=dbengine.checkForStoreIdSstatStrMapping();
+			dbengine.close();
+
+			dbengine.fndeleteSbumittedStoreList(4);
 
 
 
@@ -20846,7 +20904,7 @@ int flgProcessedInvoice=0;
 			NodeList tblPreAddedStoresNode = doc.getElementsByTagName("tblPreAddedStores");
 			for (int i = 0; i < tblPreAddedStoresNode.getLength(); i++)
 			{
-
+				String StoreIDPDAFromServer="NA";
 				String StoreID="0";
 				String StoreName ="0";
 				String LatCode ="0";
@@ -20857,6 +20915,9 @@ int flgProcessedInvoice=0;
 				int Sstat=0;
 				int RouteID=0;
 				int RouteNodeType=0;
+				int flgApproveOrRejectOrNoActionOrReVisit=0;
+				int IsStoreDataCompleteSaved=0;
+				int flgStoreVisitMode=0;
 				Element element = (Element) tblPreAddedStoresNode.item(i);
 
 
@@ -20888,6 +20949,19 @@ int flgProcessedInvoice=0;
 					if (StoreIDNode.getLength()>0)
 					{
 						StoreID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("StoreID").equals(null))
+				{
+
+					NodeList StoreIDPDANode = element.getElementsByTagName("StoreID");
+					Element     line = (Element) StoreIDPDANode.item(0);
+
+					if(StoreIDPDANode.getLength()>0)
+					{
+
+						StoreIDPDAFromServer=xmlParser.getCharacterDataFromElement(line);
 					}
 				}
 				if(!element.getElementsByTagName("StoreName").equals(null))
@@ -20936,9 +21010,54 @@ int flgProcessedInvoice=0;
 						flgRemap=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
 					}
 				}
+				if(!element.getElementsByTagName("flgStoreValidated").equals(null))
+				{
+					NodeList flgApproveOrRejectOrNoActionNode = element.getElementsByTagName("flgStoreValidated");
+					Element     line = (Element) flgApproveOrRejectOrNoActionNode.item(0);
+					if (flgApproveOrRejectOrNoActionNode.getLength()>0)
+					{
+						flgApproveOrRejectOrNoActionOrReVisit=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
 
 
-				dbengine.saveTblPreAddedStores(StoreID, StoreName, LatCode, LongCode, DateAdded,flgOldNewStore,flgRemap,Sstat,RouteID,RouteNodeType);
+				if(hmapStoreIdSstat!=null)
+				{
+					//StoreIDPDAFromServer
+
+					if(hmapStoreIdSstat.containsKey(StoreIDPDAFromServer))
+					{
+						StoreID=StoreIDPDAFromServer;
+						flgOldNewStore=1;
+					}
+					if(hmapStoreIdSstat.containsKey(StoreID))
+					{
+						if(flgRemap==3)
+						{
+							hmapStoreIdSstat.put(StoreID,"0");
+						}
+						if(hmapStoreIdSstat.get(StoreID).equals("3"))
+						{
+							hmapStoreIdSstat.put(StoreID,"4");
+						}
+
+						Sstat=Integer.parseInt(hmapStoreIdSstat.get(StoreID));
+					}
+					else
+					{
+						if(!element.getElementsByTagName("Sstat").equals(null))
+						{
+							NodeList SstatNode = element.getElementsByTagName("Sstat");
+							Element     line = (Element) SstatNode.item(0);
+
+							if(SstatNode.getLength()>0)
+							{
+								Sstat=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+							}
+						}
+					}
+				}
+				dbengine.saveTblPreAddedStores(StoreID, StoreName, LatCode, LongCode, DateAdded,flgOldNewStore,flgRemap,Sstat,RouteID,RouteNodeType,flgApproveOrRejectOrNoActionOrReVisit,IsStoreDataCompleteSaved,flgStoreVisitMode);
 			}
 
 			NodeList tblPreAddedStoresDataDetailsNode = doc.getElementsByTagName("tblPreAddedStoresDataDetails");
@@ -21018,6 +21137,813 @@ int flgProcessedInvoice=0;
 				dbengine.saveTblPreAddedStoresDataDetails(StoreIDDB, GrpQuestID, QstId, AnsControlTypeID,AnsTextVal,flgPrvVal);
 			}
 
+
+
+
+
+
+
+
+
+			setmovie.director = "1";
+			dbengine.close();
+			return setmovie;
+
+		} catch (Exception e) {
+
+			// System.out.println("Aman Exception occur in GetIMEIVersionDetailStatusNew :"+e.toString());
+			setmovie.director = e.toString();
+			setmovie.movie_name = e.toString();
+			dbengine.close();
+
+			return setmovie;
+		}
+
+
+
+
+
+	}*/
+	public ServiceWorker getStoreAllDetails(Context ctx,String uuid,String CurDate,int DatabaseVersion,int ApplicationID)
+	{
+
+		this.context = ctx;
+		PRJDatabase dbengine = new PRJDatabase(context);
+
+
+		decimalFormat.applyPattern(pattern);
+
+		int chkTblStoreListContainsRow=1;
+		StringReader read;
+		InputSource inputstream;
+		final String SOAP_ACTION = "http://tempuri.org/fnGetLTFoodsSOStores";
+		final String METHOD_NAME = "fnGetLTFoodsSOStores";
+		final String NAMESPACE = "http://tempuri.org/";
+		final String URL = UrlForWebService;
+		//Create request
+		SoapObject table = null; // Contains table of dataset that returned
+		// through SoapObject
+		SoapObject client = null; // Its the client petition to the web service
+		SoapObject tableRow = null; // Contains row of table
+		SoapObject responseBody = null; // Contains XML content of dataset
+
+		//SoapObject param
+		HttpTransportSE transport = null; // That call webservice
+		SoapSerializationEnvelope sse = null;
+
+		sse = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+		sse.dotNet = true;
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL,timeout);
+
+		ServiceWorker setmovie = new ServiceWorker();
+
+
+		// // System.out.println("Kajol 100");
+
+		try {
+			client = new SoapObject(NAMESPACE, METHOD_NAME);
+
+			String StoreListOld="";
+			HashMap<String,String> hmapStoreIdSstat=dbengine.checkForStoreIdSstatStrMapping();
+			/*if(dbengine.fncheckCountNearByStoreExistsOrNot(1000)==1)
+			{
+
+				LinkedHashMap<String, String> hmapStoreLisMstr=new LinkedHashMap<String, String>();
+				hmapStoreLisMstr=dbengine.fnGeStoreListAllForSOForWebService(0,0);
+				System.out.println("Nitish Count Previous Store ="+hmapStoreLisMstr.size());
+				LinkedHashMap<String, String> map = new LinkedHashMap<String, String>(hmapStoreLisMstr);
+				Set set2 = map.entrySet();
+				Iterator iterator = set2.iterator();
+				while(iterator.hasNext())
+				{
+					Map.Entry me2 = (Map.Entry)iterator.next();
+					if(StoreListOld.equals(""))
+					{
+						StoreListOld=me2.getKey().toString();
+					}
+					else
+					{
+						StoreListOld +="^"+me2.getKey().toString();
+					}
+					//CoverageAreaNames[index]=me2.getKey().toString();
+
+				}
+
+				dbengine.fndeleteSbumittedStoreList(4);
+			}*/
+
+			dbengine.fndeleteSbumittedStoreList(4);
+			client.addProperty("uuid", uuid.toString());
+			client.addProperty("DatabaseVersion", DatabaseVersion);
+			client.addProperty("ApplicationID", ApplicationID);
+			client.addProperty("StoreListOld", StoreListOld);
+
+
+			// // System.out.println("Kajol 102");
+			sse.setOutputSoapObject(client);
+			// // System.out.println("Kajol 103");
+			sse.bodyOut = client;
+			// // System.out.println("Kajol 104");
+
+			androidHttpTransport.call(SOAP_ACTION, sse);
+
+			// // System.out.println("Kajol 1");
+
+			responseBody = (SoapObject)sse.bodyIn;
+			// This step: get file XML
+			//responseBody = (SoapObject) sse.getResponse();
+			int totalCount = responseBody.getPropertyCount();
+
+			// // System.out.println("Kajol 2 :"+totalCount);
+			String resultString=androidHttpTransport.responseDump;
+
+			String name=responseBody.getProperty(0).toString();
+
+			// // System.out.println("Kajol 3 :"+name);
+
+			XMLParser xmlParser = new XMLParser();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource();
+			is.setCharacterStream(new StringReader(name));
+			Document doc = db.parse(is);
+			dbengine.open();
+
+			dbengine.delete_all_storeDetailTables();
+
+
+
+
+			/*NodeList tblUserNameNode = doc.getElementsByTagName("tblUserName");
+			for (int i = 0; i < tblUserNameNode.getLength(); i++)
+			{
+
+				String UserName="0";
+
+				Element element = (Element) tblUserNameNode.item(i);
+				if(!element.getElementsByTagName("UserName").equals(null))
+				{
+					NodeList UserNameNode = element.getElementsByTagName("UserName");
+					Element     line = (Element) UserNameNode.item(0);
+					if (UserNameNode.getLength()>0)
+					{
+						UserName=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				dbengine.saveTblUserName(UserName);
+			}*/
+			dbengine.saveTblUserName("Not Specified");
+			/*NodeList tblStoreCountDetailsNode = doc.getElementsByTagName("tblStoreCountDetails");
+			for (int i = 0; i < tblStoreCountDetailsNode.getLength(); i++)
+			{
+
+				String TotStoreAdded="0";
+				String TodayStoreAdded ="0";
+
+
+				Element element = (Element) tblStoreCountDetailsNode.item(i);
+				if(!element.getElementsByTagName("TotStoreAdded").equals(null))
+				{
+					NodeList TotStoreAddedNode = element.getElementsByTagName("TotStoreAdded");
+					Element     line = (Element) TotStoreAddedNode.item(0);
+					if (TotStoreAddedNode.getLength()>0)
+					{
+						TotStoreAdded=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("TodayStoreAdded").equals(null))
+				{
+					NodeList TodayStoreAddedNode = element.getElementsByTagName("TodayStoreAdded");
+					Element     line = (Element) TodayStoreAddedNode.item(0);
+					if (TodayStoreAddedNode.getLength()>0)
+					{
+						TodayStoreAdded=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				dbengine.saveTblStoreCountDetails(TotStoreAdded, TodayStoreAdded);
+			}*/
+			dbengine.saveTblStoreCountDetails("0", "0");
+
+			NodeList tblPreAddedStoresNode = doc.getElementsByTagName("tblPreAddedStores");
+			for (int i = 0; i < tblPreAddedStoresNode.getLength(); i++)
+			{
+
+				String StoreID="0";
+				String StoreName ="0";
+				String LatCode ="0";
+				String LongCode ="0";
+				String SOLatCode ="NA";
+				String SOLongCode ="NA";
+				String DateAdded ="07-July-2017";
+				int CoverageAreaID =0;
+				int CoverageAreaType =0;
+				int RouteNodeID =0;
+				int RouteNodeType =0;
+				int flgStoreValidated =0;
+				String City="";
+				String State="";
+				String PinCode="";
+
+				String StoreCategoryType="0-0-0";
+				int StoreSectionCount=0;
+
+				int flgOldNewStore=0;
+				int flgApproveOrRejectOrNoActionOrReVisit=0;
+				int Sstat=0;
+				int flgStoreVisitMode=0;
+				String VisitStartTS="NA";
+				String VisitEndTS="NA";
+				String LocProvider="NA";
+				String Accuracy="NA";
+				String SOAccuracy="NA";
+				int flgRemap=0;
+				int flgSelfStore=0;
+				String BateryLeftStatus="0";
+				int IsStoreDataCompleteSaved=0;
+				String PaymentStage="NA";
+				int flgLocationTrackEnabled=0;
+				String StoreAddress="NA";
+
+				String StoreIDPDAFromServer="NA";
+				//String StoreID,String StoreName,String ActualLatitude,String ActualLongitude,String
+				// VisitStartTS,String VisitEndTS,String LocProvider,String Accuracy,String BateryLeftStatus,
+				// int IsStoreDataCompleteSaved,String PaymentStage,int flgLocationTrackEnabled,String StoreAddress,
+				// String StoreCity,String StorePinCode,String StoreState,int Sstat
+
+				Date pdaDate=new Date();
+				SimpleDateFormat	sdfPDaDate = new SimpleDateFormat("dd-MMM-yyyy",Locale.ENGLISH);
+				DateAdded = sdfPDaDate.format(pdaDate).toString().trim();
+
+				Element element = (Element) tblPreAddedStoresNode.item(i);
+
+				if(!element.getElementsByTagName("StoreIDDB").equals(null))
+				{
+					NodeList StoreIDNode = element.getElementsByTagName("StoreIDDB");
+					Element     line = (Element) StoreIDNode.item(0);
+					if (StoreIDNode.getLength()>0)
+					{
+						StoreID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("StoreID").equals(null))
+				{
+
+					NodeList StoreIDPDANode = element.getElementsByTagName("StoreID");
+					Element     line = (Element) StoreIDPDANode.item(0);
+
+					if(StoreIDPDANode.getLength()>0)
+					{
+
+						StoreIDPDAFromServer=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("StoreName").equals(null))
+				{
+					NodeList StoreNameNode = element.getElementsByTagName("StoreName");
+					Element     line = (Element) StoreNameNode.item(0);
+					if (StoreNameNode.getLength()>0)
+					{
+						StoreName=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("LatCode").equals(null))
+				{
+					NodeList LatCodeNode = element.getElementsByTagName("LatCode");
+					Element     line = (Element) LatCodeNode.item(0);
+					if (LatCodeNode.getLength()>0)
+					{
+						LatCode=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("LongCode").equals(null))
+				{
+					NodeList LongCodeNode = element.getElementsByTagName("LongCode");
+					Element     line = (Element) LongCodeNode.item(0);
+					if (LongCodeNode.getLength()>0)
+					{
+						LongCode=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("DateAdded").equals(null))
+				{
+					NodeList DateAddedNode = element.getElementsByTagName("DateAdded");
+					Element     line = (Element) DateAddedNode.item(0);
+					if (DateAddedNode.getLength()>0)
+					{
+						DateAdded=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageAreaID").equals(null))
+				{
+					NodeList CoverageAreaIDNode = element.getElementsByTagName("CoverageAreaID");
+					Element     line = (Element) CoverageAreaIDNode.item(0);
+					if (CoverageAreaIDNode.getLength()>0)
+					{
+						CoverageAreaID=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageAreaType").equals(null))
+				{
+					NodeList CoverageAreaTypeNode = element.getElementsByTagName("CoverageAreaType");
+					Element     line = (Element) CoverageAreaTypeNode.item(0);
+					if (CoverageAreaTypeNode.getLength()>0)
+					{
+						CoverageAreaType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("RouteNodeID").equals(null))
+				{
+					NodeList RouteNodeIDNode = element.getElementsByTagName("RouteNodeID");
+					Element     line = (Element) RouteNodeIDNode.item(0);
+					if (RouteNodeIDNode.getLength()>0)
+					{
+						RouteNodeID=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("RouteNodeType").equals(null))
+				{
+					NodeList RouteNodeTypeNode = element.getElementsByTagName("RouteNodeType");
+					Element     line = (Element) RouteNodeTypeNode.item(0);
+					if (RouteNodeTypeNode.getLength()>0)
+					{
+						RouteNodeType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("flgStoreValidated").equals(null))
+				{
+					NodeList flgApproveOrRejectOrNoActionNode = element.getElementsByTagName("flgStoreValidated");
+					Element     line = (Element) flgApproveOrRejectOrNoActionNode.item(0);
+					if (flgApproveOrRejectOrNoActionNode.getLength()>0)
+					{
+						flgApproveOrRejectOrNoActionOrReVisit=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+				//flgApproveOrRejectOrNoActionOrReVisit
+
+
+				if(!element.getElementsByTagName("City").equals(null))
+				{
+					NodeList CityNode = element.getElementsByTagName("City");
+					Element     line = (Element) CityNode.item(0);
+					if (CityNode.getLength()>0)
+					{
+						City=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("State").equals(null))
+				{
+					NodeList StateNode = element.getElementsByTagName("State");
+					Element     line = (Element) StateNode.item(0);
+					if (StateNode.getLength()>0)
+					{
+						State=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("PinCode").equals(null))
+				{
+					NodeList PinCodeNode = element.getElementsByTagName("PinCode");
+					Element     line = (Element) PinCodeNode.item(0);
+					if (PinCodeNode.getLength()>0)
+					{
+						PinCode=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("flgRemap").equals(null))
+				{
+					NodeList flgRemapNode = element.getElementsByTagName("flgRemap");
+					Element     line = (Element) flgRemapNode.item(0);
+					if (flgRemapNode.getLength()>0)
+					{
+						flgRemap=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+				if(!element.getElementsByTagName("flgSelfStore").equals(null))
+				{
+					NodeList flgSelfStoreNode = element.getElementsByTagName("flgSelfStore");
+					Element     line = (Element) flgSelfStoreNode.item(0);
+					if (flgSelfStoreNode.getLength()>0)
+					{
+						flgSelfStore=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("Accuracy").equals(null))
+				{
+					NodeList AccuracyNode = element.getElementsByTagName("Accuracy");
+					Element     line = (Element) AccuracyNode.item(0);
+					if (AccuracyNode.getLength()>0)
+					{
+						Accuracy=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+//Accuracy
+				if(!element.getElementsByTagName("OptionID").equals(null))
+				{
+					NodeList StoreCategoryTypeNode = element.getElementsByTagName("OptionID");
+					Element     line = (Element) StoreCategoryTypeNode.item(0);
+					if (StoreCategoryTypeNode.getLength()>0)
+					{
+						StoreCategoryType=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("SectionCount").equals(null))
+				{
+					NodeList SectionCountNode = element.getElementsByTagName("SectionCount");
+					Element     line = (Element) SectionCountNode.item(0);
+					if (SectionCountNode.getLength()>0)
+					{
+						StoreSectionCount=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+
+				if(StoreName.equals("shivam"))
+				{
+					int sadads=0;
+				}
+				if(hmapStoreIdSstat!=null)
+				{
+					//StoreIDPDAFromServer
+
+					if(hmapStoreIdSstat.containsKey(StoreIDPDAFromServer))
+					{
+						StoreID=StoreIDPDAFromServer;
+                        int  sstsnew=Integer.parseInt(hmapStoreIdSstat.get(StoreIDPDAFromServer));
+                        hmapStoreIdSstat.remove(StoreIDPDAFromServer);
+                        hmapStoreIdSstat.put(StoreID,""+sstsnew);
+
+						flgOldNewStore=1;
+					}
+					if(hmapStoreIdSstat.containsKey(StoreID))
+					{
+
+						if(hmapStoreIdSstat.get(StoreID).equals("3"))
+						{
+							hmapStoreIdSstat.put(StoreID,"4");
+						}
+						if(flgRemap==3)
+						{
+							hmapStoreIdSstat.put(StoreID,"0");
+						}
+
+						Sstat=Integer.parseInt(hmapStoreIdSstat.get(StoreID));
+					}
+					else
+					{
+						if(!element.getElementsByTagName("Sstat").equals(null))
+						{
+							NodeList SstatNode = element.getElementsByTagName("Sstat");
+							Element     line = (Element) SstatNode.item(0);
+
+							if(SstatNode.getLength()>0)
+							{
+								Sstat=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+							}
+						}
+					}
+				}
+
+
+
+				if(!hmapStoreIdSstat.containsKey(StoreID)) {
+					long count = dbengine.fnsaveTblPreAddedStores(StoreID, StoreName, LatCode, LongCode, DateAdded, flgOldNewStore, Sstat, CoverageAreaID, CoverageAreaType, RouteNodeID, RouteNodeType, City, State, PinCode, StoreCategoryType, StoreSectionCount, flgApproveOrRejectOrNoActionOrReVisit, SOLatCode, SOLongCode, flgStoreVisitMode, VisitStartTS, VisitEndTS, LocProvider, Accuracy, BateryLeftStatus, IsStoreDataCompleteSaved, PaymentStage, flgLocationTrackEnabled, StoreAddress, SOAccuracy, flgRemap, flgSelfStore);
+				}
+			}
+
+
+
+
+			NodeList tblCoverageMaster = doc.getElementsByTagName("tblCoverageMaster");
+			for (int i = 0; i < tblCoverageMaster.getLength(); i++)
+			{
+
+				int CoverageAreaNodeID=0;
+				int CoverageAreaNodeType=0;
+
+				String CoverageArea ="NA";
+
+
+
+				Element element = (Element) tblCoverageMaster.item(i);
+
+				if(!element.getElementsByTagName("CoverageAreaNodeID").equals(null))
+				{
+					NodeList CoverageAreaNodeIDNode = element.getElementsByTagName("CoverageAreaNodeID");
+					Element     line = (Element) CoverageAreaNodeIDNode.item(0);
+					if (CoverageAreaNodeIDNode.getLength()>0)
+					{
+						CoverageAreaNodeID=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageAreaNodeType").equals(null))
+				{
+					NodeList CoverageAreaNodeTypeNode = element.getElementsByTagName("CoverageAreaNodeType");
+					Element     line = (Element) CoverageAreaNodeTypeNode.item(0);
+					if (CoverageAreaNodeTypeNode.getLength()>0)
+					{
+						CoverageAreaNodeType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageArea").equals(null))
+				{
+					NodeList CoverageAreaNode = element.getElementsByTagName("CoverageArea");
+					Element     line = (Element) CoverageAreaNode.item(0);
+					if (CoverageAreaNode.getLength()>0)
+					{
+						CoverageArea=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				dbengine.fnsavetblCoverageMaster(CoverageAreaNodeID, CoverageAreaNodeType, CoverageArea);
+			}
+
+
+
+
+
+
+			NodeList tblRouteMasterWithCoverageMapping = doc.getElementsByTagName("tblRouteMasterWithCoverageMapping");
+			for (int i = 0; i < tblRouteMasterWithCoverageMapping.getLength(); i++)
+			{
+
+				int CoverageAreaNodeID=0;
+				int CoverageAreaNodeType=0;
+
+				String CoverageArea ="NA";
+
+
+				int RouteID=0;
+				int RouteType=0;
+
+				String Route ="NA";
+
+
+
+				Element element = (Element) tblRouteMasterWithCoverageMapping.item(i);
+
+				if(!element.getElementsByTagName("CoverageAreaNodeID").equals(null))
+				{
+					NodeList CoverageAreaNodeIDNode = element.getElementsByTagName("CoverageAreaNodeID");
+					Element     line = (Element) CoverageAreaNodeIDNode.item(0);
+					if (CoverageAreaNodeIDNode.getLength()>0)
+					{
+						CoverageAreaNodeID=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageAreaNodeType").equals(null))
+				{
+					NodeList CoverageAreaNodeTypeNode = element.getElementsByTagName("CoverageAreaNodeType");
+					Element     line = (Element) CoverageAreaNodeTypeNode.item(0);
+					if (CoverageAreaNodeTypeNode.getLength()>0)
+					{
+						CoverageAreaNodeType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("CoverageArea").equals(null))
+				{
+					NodeList CoverageAreaNode = element.getElementsByTagName("CoverageArea");
+					Element     line = (Element) CoverageAreaNode.item(0);
+					if (CoverageAreaNode.getLength()>0)
+					{
+						CoverageArea=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("RouteID").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("RouteID");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						RouteID=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("RouteType").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("RouteType");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						RouteType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("Route").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("Route");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						Route=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				dbengine.fnsavetblRouteMasterWithCoverageMapping(CoverageAreaNodeID, CoverageAreaNodeType,CoverageArea,RouteID,RouteType,Route);
+			}
+
+
+
+
+			NodeList tblStoreImageList = doc.getElementsByTagName("tblStoreImageList");
+			for (int i = 0; i < tblStoreImageList.getLength(); i++)
+			{
+
+				String StoreID="NA";
+				String StoreImagename="NA";
+
+				int ImageType =0;
+
+
+
+				Element element = (Element) tblStoreImageList.item(i);
+
+				if(!element.getElementsByTagName("StoreIDDB").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("StoreIDDB");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						StoreID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("ImageType").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("ImageType");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						ImageType=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
+
+				if(!element.getElementsByTagName("StoreImagename").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("StoreImagename");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						StoreImagename=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				dbengine.fnsavetblStoreImageList(StoreID,StoreImagename,ImageType);
+			}
+
+
+
+
+			/*NodeList tblStorePaymentStageMapping = doc.getElementsByTagName("tblStorePaymentStageMapping");
+			for (int i = 0; i < tblStorePaymentStageMapping.getLength(); i++)
+			{
+
+				String StoreID="NA";
+
+				String PaymentStage ="0";
+
+
+
+				Element element = (Element) tblStorePaymentStageMapping.item(i);
+
+				if(!element.getElementsByTagName("StoreIDDB").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("StoreIDDB");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						StoreID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("PaymentStage").equals(null))
+				{
+					NodeList Node = element.getElementsByTagName("PaymentStage");
+					Element     line = (Element) Node.item(0);
+					if (Node.getLength()>0)
+					{
+						PaymentStage=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+
+
+				//dbengine.fnsavetblStorePaymentStageMapping(StoreID,PaymentStage);
+				if(dbengine.fnCheckFortblNewStoreSalesQuotePaymentDetailsHasStore(StoreID)==0) {
+
+
+					String PaymentStageDetails = "0";
+					if ((PaymentStage).length() == 1) {
+						if (PaymentStage.equals("1")) {
+							PaymentStageDetails = PaymentStage + "~0~0~0~0";
+						}
+						if (PaymentStage.equals("2")) {
+							PaymentStageDetails = PaymentStage + "~0~0~0~0";
+						}
+						if (PaymentStage.equals("3")) {
+							PaymentStageDetails = PaymentStage + "~100~0~0~0~0";
+						}
+					} else {
+						PaymentStageDetails = PaymentStage;
+					}
+					dbengine.fnsaveNewStoreSalesQuotePaymentDetails(StoreID, PaymentStageDetails);
+				}
+
+
+
+			}*/
+			NodeList tblPreAddedStoresDataDetailsNode = doc.getElementsByTagName("tblPreAddedStoresDataDetails");
+			for (int i = 0; i < tblPreAddedStoresDataDetailsNode.getLength(); i++)
+			{
+
+				String StoreIDDB="0";
+				String GrpQuestID ="0";
+				String QstId ="0";
+				String AnsControlTypeID ="0";
+
+				String AnsTextVal ="0";
+
+				String flgPrvVal ="2";
+
+
+				Element element = (Element) tblPreAddedStoresDataDetailsNode.item(i);
+
+				if(!element.getElementsByTagName("StoreIDDB").equals(null))
+				{
+					NodeList StoreIDDBNode = element.getElementsByTagName("StoreIDDB");
+					Element     line = (Element) StoreIDDBNode.item(0);
+					if (StoreIDDBNode.getLength()>0)
+					{
+						StoreIDDB=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("GrpQuestID").equals(null))
+				{
+					NodeList GrpQuestIDNode = element.getElementsByTagName("GrpQuestID");
+					Element     line = (Element) GrpQuestIDNode.item(0);
+					if (GrpQuestIDNode.getLength()>0)
+					{
+						GrpQuestID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("QstId").equals(null))
+				{
+					NodeList QstIdNode = element.getElementsByTagName("QstId");
+					Element     line = (Element) QstIdNode.item(0);
+					if (QstIdNode.getLength()>0)
+					{
+						QstId=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+				if(!element.getElementsByTagName("AnsControlTypeID").equals(null))
+				{
+					NodeList AnsControlTypeIDNode = element.getElementsByTagName("AnsControlTypeID");
+					Element     line = (Element) AnsControlTypeIDNode.item(0);
+					if (AnsControlTypeIDNode.getLength()>0)
+					{
+						AnsControlTypeID=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("Ans").equals(null))
+				{
+					NodeList AnsTextValNode = element.getElementsByTagName("Ans");
+					Element     line = (Element) AnsTextValNode.item(0);
+					if (AnsTextValNode.getLength()>0)
+					{
+						AnsTextVal=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+				if(!element.getElementsByTagName("flgPrvValue").equals(null))
+				{
+					NodeList OptionValueNode = element.getElementsByTagName("flgPrvValue");
+					Element     line = (Element) OptionValueNode.item(0);
+					if (OptionValueNode.getLength()>0)
+					{
+						flgPrvVal=xmlParser.getCharacterDataFromElement(line);
+					}
+				}
+
+
+				dbengine.saveTblPreAddedStoresDataDetails(StoreIDDB, GrpQuestID, QstId, AnsControlTypeID,AnsTextVal,flgPrvVal);
+			}
 
 
 
@@ -21138,6 +22064,7 @@ int flgProcessedInvoice=0;
 				String PersonNodeID ="0";
 				String PersonNodeType ="0";
 				String PersonName ="0";
+				int flgDSRCoverageAssignedToSO =0;
 
 				Element element = (Element) tblDSRCoverageMasterNode.item(i);
 
@@ -21196,10 +22123,18 @@ int flgProcessedInvoice=0;
 						PersonName=xmlParser.getCharacterDataFromElement(line);
 					}
 				}
+//flgDSRCoverageAssignedToSO
+				if(!element.getElementsByTagName("flgDSRCoverageAssignedToSO").equals(null))
+				{
+					NodeList flgDSRCoverageAssignedToSONode = element.getElementsByTagName("flgDSRCoverageAssignedToSO");
+					Element     line = (Element) flgDSRCoverageAssignedToSONode.item(0);
+					if (flgDSRCoverageAssignedToSONode.getLength()>0)
+					{
+						flgDSRCoverageAssignedToSO=Integer.parseInt(xmlParser.getCharacterDataFromElement(line));
+					}
+				}
 
-
-
-				dbengine.savetblDSRCoverageMaster(CoverageAreaNodeID, CoverageAreaNodeType, CoverageArea, PersonNodeID, PersonNodeType,PersonName);
+				dbengine.savetblDSRCoverageMaster(CoverageAreaNodeID, CoverageAreaNodeType, CoverageArea, PersonNodeID, PersonNodeType,PersonName,flgDSRCoverageAssignedToSO);
 
 			}
 

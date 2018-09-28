@@ -1,16 +1,25 @@
 <resources>
 
-     <!--<string name="app_name">Paras SO SFA</string>-->
+     <string name="app_name">Paras SO SFA</string>
     <!-- <string name="app_name">Paras SO SFA Stagging</string>-->
     <!--<string name="app_name">Paras SO SFA Test</string>-->
-   <string name="app_name">Paras SO SFA Dev</string>
+   <!-- <string name="app_name">Paras SO SFA Dev</string>-->
 
+
+    <string name="uploading_errorXMLFiles">Error while uploading pending store details</string>
+    <string name="saveAlertOKMsg"><small>Details submitted successfully!</small></string>
+    <string name="AddedStoresSummary">Added Stores Summary</string>
+    <string name="searchingcurrentposition">Searching Your Current Position</string>
+    <string name="genTermNoDataConnectionForViewingImgaesOnline">Your device has no Data Connection. \n Please ensure Internet is accessible to see Store images..</string>
+    <string name="msgNoImagesToShow">Your device Data Connection is slow.</string>
+    <string name="reject">Reject</string>
+    <string name="revisit">Revisit</string>
     <string name="SubmitDistrbtrMapDetail">Submitting Warehouse Map Details...</string>
     <string name="SubmitDistrbtr">Warehouse Data is Submitted Succcessfully</string>
     <string name="ChangeDSR">Change Salesman</string>
     <string name="select_report_scope">Summary Reports</string>
     <string name="selectDistributorProceeds">Please select Distributor to Proceed.</string>
-    <string name="individual_dsr">Individual Salesman</string>
+    <string name="individual_dsr">Team Report</string>
     <string name="full_territory">Full Territory</string>
     <string name="distributor_scope">Distributor Scope</string>
     <string name="view_new_added_store">View New Added Store</string>
@@ -51,9 +60,9 @@
 
     <string name="Coverage_Area">Coverage Area</string>
     <string name="DSR_Profile">DSR Profile</string>
+    <string name="SO_Profile">SO Profile</string>
     <string name="Contact_No">Contact No</string>
     <string name="DOB">DOB</string>
-
 
 
     <!--Alert Box message-->
@@ -220,7 +229,6 @@
     <string name="SubmittingPndngDataMsg">Submitting Pending Data…</string>
 
 
-
     <string name="ValidatingMsg">Validating User</string>
 
     <!--Launcher Activity ends here-->
@@ -369,7 +377,7 @@
 
     <!-- Check DatabaseData Activity starts -->
     <string name="txtTodaySubmitData">Today Submit Data</string>
- <string name="txtTodayInvoices">Today Invoices</string>
+    <string name="txtTodayInvoices">Today Invoices</string>
     <!-- Check DatabaseData Activity ends -->
 
     <!-- Notification Activity starts -->

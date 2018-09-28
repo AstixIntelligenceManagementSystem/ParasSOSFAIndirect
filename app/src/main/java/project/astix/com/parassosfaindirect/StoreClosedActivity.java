@@ -1429,7 +1429,7 @@ public class StoreClosedActivity extends BaseActivity implements LocationListene
                         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss",Locale.ENGLISH);
                         String clkdTime = df.format(dateobj);
 
-                        String valueOfKey=clickedTagPhoto+"~"+AddNewStore_DynamicSectionWise.selStoreID+"~"+uriSavedImage.toString()+"~"+clkdTime+"~"+"1";
+                        String valueOfKey=clickedTagPhoto+"~"+AddNewStore_DynamicSectionWiseSO.selStoreID+"~"+uriSavedImage.toString()+"~"+clkdTime+"~"+"1";
 
                         Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 

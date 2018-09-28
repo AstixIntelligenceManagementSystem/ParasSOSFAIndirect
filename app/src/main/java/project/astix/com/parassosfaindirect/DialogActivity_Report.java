@@ -170,7 +170,7 @@ public class DialogActivity_Report extends BaseActivity
                 }
                 else if(rb_WholeReport.isChecked())
                 {
-                    String SONodeIdAndNodeType= dbengine.fnGetPersonNodeIDAndPersonNodeTypeForSO();
+                    /*String SONodeIdAndNodeType= dbengine.fnGetPersonNodeIDAndPersonNodeTypeForSO();
 
                     CommonInfo.PersonNodeID=Integer.parseInt(SONodeIdAndNodeType.split(Pattern.quote("^"))[0]);
                     CommonInfo.PersonNodeType=Integer.parseInt(SONodeIdAndNodeType.split(Pattern.quote("^"))[1]);
@@ -179,11 +179,18 @@ public class DialogActivity_Report extends BaseActivity
                     flgDataScopeSharedPref(3);
                     Intent i=new Intent(DialogActivity_Report.this,DetailReportSummaryActivity.class);
                     startActivity(i);
-                    finish();
+                    finish();*/
+                    Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                    i.putExtra("ReportClick","1");
+                    startActivity(i);
                 }
                 else if(rb_dsrReport.isChecked())
                 {
-                    if(!SelectedDSRValue.equals("") && !SelectedDSRValue.equals("Select DSR") && !SelectedDSRValue.equals("No DSR") )
+
+                    Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                    i.putExtra("ReportClick","2");
+                    startActivity(i);
+                  /*  if(!SelectedDSRValue.equals("") && !SelectedDSRValue.equals("Select DSR") && !SelectedDSRValue.equals("No DSR") )
                     {
 
                         String DSRNodeIdAndNodeType= dbengine.fnGetDSRPersonNodeIdAndNodeType(SelectedDSRValue);
@@ -198,7 +205,7 @@ public class DialogActivity_Report extends BaseActivity
                     }
                     else
                     {
-                    }
+                    }*/
                 }
                 else if(rb_distrbtrScope.isChecked())
                 {
@@ -222,9 +229,9 @@ public class DialogActivity_Report extends BaseActivity
                 }
                 else if(rb_dsrAttendance.isChecked())
                 {
-                      /*Intent i=new Intent(DialogActivity_Report.this,WebViewDSRAttendanceReportActivity.class);
+                      Intent i=new Intent(DialogActivity_Report.this,WebViewDSRAttendanceReportActivity.class);
                       startActivity(i);
-                      finish();*/
+                      finish();
   }
                 else
                 {
@@ -292,7 +299,7 @@ public class DialogActivity_Report extends BaseActivity
                     spinner_distrbtrScope.setVisibility(View.GONE);
                     rb_dsrAttendance.setChecked(false);
 
-                    ArrayAdapter adapterCategory=new ArrayAdapter(DialogActivity_Report.this, android.R.layout.simple_spinner_item,drsNames);
+                   /* ArrayAdapter adapterCategory=new ArrayAdapter(DialogActivity_Report.this, android.R.layout.simple_spinner_item,drsNames);
                     adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_dsrVisit.setAdapter(adapterCategory);
                     spinner_dsrVisit.setVisibility(View.VISIBLE);
@@ -305,7 +312,7 @@ public class DialogActivity_Report extends BaseActivity
                         {
                             // TODO Auto-generated method stub
                             SelectedDSRValue = spinner_dsrVisit.getSelectedItem().toString();
-                           /* ReasonText=spinnerReasonSelected;
+                           *//**//* ReasonText=spinnerReasonSelected;
                             int check=dbengine.fetchFlgToShowTextBox(spinnerReasonSelected);
                             ReasonId=dbengine.fetchReasonIdBasedOnReasonDescr(spinnerReasonSelected);
                             if(check==0)
@@ -315,7 +322,7 @@ public class DialogActivity_Report extends BaseActivity
                             else
                             {
                                 et_Reason.setVisibility(View.VISIBLE);
-                            }*/
+                            }*//**//*
 
 
                             //ReasonId,ReasonText
@@ -325,7 +332,7 @@ public class DialogActivity_Report extends BaseActivity
                         public void onNothingSelected(AdapterView<?> arg0)
                         {
                         }
-                    });
+                    });*/
 
                 }
             }

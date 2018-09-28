@@ -131,7 +131,7 @@ public class DatabaseAssistant
 			//exportTabletblStoreSalesOrderPaymentDetails("tblStoreSalesOrderPaymentDetails");
 			
 			//exportTable("tblRateDistribution");
-		//	exportTableNotification("tblNotificationMstr");
+			exportTableNotification("tblNotificationMstr");
 
 			exportTable("tblSelectedManagerDetails");
 

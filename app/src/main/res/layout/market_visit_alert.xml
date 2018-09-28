@@ -8,34 +8,48 @@
     android:paddingRight="15dp"
     android:paddingBottom="15dp"
     android:paddingTop="5dp"
+    android:id="@+id/ll_DialogMarketVisitWholePage"
     >
 
     <TextView
         android:id="@+id/txt_HdrVst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Visit Type"
+        android:layout_marginBottom="6dp"
         android:background="@drawable/logo_background"
-        android:padding="5dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Select Visit Type"
         android:textColor="#FFFF4424"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="6dp"
-        android:gravity="center"/>
-
+        android:textStyle="bold" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMktVisitOnBehalfOFDSR"
+        android:text="Market Visit Against"
+        android:gravity="center_vertical"
+            android:padding="4dp"
+        android:background="@drawable/btn_backgroundformarketvisit"
+        style="?android:attr/borderlessButtonStyle"
+        android:textAllCaps="false"
+        android:textColor="#ffff"
+        />
     <RadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My own visit"
         android:padding="4dp"
-        android:id="@+id/rb_myVisit"/>
+        android:id="@+id/rb_myVisit"
+        android:visibility="gone"/>
 
     <RadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Visit on behalf of Salesman"
         android:padding="4dp"
-        android:id="@+id/rb_dsrVisit"/>
+        android:id="@+id/rb_dsrVisit"
+        android:visibility="gone"/>
 
     <Spinner
         android:layout_width="match_parent"
@@ -53,7 +67,7 @@
         android:text="Joint Working"
         android:padding="4dp"
         android:id="@+id/rb_jointWorking"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <Spinner
         android:layout_width="match_parent"

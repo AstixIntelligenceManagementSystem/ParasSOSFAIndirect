@@ -327,10 +327,10 @@ public class SplashScreen extends BaseActivity implements  TaskListner
       //  imei="352801088236109";
 
 
-      //  imei="354010084603910";  // paras imei like Godrej
+      // imei="354010084603910";  // paras imei like Godrej
 
-        imei="352742062583530";  // Paras SO IMei
-
+       // imei="12345678901234";  // Paras SO IMei
+            imei="352742062583530";
 
 
         CommonInfo.imei = imei;
@@ -1493,7 +1493,7 @@ public class SplashScreen extends BaseActivity implements  TaskListner
                     }
                     if(mm==11)
                     {
-                        newservice = newservice.getStoreAllDetails(SplashScreen.this, imei, fDate, CommonInfo.DATABASE_VERSIONID, CommonInfo.Application_TypeID,RegistrationID);
+                        newservice = newservice.getStoreAllDetails(SplashScreen.this, imei, fDate, CommonInfo.DATABASE_VERSIONID, CommonInfo.Application_TypeID);
                         if (!newservice.director.toString().trim().equals("1")) {
                            /* if (chkFlgForErrorToCloseApp == 0) {
                                 chkFlgForErrorToCloseApp = 1;

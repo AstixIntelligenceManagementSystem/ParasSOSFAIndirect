@@ -693,7 +693,7 @@ public class SyncMasterDistributor extends Activity
 
             try {
 
-                String xmlfileNames = dbengine.fnGetXMLFile("3");
+                String xmlfileNames = dbengine.fnGetXMLFile("3","2");
 
                 int index=0;
                 if(!xmlfileNames.equals(""))

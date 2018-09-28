@@ -71,6 +71,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -1829,8 +1830,10 @@ public void DayEndWithoutalert()
 					dbengine.open();
 					String slctdRouteName=dbengine.GetRouteNameBasedOnRouteID(rID);
 					dbengine.close();
-
-					Intent intent = new Intent(StoreSelection.this, AddNewStore_DynamicSectionWise.class);
+					CommonInfo.flgNewStoreORStoreValidation=1;
+					String StoreCategoryType=dbengine.getChannelGroupIdOptIdForAddingStore();
+					int StoreSectionCount=dbengine.getsectionCountWhileAddingStore();
+					Intent intent = new Intent(StoreSelection.this, AddNewStore_DynamicSectionWiseSO.class);
 					//Intent intent = new Intent(StoreSelection.this, Add_New_Store_NewFormat.class);
 					//Intent intent = new Intent(StoreSelection.this, Add_New_Store.class);
 					intent.putExtra("storeID", "0");
@@ -1842,7 +1845,11 @@ public void DayEndWithoutalert()
 					intent.putExtra("rID", rID);
 					intent.putExtra("FLAG_NEW_UPDATE","NEW");
 					intent.putExtra("CurrntRouteName",slctdRouteName);
-					intent.putExtra("activityFrom", "StoreSelection");
+					intent.putExtra("CoverageAreaID", ""+0);
+					intent.putExtra("RouteNodeID", ""+0);
+					intent.putExtra("StoreSectionCount", ""+StoreSectionCount);
+					intent.putExtra("StoreCategoryType", StoreCategoryType);
+
 					StoreSelection.this.startActivity(intent);
 					finish();
 					
@@ -2152,7 +2159,10 @@ public void DayEndWithoutalert()
 								if(IsNewStoreDataCompleteSaved==1)
 								{
 									// TODO Auto-generated method stub
-									Intent intent = new Intent(StoreSelection.this, AddNewStore_DynamicSectionWise.class);
+									CommonInfo.flgNewStoreORStoreValidation=1;
+									String StoreCategoryType=dbengine.getChannelGroupIdOptIdForAddingStore();
+									int StoreSectionCount=dbengine.getsectionCountWhileAddingStore();
+									Intent intent = new Intent(StoreSelection.this, AddNewStore_DynamicSectionWiseSO.class);
 									//Intent intent = new Intent(StoreSelection.this, Add_New_Store_NewFormat.class);
 									//Intent intent = new Intent(StoreSelection.this, Add_New_Store.class);
 									intent.putExtra("storeID",selStoreID);
@@ -2161,6 +2171,11 @@ public void DayEndWithoutalert()
 									intent.putExtra("pickerDate", pickerDate);
 									intent.putExtra("imei", imei);
 									intent.putExtra("rID", rID);
+
+									intent.putExtra("CoverageAreaID", ""+0);
+									intent.putExtra("RouteNodeID", ""+0);
+									intent.putExtra("StoreSectionCount", ""+StoreSectionCount);
+									intent.putExtra("StoreCategoryType", StoreCategoryType);
 									StoreSelection.this.startActivity(intent);
 									finish();
 								}
@@ -3450,6 +3465,19 @@ public void DayEndWithoutalert()
 		 });
 
 
+		 final Button btnDSRTrack = (Button) dialog.findViewById(R.id.btnDSRTrack);
+		 btnDSRTrack.setOnClickListener(new OnClickListener() {
+			 @Override
+			 public void onClick(View view)
+			 {
+				/* Intent intent=new Intent(StoreSelection.this,WebViewDSRTrackerActivity.class);
+				 startActivity(intent);*/
+				 openDSRTrackerAlert();
+			 }
+		 });
+
+
+
 		 final   Button btnRemainingStockStatus = (Button) dialog.findViewById(R.id.btnRemainingStockStatus);
 		 btnRemainingStockStatus.setOnClickListener(new OnClickListener()
 		 {
@@ -3735,7 +3763,7 @@ public void DayEndWithoutalert()
 // check number of files in folder
 					final String [] AllFilesNameNotSync= checkNumberOfFiles(del);
 
-					String xmlfileNames = dbengine.fnGetXMLFile("3");
+					String xmlfileNames = dbengine.fnGetXMLFile("3","1");
 					// String xmlfileNamesStrMap=dbengineSo.fnGetXMLFile("3");
 
 					dbengine.open();
@@ -5126,5 +5154,110 @@ public void DayEndWithoutalert()
 	public String convertExponential(double firstNumber){
 		String secondNumberAsString = String.format("%.10f",firstNumber);
 		return secondNumberAsString;
+	}
+
+		void openDSRTrackerAlert()
+		{
+			final android.support.v7.app.AlertDialog.Builder alert=new android.support.v7.app.AlertDialog.Builder(StoreSelection.this);
+			LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View view = inflater.inflate(R.layout.dsr_tracker_alert, null);
+			alert.setView(view);
+
+			alert.setCancelable(false);
+
+			final RadioButton rb_dataReport= (RadioButton) view.findViewById(R.id.rb_dataReport);
+			final RadioButton rb_onMap= (RadioButton) view.findViewById(R.id.rb_onMap);
+
+
+
+
+
+			Button btn_proceed= (Button) view.findViewById(R.id.btn_proceed);
+			Button btn_cancel= (Button) view.findViewById(R.id.btn_cancel);
+
+			final android.support.v7.app.AlertDialog dialog=alert.create();
+			dialog.show();
+
+			btn_cancel.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			btn_proceed.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v)
+				{
+					dialog.dismiss();
+					if(rb_dataReport.isChecked())
+					{
+						Intent i=new Intent(StoreSelection.this,WebViewDSRDataReportActivity.class);
+						startActivity(i);
+
+					}
+					else if(rb_onMap.isChecked())
+					{
+						Intent i = new Intent(StoreSelection.this, WebViewDSRTrackerActivity.class);
+						startActivity(i);
+
+					}
+
+					else
+					{
+						showAlertForEveryOne("Please select atleast one option to Proceeds.");
+					}
+				}
+			});
+
+			rb_dataReport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+				{
+					if(rb_dataReport.isChecked())
+					{
+						rb_onMap.setChecked(false);
+
+					}
+				}
+			});
+
+			rb_onMap.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+				{
+					if(rb_onMap.isChecked())
+					{
+						rb_dataReport.setChecked(false);
+
+					}
+				}
+			});
+
+
+
+			dialog.show();
+		}
+
+
+	public void showAlertForEveryOne(String msg)
+	{
+		//AlertDialog.Builder alertDialogNoConn = new AlertDialog.Builder(new ContextThemeWrapper(LauncherActivity.this, R.style.Dialog));
+		android.support.v7.app.AlertDialog.Builder alertDialogNoConn = new android.support.v7.app.AlertDialog.Builder(StoreSelection.this);
+
+		alertDialogNoConn.setTitle(R.string.AlertDialogHeaderMsg);
+		alertDialogNoConn.setMessage(msg);
+		alertDialogNoConn.setCancelable(false);
+		alertDialogNoConn.setNeutralButton(R.string.AlertDialogOkButton,new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int which)
+			{
+				dialog.dismiss();
+				//finish();
+			}
+		});
+		alertDialogNoConn.setIcon(R.drawable.info_ico);
+		android.support.v7.app.AlertDialog alert = alertDialogNoConn.create();
+		alert.show();
 	}
 }

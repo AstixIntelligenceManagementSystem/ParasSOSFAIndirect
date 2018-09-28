@@ -6,7 +6,14 @@
    <!-- <string name="app_name">Paras SO SFA Dev</string>-->
 
 
-
+    <string name="uploading_errorXMLFiles">Error while uploading pending store details</string>
+    <string name="saveAlertOKMsg"><small>Details submitted successfully!</small></string>
+    <string name="AddedStoresSummary">Added Stores Summary</string>
+    <string name="genTermNoDataConnectionForViewingImgaesOnline">Your device has no Data Connection. \n Please ensure Internet is accessible to see Store images..</string>
+    <string name="msgNoImagesToShow">Your device Data Connection is slow.</string>
+    <string name="searchingcurrentposition">Searching Your Current Position</string>
+    <string name="reject">अस्वीकार</string>
+    <string name="revisit">फिर से मिलना</string>
     <string name="ChangeDSR">Change Salesman</string>
     <string name="RqrdQty">आवश्यक मात्रा : </string>
     <string name="StoreSale">स्टोर बिक्री </string>
@@ -25,6 +32,7 @@
     <string name="verifyLocation">अगली पर क्लिक करने से पहले कृपया अपना स्थान सत्यापित करें.</string>
 
     <string name="DSR_Profile">डीएसआर प्रोफाइल</string>
+    <string name="SO_Profile">एसओ प्रोफाइल</string>
     <string name="Coverage_Area">कवरेज क्षेत्र</string>
     <string name="Contact_No">संपर्क नंबर</string>
     <string name="DOB">जन्म तिथि</string>

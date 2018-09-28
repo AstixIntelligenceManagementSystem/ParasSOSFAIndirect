@@ -71,7 +71,7 @@ class XMLFileUploadAsyncTask extends AsyncTask<Void,Void,Boolean>
 
         try {
 
-            String xmlfileNames = dbengine.fnGetXMLFile("3");
+            String xmlfileNames = dbengine.fnGetXMLFile("3","1");
 
             int index=0;
             if(!xmlfileNames.equals(""))

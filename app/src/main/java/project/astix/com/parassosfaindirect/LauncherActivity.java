@@ -736,12 +736,12 @@ private void downloadapk()
 				if(mm==2)
 					{  
 					
-						/*newservice = newservice.getallProduct(getApplicationContext(), fDate, imei, rID,RouteType);
+						newservice = newservice.getallProduct(getApplicationContext(), fDate, imei, rID,RouteType);
 						if(newservice.flagExecutedServiceSuccesfully!=2)
 						{
 							serviceException=true;
 							break;
-						}*/
+						}
 					}
 				if(mm==3)
 					{  

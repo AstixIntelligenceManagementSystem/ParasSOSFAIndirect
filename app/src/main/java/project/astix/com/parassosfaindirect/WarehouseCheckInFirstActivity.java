@@ -1716,7 +1716,7 @@ public class WarehouseCheckInFirstActivity extends BaseActivity implements Locat
                     address=  getAddressNewWay(addresses.get(0).getAddressLine(0),city,state,zipcode,countryname);
                 }
 
-                NewStoreForm recFragment = (NewStoreForm)getFragmentManager().findFragmentByTag("NewStoreFragment");
+                NewStoreFormSO recFragment = (NewStoreFormSO)getFragmentManager().findFragmentByTag("NewStoreFragment");
                 if(null != recFragment)
                 {
                     recFragment.setFreshAddress();

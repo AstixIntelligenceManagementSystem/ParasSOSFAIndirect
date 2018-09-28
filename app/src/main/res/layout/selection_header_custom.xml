@@ -40,7 +40,17 @@
 	 android:gravity="left|center_vertical"
          android:drawableRight="@drawable/ic_right2"
            android:textSize="14sp"/>
-
+    <Button
+        android:id="@+id/butMarketVisit"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/alert_text_background"
+        android:drawableRight="@drawable/ic_right2"
+        android:gravity="left|center_vertical"
+        android:text="Market Visit"
+        android:visibility="gone"
+        android:textColor="#000000"
+        android:textSize="14sp" />
     <Button android:id="@+id/butn_Change_dsr"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
@@ -137,6 +147,16 @@
          android:drawableRight="@drawable/ic_right2"
            android:textSize="14sp"
         android:text="@string/CheckTodayOrder" />
+    <Button
+        android:id="@+id/btnDSRTrack"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/alert_text_background"
+        android:drawableRight="@drawable/ic_right2"
+        android:gravity="left|center_vertical"
+        android:text="DSM Track"
+        android:textColor="#000000"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/btnVersion"

@@ -24,7 +24,7 @@
             android:visibility="visible"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:text="@string/DSR_Profile"/>
+            android:text="@string/SO_Profile"/>
 
     </LinearLayout>
 

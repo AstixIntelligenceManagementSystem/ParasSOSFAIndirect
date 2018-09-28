@@ -36,7 +36,19 @@ public class PRJDatabase
     public static final String KEY_PHID = "phID";
     private static final String TAG = "PRJDatabase";
 
+    private static final String DATABASE_TABLE_tblStoreImageList = "tblStoreImageList";
+    private static final String DATABASE_CREATE_TABLE_tblStoreImageList = "create table tblStoreImageList (StoreID text null,StoreImagename text null,ImageType int null);";
 
+
+    private static final String TABLE_tblAllServicesCalledSuccessfull = "tblAllServicesCalledSuccessfull";
+    private static final String DATABASE_CREATE_tblAllServicesCalledSuccessfull = "create table tblAllServicesCalledSuccessfull(flgAllServicesCalledOrNot int null);";
+
+
+    private static final String DATABASE_TABLE_tblCoverageMaster = "tblCoverageMaster";
+    private static final String DATABASE_CREATE_TABLE_tblCoverageMaster = "create table tblCoverageMaster(CoverageAreaNodeID int null,CoverageAreaNodeType int null,CoverageArea text null);";
+
+    private static final String DATABASE_TABLE_tblRouteMasterWithCoverageMapping = "tblRouteMasterWithCoverageMapping";
+    private static final String DATABASE_CREATE_TABLE_tblRouteMasterWithCoverageMapping = "create table tblRouteMasterWithCoverageMapping (CoverageAreaNodeID int null,CoverageAreaNodeType int null,CoverageArea text null,RouteID int null,RouteType int null,Route text null);";
 
     // WareHouse Mapping
     private static final String TABLE_tblWarehouseMstr = "tblWarehouseMstr";
@@ -70,7 +82,7 @@ public class PRJDatabase
 
     // SO Tables Start
     private static final String Table_tblDSRCoverageMaster_Define = "tblDSRCoverageMaster";
-    private static final String Table_tblDSRCoverageMaster_Definition = "create table tblDSRCoverageMaster (CoverageAreaNodeID text null,CoverageAreaNodeType text null,CoverageArea text null,PersonNodeID text null,PersonNodeType text null,PersonName text null);";
+    private static final String Table_tblDSRCoverageMaster_Definition = "create table tblDSRCoverageMaster (CoverageAreaNodeID text null,CoverageAreaNodeType text null,CoverageArea text null,PersonNodeID text null,PersonNodeType text null,PersonName text null,flgDSRCoverageAssignedToSONode int null);";
 
 
     private static final String DATABASE_TABLE_tblUserName = "tblUserName";
@@ -80,7 +92,14 @@ public class PRJDatabase
 
     private static final String DATABASE_CREATE_TABLE_tblUserName = "create table tblUserName (UserName text null);";
     private static final String DATABASE_CREATE_TABLE_tblStoreCountDetails = "create table tblStoreCountDetails (TotStoreAdded int null,TodayStoreAdded int null);";
-    private static final String DATABASE_CREATE_TABLE_tblPreAddedStores = "create table tblPreAddedStores (StoreID text null,StoreName text null,LatCode text null,LongCode text null,DateAdded text null,DistanceNear int null,flgOldNewStore int null,flgReMap int null,Sstat int null,RouteID int null,RouteNodeType int null);";
+    //private static final String DATABASE_CREATE_TABLE_tblPreAddedStores = "create table tblPreAddedStores (StoreID text null,StoreName text null,LatCode text null,LongCode text null,DateAdded text null,DistanceNear int null,flgOldNewStore int null,flgReMap int null,Sstat int null,RouteID int null,RouteNodeType int null,flgApproveOrRejectOrNoActionOrReVisit int null,IsStoreDataCompleteSaved int null,flgStoreVisitMode int null);";
+    private static final String DATABASE_CREATE_TABLE_tblPreAddedStores = "create table tblPreAddedStores(StoreID text null,StoreName text null,LatCode text null," +
+            "LongCode text null,DateAdded text null,DistanceNear int null,flgOldNewStore int null,CoverageAreaID int null,CoverageAreaType int null," +
+            "RouteNodeID int null,RouteNodeType int null,City text null,State text null,PinCode text null,StoreCategoryType text null,StoreSectionCount int null," +
+            "flgApproveOrRejectOrNoActionOrReVisit int null,SOLatCode text null,SOLongCode text null,VisitStartTS text null,VisitEndTS text null," +
+            "LocProvider text null,Accuracy text null,BateryLeftStatus text null,IsStoreDataCompleteSaved int null,PaymentStage text null,flgLocationTrackEnabled int null," +
+            "flgStoreVisitMode int null,Sstat int null,StoreAddress text null,SOAccuracy text null,flgRemap int null,flgLocationServicesOnOff int null,flgGPSOnOff int null,flgNetworkOnOff int null,flgFusedOnOff int null,flgInternetOnOffWhileLocationTracking int null,flgRestart int null,flgStoreOrder int null,MapAddress text null,MapCity text null,MapPinCode text null,MapState text null,CityId text null,StateId text null,flgSelfStoreNode int null);";
+
     private static final String DATABASE_CREATE_TABLE_tblPreAddedStoresDataDetails = "create table tblPreAddedStoresDataDetails (StoreIDDB text null,GrpQuestID text null,QstId text null,AnsControlTypeID text null,AnsTextVal text null,flgPrvVal text null);";
 
 
@@ -203,7 +222,7 @@ public class PRJDatabase
     private static final String DATABASE_CREATE_TABLE_236 = "create table tblTargetVsAchievedNote (MsgToDisplay text null);";
     // Tables Data Coming at Splash Screen Starts
     private static final String TABLE_tblUserAuthenticationMstr_Define = "tblUserAuthenticationMstr";
-    private static final String TABLE_tblUserAuthenticationMstr_Definition = "create table tblUserAuthenticationMstr (flgUserAuthenticated text null,PersonName text null,PersonNodeID integer null,PersonNodeType integer null,FlgRegistered text null,flgAppStatus text null,DisplayMessage text null,flgValidApplication text null,MessageForInvalid text null,flgPersonTodaysAtt text null,ContactNo text null,DOB text null,SelfieName text null,SelfieNameURL text null,SalesAreaName text null);";
+    private static final String TABLE_tblUserAuthenticationMstr_Definition = "create table tblUserAuthenticationMstr (flgUserAuthenticated text null,PersonName text null,PersonNodeID integer null,PersonNodeType integer null,FlgRegistered text null,CoverageAreaNodeID integer null,CoverageAreaNodeType integer null,flgAppStatus text null,DisplayMessage text null,flgValidApplication text null,MessageForInvalid text null,flgPersonTodaysAtt text null,ContactNo text null,DOB text null,SelfieName text null,SelfieNameURL text null,SalesAreaName text null);";
 
    // private static final String TABLE_tblUserAuthenticationMstr_Definition = "create table tblUserAuthenticationMstr (flgUserAuthenticated text null,PersonName text null,FlgRegistered text null,PersonNodeID text null,PersonNodeType text null,flgPersonTodaysAtt text null);";
     private static final String TABLE_tblBloodGroup_Define = "tblBloodGroup";
@@ -238,9 +257,9 @@ public class PRJDatabase
     private static final String TABLE_QST_NAME = "tblQuestIDForName";
     private static final String DATABASE_CREATE_TABLE_QST_NAME = "create table tblQuestIDForName(ID int null,GrpQstId int null,QuestID int null,QuestDesc text null);";
     private static final String TABLE_QuestionMstr = "tblQuestionMstr";
-    private static final String DATABASE_CREATE_TABLE_QUESTIONMstr = "create table tblQuestionMstr(QuestID int null,QuestCode int null,QuestDesc text null,QuestType int null,AnsControlType int null,AnsControlInputTypeID int null,AnsControlInputTypeMinLength int null,AnsControlInputTypeMaxLength int null,AnsMustRequiredFlg int null,QuestBundleFlg int null,ApplicationTypeID int null,Sequence int null,AnsHint text null,flgQuestIDForOutChannel int null,QuestDescHindi text null);";
+    private static final String DATABASE_CREATE_TABLE_QUESTIONMstr = "create table tblQuestionMstr(QuestID int null,QuestCode int null,QuestDesc text null,QuestType int null,AnsControlType int null,AnsControlInputTypeID int null,AnsControlInputTypeMinLength int null,AnsControlInputTypeMaxLength int null,AnsMustRequiredFlg int null,QuestBundleFlg int null,ApplicationTypeID int null,Sequence int null,AnsHint text null,flgQuestIDForOutChannel int null,QuestDescHindi text null,flgNewStore int null,flgStoreValidation int null);";
     private static final String TABLE_QuestGrpMappingMstr = "tblPDAQuestGrpMappingMstr";
-    private static final String DATABASE_CREATE_TABLE_QuestGrpMappingMstr = "create table tblPDAQuestGrpMappingMstr(GrpQuestID int null,QuestID int null,GrpID int null,GrpNodeID int null,GrpDesc text null,SectionNo int null,GrpCopyID int null,QuestCopyID int null,Sequence int null);";
+    private static final String DATABASE_CREATE_TABLE_QuestGrpMappingMstr = "create table tblPDAQuestGrpMappingMstr(GrpQuestID int null,QuestID int null,GrpID int null,GrpNodeID int null,GrpDesc text null,SectionNo int null,GrpCopyID int null,QuestCopyID int null,Sequence int null,flgNewStore int null,flgStoreValidation int null);";
     private static final String TABLE_OptionMstr = "tblOptionMstr";
     private static final String DATABASE_CREATE_TABLE_OPTIONMstr = "create table tblOptionMstr(OptID text null,QuestID int null,OptionNo int null,OptionDescr text null,Sequence int null );";
     private static final String TABLE_QuestOptionDependentMstr = "tblPDAQuestOptionDependentMstr";
@@ -13667,6 +13686,9 @@ open();
         initialValues.put("flgTransType", flgTransType);
 
         initialValues.put("StoreClose", IsClose);
+        initialValues.put("CoverageAreaNodeID", CommonInfo.CoverageAreaNodeID);
+        initialValues.put("CoverageAreaNodeType", CommonInfo.CoverageAreaNodeType);
+        initialValues.put("FlgDSRSO", CommonInfo.FlgDSRSO);
         return db.insert(DATABASE_TABLE_MAIN13, null, initialValues);
     }
 
@@ -15382,7 +15404,9 @@ open();
         initialValues.put("GSTNumber", GSTNumber);
         initialValues.put("flgGSTRecordFromServer", flgGSTRecordFromServer);
         initialValues.put("DistanceNear", 1000);
-
+        initialValues.put("CoverageAreaNodeID", CommonInfo.CoverageAreaNodeID);
+        initialValues.put("CoverageAreaNodeType", CommonInfo.CoverageAreaNodeType);
+        initialValues.put("FlgDSRSO", CommonInfo.FlgDSRSO);
 
 
       /*  initialValues.put("flgLocationServicesOnOff", flgLocationServicesOnOff);
@@ -15509,12 +15533,12 @@ open();
         return DDlStringCity;
     }
 
-    public LinkedHashMap isMstrQuestToHide()
+    public LinkedHashMap isMstrQuestToHide(String prmchannelOptId)
     {
         LinkedHashMap<String,String> hmapMstrQstOptId=new LinkedHashMap<String,String>();
         open();
 
-        String channelOptId=getChannelGroupIdOptId();
+        String channelOptId=prmchannelOptId;//getChannelGroupIdOptId();
         String channelkey =getChannelGroupIdKey();
         if(!channelOptId.equals("0-0-0"))
         {
@@ -19165,7 +19189,8 @@ open();
                                               String MessageForInvalid,String flgPersonTodaysAtt,
                                               int PersonNodeID,int PersonNodeType,
                                               String ContactNo,String DOB,String SelfieName,
-                                              String SelfieNameURL,String SalesAreaName)
+                                              String SelfieNameURL,String SalesAreaName,
+                                              int CoverageAreaNodeID,int CoverageAreaNodeType)
     {
 
         ContentValues initialValues = new ContentValues();
@@ -19181,7 +19206,8 @@ open();
         initialValues.put("PersonNodeID", PersonNodeID);
         initialValues.put("PersonNodeType", PersonNodeType);
 
-
+        initialValues.put("CoverageAreaNodeID", CoverageAreaNodeID);
+        initialValues.put("CoverageAreaNodeType", CoverageAreaNodeType);
         initialValues.put("ContactNo", ContactNo.trim());
         initialValues.put("DOB", DOB.trim());
         initialValues.put("SelfieName", SelfieName.trim());
@@ -19744,7 +19770,7 @@ open();
 
     }
 
-    public long savetblQuestionMstr(String QuestID,String QuestCode,String QuestDesc,String QuestType,String AnsControlType,String AnsControlInputTypeID,String AnsControlInputTypeMaxLength,String AnsMustRequiredFlg,String QuestBundleFlg,String ApplicationTypeID,String Sequence,String AnsControlInputTypeMinLength,String answerHint,int flgQuestIDForOutChannel,String QuestDescHindi)
+    public long savetblQuestionMstr(String QuestID,String QuestCode,String QuestDesc,String QuestType,String AnsControlType,String AnsControlInputTypeID,String AnsControlInputTypeMaxLength,String AnsMustRequiredFlg,String QuestBundleFlg,String ApplicationTypeID,String Sequence,String AnsControlInputTypeMinLength,String answerHint,int flgQuestIDForOutChannel,String QuestDescHindi,int flgNewStore,int flgStoreValidation)
     {
 
         ContentValues initialValues = new ContentValues();
@@ -19766,6 +19792,9 @@ open();
         initialValues.put("flgQuestIDForOutChannel", flgQuestIDForOutChannel);
 
         initialValues.put("QuestDescHindi", QuestDescHindi);
+
+        initialValues.put("flgNewStore", flgNewStore);
+        initialValues.put("flgStoreValidation", flgStoreValidation);
 
         return db.insert(TABLE_QuestionMstr, null, initialValues);
     }
@@ -21500,14 +21529,12 @@ open();
 
     }
 
-    public String fnGetXMLFile(String Sstat)
+    public String fnGetXMLFile(String Sstat,String filetype)
     {
         String optionList="";
         open();
-        // Cursor cursor = db.rawQuery("SELECT SST_NameId,SST_Name_des from tbl_SST_NameMstr Order By Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-        Cursor cursor = db.rawQuery("SELECT XmlFileName from tbl_XMLfiles Where Sstat='"+Sstat+"'", null);// Where PNodeID='"+TSIID+"'
-        // (String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(2).toString()+"^"+(String) cursor.getString(3).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(5).toString()+"^"+(String) cursor.getString(6).toString()+"^"+(String) cursor.getString(7).toString()+"^"+(String) cursor.getString(8).toString()+"^"+(String) cursor.getString(9).toString()+"^"+(String) cursor.getString(10).toString()
-        // close();
+        Cursor cursor = db.rawQuery("SELECT XmlFileName from tbl_XMLfiles Where Sstat='"+Sstat+"' and filetype='"+filetype+"'", null);// Where PNodeID='"+TSIID+"'
+
         try {
             if(cursor.getCount()>0)
             {
@@ -21534,6 +21561,25 @@ open();
             cursor.close();
 
         }
+    }
+    public LinkedHashMap<String, String> fnGetImagesAgainstStoreForSOView(String StoreID)
+    {
+        open();
+        Cursor cursor=db.rawQuery("Select StoreImagename,ImageType from tblStoreImageList where StoreID='"+StoreID+"'",null);
+        LinkedHashMap<String, String> hmapStoresDSRImageList=new LinkedHashMap<String, String>();
+        if(cursor.getCount()>0)
+        {
+            if(cursor.moveToFirst())
+            {
+                for(int index=0;index<cursor.getCount();index++)
+                {
+                    hmapStoresDSRImageList.put(cursor.getString(0), cursor.getString(1));
+                    cursor.moveToNext();
+                }
+            }
+        }
+        close();
+        return hmapStoresDSRImageList;
     }
 
     public void upDateTblXmlFile(String XmlFileName) {
@@ -22151,7 +22197,7 @@ open();
         }
     }
 
-    public long savetblPDAQuestGrpMappingMstr(String GrpQuestID,String QuestID,String GrpID,String GrpNodeID,String GrpDesc,String SectionNo,String GrpCopyID,String QuestCopyID,String sequence)
+    public long savetblPDAQuestGrpMappingMstr(String GrpQuestID,String QuestID,String GrpID,String GrpNodeID,String GrpDesc,String SectionNo,String GrpCopyID,String QuestCopyID,String sequence,int flgNewStore,int flgStoreValidation)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put("GrpQuestID", Integer.parseInt(GrpQuestID));
@@ -22163,6 +22209,9 @@ open();
         initialValues.put("GrpCopyID", Integer.parseInt(GrpCopyID));
         initialValues.put("QuestCopyID", Integer.parseInt(QuestCopyID));
         initialValues.put("Sequence", Integer.parseInt(sequence));
+
+        initialValues.put("flgNewStore", flgNewStore);
+        initialValues.put("flgStoreValidation", flgStoreValidation);
         long inserted= db.insert(TABLE_QuestGrpMappingMstr, null, initialValues);
         System.out.println("TABLE_QuestGrpMappingMstr ="+inserted);
         return inserted;
@@ -22477,81 +22526,44 @@ open();
 
     }
 
-    public LinkedHashMap<String, String> fnGetQuestionMstr(SharedPreferences sPref)
+    public LinkedHashMap<String, String> fnGetQuestionMstr(int sectionCount)
     {
-
-        if(sPref.getString("Language", "").equals("en"))
-        {
-
-        }
-        else if(sPref.getString("Language", "").equals("hi"))
-        {
-
-        }
-        else
-        {
-
-        }
         LinkedHashMap<String, String> hmapQuestionMstr=new LinkedHashMap<String, String>();
         open();
-        int sectionCount=getsectionCount();
-
-
-
-
-        Cursor cursor;
-
-
-/*
-
-		if(sPref.getString("Language", "").equals("en"))
-		{
-			if(sectionCount!=0)
-			{
-				cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  where tblPDAQuestGrpMappingMstr.SectionNo<="+sectionCount+" Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-			}
-			else
-			{
-				cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-			}
-		}
-		else if(sPref.getString("Language", "").equals("hi"))
-		{
-			if(sectionCount!=0)
-			{
-				cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDescHindi,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  where tblPDAQuestGrpMappingMstr.SectionNo<="+sectionCount+" Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-			}
-			else
-			{
-				cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDescHindi,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-			}
-		}
-		else
-		{
-			if(sectionCount!=0)
-			{
-				cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  where tblPDAQuestGrpMappingMstr.SectionNo<="+sectionCount+" Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-			}
-			else
-			{
-				cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
-			}
-		}
-*/
-
+        // int sectionCount=getsectionCount();
+        //tblPDAQuestGrpMappingMstr(GrpQuestID int null,QuestID int null,GrpID int null,GrpNodeID int null,GrpDesc text null,SectionNo int null);";
+        //tblQuestionMstr(QuestID int null,QuestCode int null,QuestDesc text null,QuestType int null,AnsControlType int null,AnsControlInputTypeID int null,AnsControlInputTypeMinLength int null,AnsControlInputTypeMaxLength int null,AnsMustRequiredFlg int null,QuestBundleFlg int null,ApplicationTypeID int null,Sequence int null,AnsHint text null);";
+        Cursor cursor=null;
         if(sectionCount!=0)
         {
-            cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  where tblPDAQuestGrpMappingMstr.SectionNo<="+sectionCount+" Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            if(CommonInfo.flgNewStoreORStoreValidation==1)
+            {
+                cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr on tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  where tblPDAQuestGrpMappingMstr.SectionNo<="+sectionCount+" AND tblQuestionMstr.flgNewStore=1 Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            }
+            else if(CommonInfo.flgNewStoreORStoreValidation==2)
+            {
+                cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr on tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  where tblPDAQuestGrpMappingMstr.SectionNo<="+sectionCount+" AND tblQuestionMstr.flgStoreValidation=1 Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            }
+
+
         }
         else
         {
-            cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr On tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            // cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr on tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID  Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            if(CommonInfo.flgNewStoreORStoreValidation==1)
+            {
+                cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr on tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID WHERE  tblQuestionMstr.flgNewStore=1 Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            }
+            else if(CommonInfo.flgNewStoreORStoreValidation==2)
+            {
+                cursor = db.rawQuery("SELECT tblQuestionMstr.QuestID,tblQuestionMstr.QuestCode,tblQuestionMstr.QuestDesc,tblQuestionMstr.QuestType,tblQuestionMstr.AnsControlType,tblQuestionMstr.AnsControlInputTypeID,tblQuestionMstr.AnsControlInputTypeMaxLength,tblQuestionMstr.AnsMustRequiredFlg,tblQuestionMstr.QuestBundleFlg,tblQuestionMstr.ApplicationTypeID,tblQuestionMstr.Sequence,tblQuestionMstr.AnsControlInputTypeMinLength,tblQuestionMstr.AnsHint,tblPDAQuestGrpMappingMstr.GrpQuestID,tblPDAQuestGrpMappingMstr.Sequence from tblQuestionMstr inner join tblPDAQuestGrpMappingMstr on tblQuestionMstr.QuestID=tblPDAQuestGrpMappingMstr.QuestID WHERE tblQuestionMstr.flgStoreValidation=1  Order By tblPDAQuestGrpMappingMstr.Sequence ASC  ", null);// Where PNodeID='"+TSIID+"'
+            }
+
         }
 
 
         try
         {
-            //	String aa="उत्पाद का $ नाम है";
             if(cursor.getCount()>0)
             {
                 if (cursor.moveToFirst())
@@ -22559,9 +22571,7 @@ open();
                     for (int i = 0; i <= (cursor.getCount() - 1); i++)
                     {
                         System.out.println("Varun Quest Id = "+(String) cursor.getString(0).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(13).toString()+"~"+ (String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(2).toString()+"^"+(String) cursor.getString(3).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(5).toString()+"^"+(String) cursor.getString(6).toString()+"^"+(String) cursor.getString(7).toString()+"^"+(String) cursor.getString(8).toString()+"^"+(String) cursor.getString(13).toString()+"^"+(String) cursor.getString(14).toString());
-                        //	hmapQuestionMstr.put((String) cursor.getString(0).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(13).toString(), (String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(2).toString()+"^"+(String) cursor.getString(3).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(5).toString()+"^"+(String) cursor.getString(6).toString()+"^"+(String) cursor.getString(7).toString()+"^"+(String) cursor.getString(8).toString()+"^"+(String) cursor.getString(9).toString()+"^"+(String) cursor.getString(10).toString()+"^"+(String) cursor.getString(11).toString()+"^"+(String) cursor.getString(12).toString()+"^"+(String) cursor.getString(13).toString());
                         hmapQuestionMstr.put((String) cursor.getString(0).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(13).toString(), (String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(2).toString()+"^"+(String) cursor.getString(3).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(5).toString()+"^"+(String) cursor.getString(6).toString()+"^"+(String) cursor.getString(7).toString()+"^"+(String) cursor.getString(8).toString()+"^"+(String) cursor.getString(9).toString()+"^"+(String) cursor.getString(10).toString()+"^"+(String) cursor.getString(11).toString()+"^"+(String) cursor.getString(12).toString()+"^"+(String) cursor.getString(13).toString());
-                        //use=aa in place of (String) cursor.getString(2).toString()
                         cursor.moveToNext();
                     }
                 }
@@ -24401,14 +24411,14 @@ open();
         }
     }
 
-    public LinkedHashMap<String, String> getQuestAnswer(String tempId)
+    public LinkedHashMap<String, String> getQuestAnswer(String tempId,String prmchannelOptId)
     {
         open();
         LinkedHashMap<String, String> hmapRtrvQuestAns=new LinkedHashMap<String, String>();
         try {
-            String channelOptId=getChannelGroupIdOptId();
+            String channelOptId=prmchannelOptId;
             String channelkey =getChannelGroupIdKey();
-            if(!channelOptId.equals("0-0-0") && !TextUtils.isEmpty(channelkey))
+            if(!channelOptId.equals("0-0-0"))
             {
                 hmapRtrvQuestAns.put(channelkey,channelOptId);
             }
@@ -24468,37 +24478,39 @@ open();
             return hmapPreviousVisitServerQuestionSavedAns;
         }
     }
-/*	public LinkedHashMap<String, String> fnGetQuestionIdFlgPrvValue(String TempID)
-	{
-	LinkedHashMap<String, String> hmapQuestionflgPrvValue=new LinkedHashMap<String, String>();
-	open();
+    public LinkedHashMap<String, String> fnGetQuestionIdFlgPrvValue(String TempID)
+    {
+        LinkedHashMap<String, String> hmapQuestionflgPrvValue=new LinkedHashMap<String, String>();
+        open();
+        //tblQuestionTaskIdMapd(QstId int null,TaskId int null);";
+        int lastIndex=0;
+        Cursor cursor;
+//tblPreAddedStoresDataDetails (StoreIDDB text null,GrpQuestID text null,QstId text null,AnsControlTypeID text null,AnsTextVal text null,flgPrvVal text null);";
+        cursor = db.rawQuery("SELECT QstId,AnsControlTypeID,flgPrvVal,GrpQuestID from tblPreAddedStoresDataDetails Where tblPreAddedStoresDataDetails.StoreIDDB='"+ TempID +"'", null);
 
-	int lastIndex=0;
-	Cursor cursor;
-	cursor = db.rawQuery("SELECT QstId,AnsControlTypeID,flgPrvVal,GrpQuestID from tblPreAddedStoresDataDetails Where tblPreAddedStoresDataDetails.StoreIDDB='"+ TempID +"'", null);
 
+        try {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++) {
+                        hmapQuestionflgPrvValue.put((String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(3).toString(), (String) cursor.getString(2).toString());
 
-	try {
-		if(cursor.getCount()>0)
-		{
-			if (cursor.moveToFirst())
-			{
-				for (int i = 0; i <= (cursor.getCount() - 1); i++) {
-					hmapQuestionflgPrvValue.put((String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(3).toString(), (String) cursor.getString(2).toString());
+                        cursor.moveToNext();
+                    }
 
-					cursor.moveToNext();
-				}
+                }
+            }
+            return hmapQuestionflgPrvValue;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
 
-			}
-		}
-		return hmapQuestionflgPrvValue;
-	}
-	finally
-	{
-		cursor.close();
-		close();
-	}
-}*/
 
     public LinkedHashMap<String, String> getGroupIdCopyAsAbove()
     {
@@ -24546,6 +24558,31 @@ open();
         }
     }
 
+    /*public String getNameQstGrpId_QstId()
+    {
+        String grpQstId_qstIdForName="";
+
+        open();
+        try {
+
+
+            Cursor cur=db.rawQuery("Select * from tblQuestIDForName", null);
+            if(cur.getCount()>0)
+            {
+                if(cur.moveToFirst())
+                {
+                    grpQstId_qstIdForName=cur.getString(0)+"^"+cur.getString(1);
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        finally
+        {
+            close();
+            return grpQstId_qstIdForName;
+        }
+    }*/
     public LinkedHashMap<String,String> getNameQstGrpId_QstId()
     {
         LinkedHashMap<String,String> grpQstId_qstIdForName=new LinkedHashMap<>();
@@ -24577,6 +24614,35 @@ open();
         }
     }
 
+    public String  fetch_DSRCoverage_Name(int  PersonNodeID,int PersonNodeType)
+    {
+        open();
+        String CoverageArea="No DSR";
+        Cursor cursor = db.rawQuery("SELECT CoverageArea FROM tblDSRCoverageMaster where PersonNodeID='"+PersonNodeID+"' and PersonNodeType='"+PersonNodeType+"'",null);
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                    {
+                        CoverageArea=cursor.getString(0).toString();
+                        cursor.moveToNext();
+                    }
+                }
+
+            }
+
+
+            return CoverageArea;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
     public  LinkedHashMap<String, String> getDepOptMstr()
     {
 
@@ -24670,18 +24736,341 @@ open();
         }
     }
 
-    public void fnsaveOutletQuestAnsMstrSectionWise(LinkedHashMap<String, String> hmapQuesAnsVal,int CurrentsectionID,String CurrentOutletID)
+    public String[] getAllStoreIDForPhotoTakenDetail()
+    {
+        Cursor cursor=null;
+        try
+        {
+            cursor = db.rawQuery("SELECT DISTINCT(StoreID) FROM tableImage where Sstat=5", null);
+
+            String StoreName[] = new String[cursor.getCount()];
+
+            if (cursor.moveToFirst())
+            {
+                for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                {
+                    StoreName[i] = (String) cursor.getString(0).toString();
+                    cursor.moveToNext();
+                }
+            }
+
+            return StoreName;
+        }
+        finally
+        {
+            cursor.close();
+        }
+
+    }
+    public String[] getImgsPathSO(String StoreID)
+    {
+
+        int SnamecolumnIndex1 = 0;
+
+        Cursor cursor = db.rawQuery("SELECT imageName FROM tableImage WHERE StoreID ='"+ StoreID + "'", null);
+        try {
+
+            String StoreName[] = new String[cursor.getCount()];
+
+            if (cursor.moveToFirst()) {
+
+                for (int i = 0; i <= (cursor.getCount() - 1); i++) {
+
+                    StoreName[i] = (String) cursor.getString(SnamecolumnIndex1)
+                            .toString();
+
+                    cursor.moveToNext();
+                }
+            }
+            return StoreName;
+        } finally {
+            cursor.close();
+        }
+
+    }
+    public void updateImageRecordsIntableImage(String imageName)
+    {
+
+        try
+        {
+            open();
+            final ContentValues values = new ContentValues();
+            values.put("Sstat", 4);
+
+            int affected3 = db.update("tableImage", values, "imageName=?",new String[] { imageName });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.toString());
+        }
+        finally
+        {
+            close();
+        }
+
+
+    }
+    public int getExistingPicNosSO(String StoreID) {
+
+        int ScodecolumnIndex = 0;
+
+        Cursor cursor = db.rawQuery("SELECT Count(StoreID) FROM tableImage where StoreID='" + StoreID + "'", null);
+        try {
+            int strProdStockQty = 0;
+            if (cursor.moveToFirst()) {
+
+                for (int i = 0; i <= (cursor.getCount() - 1); i++) {
+                    if (!cursor.isNull(ScodecolumnIndex)) {
+                        strProdStockQty = Integer.parseInt(cursor.getString(ScodecolumnIndex).toString());
+                        cursor.moveToNext();
+                    }
+
+                }
+            }
+            return strProdStockQty;
+        } finally {
+            cursor.close();
+        }
+    }
+    public void fnInsertOrUpdate_tblStoreDeatils(String StoreID,String StoreName,String ActualLatitude,String ActualLongitude,String VisitStartTS,String VisitEndTS,String LocProvider,String Accuracy,String BateryLeftStatus,int IsStoreDataCompleteSaved,String PaymentStage,int flgLocationTrackEnabled,String StoreAddress,String StoreCity,String StorePinCode,String StoreState,int Sstat,int flgApproveOrRejectOrNoActionOrReVisit,int flgStoreVisitMode,String StoreCategoryType,int StoreSectionCount, int flgLocationServicesOnOff, int flgGPSOnOff, int flgNetworkOnOff, int flgFusedOnOff, int flgInternetOnOffWhileLocationTracking, int flgRestart, int flgStoreOrder,int flgUpdateSomeNewStoreFlags,String CityId,String StateId,String MapAddress,String MapCity,String MapPinCode,String MapState)
+    {
+
+        int flgIfStoreHasRecords=0;
+        try {
+            flgIfStoreHasRecords=CheckTotalStoreCount();
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        open();
+        try {
+            Cursor cursor = db.rawQuery("SELECT StoreID FROM "+ DATABASE_TABLE_tblPreAddedStores +" where StoreID='"+StoreID +"'" , null);
+
+
+            ContentValues initialValues = new ContentValues();
+            initialValues.put("StoreName", StoreName.trim());
+            initialValues.put("IsStoreDataCompleteSaved", IsStoreDataCompleteSaved);
+            initialValues.put("PaymentStage", PaymentStage);
+            initialValues.put("flgLocationTrackEnabled", flgLocationTrackEnabled);
+            initialValues.put("StoreAddress", StoreAddress);
+            initialValues.put("City", StoreCity);
+            initialValues.put("PinCode", StorePinCode);
+            initialValues.put("State", StoreState);
+            initialValues.put("Sstat", Sstat);
+            initialValues.put("SOLatCode", ActualLatitude);
+            initialValues.put("SOLongCode", ActualLongitude);
+            initialValues.put("SOAccuracy", Accuracy);
+            initialValues.put("LocProvider", LocProvider);
+            // initialValues.put("Accuracy", Accuracy);
+            initialValues.put("BateryLeftStatus", BateryLeftStatus);
+            initialValues.put("flgApproveOrRejectOrNoActionOrReVisit", flgApproveOrRejectOrNoActionOrReVisit);
+            initialValues.put("flgStoreVisitMode", flgStoreVisitMode);
+            initialValues.put("CityId", CityId);
+            initialValues.put("StateId", StateId);
+            if(flgUpdateSomeNewStoreFlags==1)
+            {
+                initialValues.put("flgLocationServicesOnOff", flgLocationServicesOnOff);
+                initialValues.put("flgGPSOnOff", flgGPSOnOff);
+                initialValues.put("flgNetworkOnOff", flgNetworkOnOff);
+                initialValues.put("flgFusedOnOff", flgFusedOnOff);
+                initialValues.put("flgInternetOnOffWhileLocationTracking", flgInternetOnOffWhileLocationTracking);
+                initialValues.put("flgRestart", flgRestart);
+            }
+            if(cursor.getCount()>0)
+            {
+                int affected = db.update(DATABASE_TABLE_tblPreAddedStores, initialValues, "StoreID=?",new String[] {StoreID});
+            }
+            else
+            {
+                long syncTIMESTAMP = System.currentTimeMillis();
+                Date datefromat = new Date(syncTIMESTAMP);
+                SimpleDateFormat dfDate = new SimpleDateFormat("dd-MMM-yyyy",Locale.ENGLISH);
+                String VisitDate = dfDate.format(datefromat);
+//
+                initialValues.put("DateAdded", VisitDate);
+                initialValues.put("StoreID", StoreID);
+                initialValues.put("SOLatCode", ActualLatitude);
+                initialValues.put("SOLongCode", ActualLongitude);
+                initialValues.put("LatCode", ActualLatitude);
+                initialValues.put("LongCode", ActualLongitude);
+                initialValues.put("Accuracy", Accuracy);
+                initialValues.put("SOAccuracy", Accuracy);
+                initialValues.put("DistanceNear", 0);
+                initialValues.put("CoverageAreaID", 0);
+                initialValues.put("CoverageAreaType", 0);
+                initialValues.put("RouteNodeID", 0);
+                initialValues.put("RouteNodeType", 0);
+                initialValues.put("StoreCategoryType", StoreCategoryType);
+                initialValues.put("StoreSectionCount", StoreSectionCount);
+                //initialValues.put("DateAdded", "0");
+                initialValues.put("VisitStartTS", VisitStartTS);
+                initialValues.put("VisitEndTS", VisitEndTS);
+                initialValues.put("flgRemap", 0);
+                //initialValues.put("LocProvider", LocProvider);
+                // initialValues.put("Accuracy", Accuracy);
+                // initialValues.put("BateryLeftStatus", BateryLeftStatus);
+                initialValues.put("flgOldNewStore", 1);
+
+
+
+                initialValues.put("flgStoreOrder", (flgIfStoreHasRecords+1));
+                initialValues.put("MapAddress", MapAddress);
+                initialValues.put("MapCity", MapCity);
+                initialValues.put("MapPinCode", MapPinCode);
+                initialValues.put("MapState", MapState);
+                initialValues.put("flgSelfStoreNode", 1);
+                db.insert(DATABASE_TABLE_tblPreAddedStores, null, initialValues);
+            }
+
+
+        }
+        catch(Exception ex)
+        {
+            String ex1=ex.getMessage();
+        }
+        finally {
+            close();
+        }
+
+    }
+    public LinkedHashMap<String, String> fnGetStList()
+    {
+        LinkedHashMap<String, String> hmapQuestionMstr=new LinkedHashMap<String, String>();
+        open();
+        Cursor cursor= db.rawQuery("SELECT StoreID,Sstat from tblPreAddedStores Where Sstat=3", null);// Where PNodeID='"+TSIID+"'
+        //(String) cursor.getString(0).toString()+"^"+(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(2).toString()+"^"+(String) cursor.getString(3).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(5).toString()+"^"+(String) cursor.getString(6).toString()+"^"+(String) cursor.getString(7).toString()+"^"+(String) cursor.getString(8).toString()+"^"+(String) cursor.getString(9).toString()+"^"+(String) cursor.getString(10).toString()
+        // close();
+        try {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++) {
+                        hmapQuestionMstr.put((String) cursor.getString(0).toString(),(String) cursor.getString(1).toString());
+                        //    System.out.println("QuestID:"+(String)cursor.getString(0).toString()+"QuestCode:"+(String) cursor.getString(1).toString()+"QuestDesc:"+(String) cursor.getString(2).toString()+"QuestType:"+(String) cursor.getString(3).toString()+"AnsControlType:"+(String) cursor.getString(4).toString()+"AnsControlInputTypeID:"+(String) cursor.getString(5).toString()+"AnsControlInputTypeMaxLength:"+(String) cursor.getString(6).toString()+"AnsMustRequiredFlg:"+(String) cursor.getString(7).toString()+"QuestBundleFlg:"+(String) cursor.getString(8).toString()+"ApplicationTypeID:"+(String) cursor.getString(9).toString()+"Sequence:"+(String) cursor.getString(10).toString());
+                        cursor.moveToNext();
+                    }
+                }
+            }
+            return hmapQuestionMstr;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
+
+    public void UpdateStoreFlagSO(String sID, int flag2set)
+    {
+
+        try
+        {
+
+            final ContentValues values = new ContentValues();
+            values.put("Sstat", flag2set);
+            int affected = db.update("tblPreAddedStores", values, "StoreID=?",new String[] { sID });
+
+            int affected1 = db.update("tblOutletQuestAnsMstr", values,"OutletID=?", new String[] { sID });
+
+
+            int affected3 = db.update("tblNewStoreSalesQuotePaymentDetails", values,"StoreId=?", new String[] { sID });
+            int affected5 = db.update("tblLatLongDetails", values,"StoreID=?", new String[] { sID });
+            if(flag2set==3)
+            {
+                int affected4 = db.update("tblsameLocationForStoreRestartDone", values,"CrntStoreID=?", new String[] { sID });
+            }
+
+
+
+        }
+        catch (Exception ex)
+        {
+            String ex1=ex.getMessage();
+        }
+
+    }
+
+
+    public void UpdateStoreReturnphotoFlagSO(String StoreID, String StoreName)
+    {
+        try
+        {
+            final ContentValues values = new ContentValues();
+            values.put("StoreName", StoreName);
+
+
+
+            int affected16 = db.update("tblPreAddedStores", values,"StoreID=?", new String[] { StoreID });
+        }
+        catch (Exception ex) {
+
+        }
+    }
+    public String getChannelGroupIdOptIdForAddingStore()
+    {
+        String grpQstIdOptIdForChannel="0-0-0";
+
+        open();
+        try {
+
+//tblQuestIDForOutChannel(GrpQstId int null,QuestID int null,OptID text null,SectionCount int null);";
+            Cursor cur=db.rawQuery("Select OptID from tblQuestIDForOutChannel", null);
+            if(cur.getCount()>0)
+            {
+                if(cur.moveToFirst())
+                {
+
+                    grpQstIdOptIdForChannel=cur.getString(0);
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        finally
+        {
+            close();
+            return grpQstIdOptIdForChannel;
+        }
+    }
+
+    public int fetch_GetCoverageAreaIDAgsinstStoreID(String StoreID)
+    {
+        open();
+        int CoverageAreaIDAgsinstStoreID =0;
+        Cursor cursor = db.rawQuery("SELECT CoverageAreaID FROM tblPreAddedStores WHERE StoreID='"+StoreID+"'",null);
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+                    CoverageAreaIDAgsinstStoreID=Integer.parseInt(cursor.getString(0).toString());
+                }
+            }
+
+            return CoverageAreaIDAgsinstStoreID;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
+    public void fnsaveOutletQuestAnsMstrSectionWise(LinkedHashMap<String, String> hmapQuesAnsVal,int CurrentsectionID,String CurrentOutletID,String StoreCategoryType)
     {
 
         open();
         fnDeletesaveOutletQuestAnsMstrSctionWise(CurrentOutletID,CurrentsectionID);
-        String channelOptId=getChannelGroupIdOptId();
+        String channelOptId=StoreCategoryType;//getChannelGroupIdOptId(CurrentOutletID);
         String channelkey =getChannelGroupIdKey();
         if(!channelOptId.equals("0-0-0"))
         {
             hmapQuesAnsVal.put(channelkey,channelOptId);
         }
-        // hmapQuesAnsVal.put("1^6^1","0-1-80");
+
         String OutletID="0",QuestID = "0",AnswerType,AnswerValue = "";
         int sectionID = 0;
         int QuestionGroupID=0;
@@ -24698,29 +25087,15 @@ open();
             content.put("AnswerType", Integer.parseInt(AnswerType));
             content.put("AnswerValue", AnswerValue.trim());
 
-            content.put("Sstat", 3);
+            content.put("Sstat", 1);
 
             content.put("sectionID", CurrentsectionID);
             content.put("QuestionGroupID", QuestionGroupID);
+            content.put("QuestID", questId);
+            content.put("OutletID", CurrentOutletID.toString().trim());
 
-            Cursor cursor = db.rawQuery("SELECT OutletID FROM tblOutletQuestAnsMstr where OutletID='"+CurrentOutletID.toString().trim() +"' and QuestID ='"+ questId +"'" , null);
+            db.insert(TABLE_OutletQuestAnsMstr, null, content);
 
-            //db.insert(TABLE_OutletQuestAnsMstr, null, content);
-            if(cursor.getCount()>0)
-            {
-
-                int affected = db.update("tblOutletQuestAnsMstr", content, "OutletID=? AND QuestID=?",
-                        new String[] {CurrentOutletID.toString().trim(),questId.toString().trim()});
-            }
-            else
-            {
-
-                content.put("QuestID", questId);
-                content.put("OutletID", CurrentOutletID.toString().trim());
-
-
-                db.insert(TABLE_OutletQuestAnsMstr, null, content);
-            }
 
         }
 
@@ -25065,55 +25440,7 @@ open();
         close();
     }
 
-    public void fnInsertOrUpdate_tblStoreDeatils(String StoreID,String StoreName,String ActualLatitude,String ActualLongitude,String VisitStartTS,String VisitEndTS,String LocProvider,String Accuracy,String BateryLeftStatus,int IsStoreDataCompleteSaved,String PaymentStage,int flgLocationTrackEnabled,String StoreAddress,String StoreCity,String StorePinCode,String StoreState,int Sstat)
-    {
 
-
-
-		/*open();
-		try {
-			Cursor cursor = db.rawQuery("SELECT StoreID FROM "+ DATABASE_TABLE_MAINtblStoreDeatils +" where StoreID='"+StoreID +"'" , null);
-
-
-			ContentValues initialValues = new ContentValues();
-
-
-			initialValues.put("StoreName", StoreName.trim());
-			initialValues.put("VisitEndTS", VisitEndTS);
-
-			initialValues.put("IsStoreDataCompleteSaved", IsStoreDataCompleteSaved);
-			initialValues.put("PaymentStage", PaymentStage);
-			initialValues.put("flgLocationTrackEnabled", flgLocationTrackEnabled);
-			initialValues.put("StoreAddress", StoreAddress);
-			initialValues.put("StoreCity", StoreCity);
-			initialValues.put("StorePinCode", StorePinCode);
-			initialValues.put("StoreState", StoreState);
-			initialValues.put("Sstat", Sstat);
-
-
-			if(cursor.getCount()>0)
-			{
-
-				int affected = db.update(DATABASE_TABLE_MAINtblStoreDeatils, initialValues, "StoreID=?",new String[] {StoreID});
-			}
-			else
-			{
-				initialValues.put("StoreID", StoreID.trim());
-				initialValues.put("ActualLatitude", ActualLatitude);
-				initialValues.put("ActualLongitude", ActualLongitude);
-				initialValues.put("VisitStartTS", VisitStartTS);
-				initialValues.put("LocProvider", LocProvider);
-				initialValues.put("Accuracy", Accuracy);
-				initialValues.put("BateryLeftStatus", BateryLeftStatus);
-				db.insert(DATABASE_TABLE_MAINtblStoreDeatils, null, initialValues);
-			}
-
-
-		} finally {
-			close();
-		}*/
-
-    }
 
     public void UpdateStoreReturnphotoFlag(String sID, int flag2set)
     {
@@ -25299,6 +25626,38 @@ open();
         return db.insert(DATABASE_TABLE_NewStoreSalesQuotePaymentDetails, null, initialValues);
     }
 
+
+    public String getLocationDetailsAddNewStoreSO()
+    {
+        //String StoresData="0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0";
+        String StoresData="0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0";
+        open();
+        try {                           //  0           1        2         3       4     5       6     7                 8          9   1 0              11     12    13           14          15         16          17                        18        19    20                21                                   22                                   23
+            Cursor cur=db.rawQuery("Select Lattitude,Longitude,Accuracy,Address,City,Pincode,State,fnAccurateProvider,GpsLat,GpsLong,GpsAccuracy,NetwLat,NetwLong,NetwAccuracy,FusedLat,FusedLong,FusedAccuracy,AllProvidersLocation,GpsAddress,NetwAddress,FusedAddress,FusedLocationLatitudeWithFirstAttempt,FusedLocationLongitudeWithFirstAttempt,FusedLocationAccuracyWithFirstAttempt from tblLocationDetails", null);
+
+            if(cur.getCount()>0)
+            {
+                StringBuilder sBuilder=new StringBuilder();
+                if(cur.moveToFirst())
+                {
+                    for(int i=0;i<cur.getCount();i++)
+                    {
+                        StoresData=cur.getString(0)+"^"+cur.getString(1)+"^"+cur.getString(2)+"^"+cur.getString(3)+"^"+cur.getString(4)+"^"+cur.getString(5)+"^"+cur.getString(6)+"^"+cur.getString(7)+"^"+cur.getString(8)+"^"+cur.getString(9)+"^"+cur.getString(10)+"^"+cur.getString(11)+"^"+cur.getString(12)+"^"+cur.getString(13)+"^"+cur.getString(14)+"^"+cur.getString(15)+"^"+cur.getString(16)+"^"+cur.getString(17)+"^"+cur.getString(18)+"^"+cur.getString(19)+"^"+cur.getString(20)+"^"+cur.getString(21)+"^"+cur.getString(22)+"^"+cur.getString(23);
+                        cur.moveToNext();
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        finally
+        {
+            close();
+            return StoresData;
+        }
+    }
     public String getLocationDetails()
     {
         //String StoresData="0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0^0";
@@ -25406,7 +25765,7 @@ open();
         open();
         LinkedHashMap<String, String> hmapCatgry = new LinkedHashMap<String, String>();
 
-        Cursor cursor = db.rawQuery("SELECT CoverageAreaNodeID,CoverageArea FROM tblDSRCoverageMaster",null);
+        Cursor cursor = db.rawQuery("SELECT CoverageAreaNodeID,CoverageArea FROM tblDSRCoverageMaster WHERE flgDSRCoverageAssignedToSONode<>1",null);
         try
         {
             if(cursor.getCount()>0)
@@ -25435,7 +25794,33 @@ open();
             close();
         }
     }
+    public ArrayList<String> fetch_DSRCoverageAssigenedToSO()
+    {
+        open();
+        ArrayList<String> hmapCatgry = new ArrayList<String>();
 
+        Cursor cursor = db.rawQuery("SELECT CoverageAreaNodeID,CoverageArea,CoverageAreaNodeType FROM tblDSRCoverageMaster WHERE flgDSRCoverageAssignedToSONode=1",null);
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+                    hmapCatgry.add(cursor.getString(0).toString());
+                    hmapCatgry.add(cursor.getString(1).toString());
+                    hmapCatgry.add(cursor.getString(2).toString());
+
+                }
+
+            }
+            return hmapCatgry;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
     //private static final String DATABASE_CREATE_TABLE_4 = "create table tblDistributorListMaster " +
     //	"(DBRNodeID int null,DistributorNodeType int null,Distributor text null);";
 
@@ -25635,7 +26020,8 @@ open();
         open();
         int flgCheckIfStoreExists=0;
         //tblStoreDetails(StoreID
-        Cursor cursor2 = db.rawQuery("SELECT Count(*) FROM tblStoreList where StoreID='"+StoreID+"'", null);
+        //Cursor cursor2 = db.rawQuery("SELECT Count(*) FROM tblStoreList where StoreID='"+StoreID+"'", null);
+        Cursor cursor2 = db.rawQuery("SELECT Count(*) FROM tblPreAddedStores where StoreID='"+StoreID+"'", null);
         try {
             if(cursor2.getCount()>0)
             {
@@ -25662,44 +26048,119 @@ open();
         }
         return flgCheckIfStoreExists;
     }
+    public void fnVisitStartOrEndTime(String StoreID,String Time,int flgVistStatOrEnd)
+    {
 
-    public ArrayList<String> fnGetDetails_tblStoreDeatils(String StoreID)
+
+
+        open();
+        try {
+            Cursor cursor = db.rawQuery("SELECT StoreID FROM "+ DATABASE_TABLE_tblPreAddedStores +" where StoreID='"+StoreID +"'" , null);
+
+
+            ContentValues initialValues = new ContentValues();
+
+            if(flgVistStatOrEnd==0)
+            {
+                initialValues.put("VisitStartTS", Time);
+            }
+            if(flgVistStatOrEnd==1)
+            {
+                initialValues.put("VisitEndTS", Time);
+            }
+
+
+
+            if(cursor.getCount()>0)
+            {
+
+                int affected = db.update(DATABASE_TABLE_tblPreAddedStores, initialValues, "StoreID=?",new String[] {StoreID});
+            }
+
+
+        } finally {
+            close();
+        }
+
+    }
+    public ArrayList<String> fnGetDetails_tblStoreDeatils(String StoreID,String StoreName)
     {
         ArrayList<String> arrBasisDetailsAgainstStore=new ArrayList<String>();
 
         open();
         try
         {
-            //Cursor cursor = db.rawQuery("SELECT StoreName,IFNULL(PaymentStage,'0') AS PaymentStage,IFNULL(StoreAddress,'NA') AS StoreAddress,IFNULL(StoreCity,'NA') AS StoreCity,IFNULL(StorePinCode,'NA') AS StorePinCode,IFNULL(StoreState,'NA') AS StoreState,ActualLatitude,ActualLongitude,Accuracy FROM tblStoreList where StoreID='" + StoreID+"'", null);
-            // by sunil
-            //SELECT t1.product_s_desc, t1.product_desc, t1.product_name, t2.product_price
-            //FROM table1 t1
-            //INNER JOIN table2 t2 ON t2.product_id = t1.product_id
-            Cursor cursor = db.rawQuery("SELECT StoreName,StoreClose,StoreClose,StoreCity,StorePinCode,StoreState,ActualLatitude,ActualLongitude,Accuracy FROM tblStoreList where StoreID='"+StoreID+"'", null);
+            Cursor cursor = db.rawQuery("SELECT StoreName,IFNULL(tblNewStoreSalesQuotePaymentDetails.PymtStageId,'0') AS PaymentStage,IFNULL(StoreAddress,'NA') AS StoreAddress,IFNULL(City,'NA') AS City,IFNULL(PinCode,'NA') AS PinCode,IFNULL(State,'NA') AS State,LatCode,LongCode,Accuracy,SOLatCode,SOLongCode,IsStoreDataCompleteSaved,VisitStartTS,VisitEndTS,flgOldNewStore,SOAccuracy,flgSelfStoreNode FROM tblPreAddedStores LEFT OUTER JOIN tblNewStoreSalesQuotePaymentDetails on tblPreAddedStores.StoreID=tblNewStoreSalesQuotePaymentDetails.StoreId where tblPreAddedStores.StoreID='" + StoreID+"'", null);
+// IFNULL(PymtStageId,0) from tblNewStoreSalesQuotePaymentDetails Where StoreId
+            // private static final String DATABASE_CREATE_TABLE_tblPreAddedStores = "create table tblPreAddedStores (StoreID text null,StoreName text null,LatCode text null," +
+/*
+            "LongCode text null,DateAdded text null,DistanceNear int null,flgOldNewStore int null,CoverageAreaID int null,CoverageAreaType int null," +
+                    "RouteNodeID int null,RouteNodeType int null,City text null,State text null,PinCode text null,StoreCategoryType int null,StoreSectionCount int null," +
+                    "flgApproveOrRejectOrNoActionOrReVisit int null,SOLatCode text null,SOLongCode text,VisitStartTS text null,VisitEndTS text null," +
+                    "LocProvider text null, Accuracy text null, BateryLeftStatus text null,IsStoreDataCompleteSaved int null,PaymentStage text null,flgLocationTrackEnabled integer null," +
+                    "flgStoreVisitMode int null,Sstat int null);";
+*/
 
-
-            if (cursor.moveToFirst())
+            if(cursor.getCount()>0)
             {
-
-                for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                if (cursor.moveToFirst())
                 {
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(0).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(1).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(2).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(3).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(4).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(5).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(6).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(7).toString());
-                    arrBasisDetailsAgainstStore.add((String) cursor.getString(8).toString());
-                    cursor.moveToNext();
+
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                    {
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(0).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(1).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(2).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(3).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(4).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(5).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(6).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(7).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(8).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(9).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(10).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(11).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(12).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(13).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(14).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(15).toString());
+                        arrBasisDetailsAgainstStore.add((String) cursor.getString(16).toString());
+
+
+
+
+
+                        //,Accuracy,SOLongCode,SOLongCode,IsStoreDataCompleteSaved,PaymentStage
+                        // cursor.moveToNext();
+                    }
                 }
+            }
+            else
+            {
+                arrBasisDetailsAgainstStore.add(StoreName);
+                arrBasisDetailsAgainstStore.add("");
+                arrBasisDetailsAgainstStore.add("");
+                arrBasisDetailsAgainstStore.add("");
+                arrBasisDetailsAgainstStore.add("");
+                arrBasisDetailsAgainstStore.add("");
+                arrBasisDetailsAgainstStore.add("NA");
+                arrBasisDetailsAgainstStore.add("NA");
+                arrBasisDetailsAgainstStore.add("0");
+                arrBasisDetailsAgainstStore.add("NA");
+                arrBasisDetailsAgainstStore.add("NA");
+                arrBasisDetailsAgainstStore.add("0");
+                arrBasisDetailsAgainstStore.add("NA");
+                arrBasisDetailsAgainstStore.add("NA");
+                arrBasisDetailsAgainstStore.add("1");
+                arrBasisDetailsAgainstStore.add("NA");
+
             }
 
 
         }
         catch (Exception e) {
             // TODO: handle exception
+            String adwq="fef";
         }
         finally
         {
@@ -25787,24 +26248,42 @@ open();
         return hmapGroupDescrptn;
     }
 
-    public LinkedHashMap<String, ArrayList<String>> fnGetGroupIdMpdWdSectionId()
+    public LinkedHashMap<String, ArrayList<String>> fnGetGroupIdMpdWdSectionId(int StoreSectionCount)
     {
         LinkedHashMap<String, ArrayList<String>> hmapQuestionMstr=new LinkedHashMap<String, ArrayList<String>>();
         ArrayList<String> listKeyQuesVal=new ArrayList<String>();
 
         open();
-        int sectionCount=getsectionCount();
-        //    int sectionCount=0;
+        int sectionCount=StoreSectionCount;//getsectionCount();
+
+        // int sectionCount1=getsectionCount();
+        //int sectionCount=0;
         //tblPDAQuestGrpMappingMstr(GrpQuestID int null,QuestID int null,GrpID int null,GrpNodeID int null,GrpDesc text null,SectionNo int null);";
         //tblQuestionMstr(QuestID int null,QuestCode int null,QuestDesc text null,QuestType int null,AnsControlType int null,AnsControlInputTypeID int null,AnsControlInputTypeMinLength int null,AnsControlInputTypeMaxLength int null,AnsMustRequiredFlg int null,QuestBundleFlg int null,ApplicationTypeID int null,Sequence int null,AnsHint text null);";
-        Cursor cursor;
+        Cursor cursor=null;
         if(sectionCount!=0)
         {
-            cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr where SectionNo<="+sectionCount+" order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            if(CommonInfo.flgNewStoreORStoreValidation==1)
+            {
+                cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr where SectionNo<="+sectionCount+" AND flgNewStore=1 order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            }
+            else if(CommonInfo.flgNewStoreORStoreValidation==2)
+            {
+                cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr where SectionNo<="+sectionCount+" AND flgStoreValidation=1 order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            }
+
         }
         else
         {
-            cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            //cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            if(CommonInfo.flgNewStoreORStoreValidation==1)
+            {
+                cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr  WHERE flgNewStore=1 order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            }
+            else if(CommonInfo.flgNewStoreORStoreValidation==2)
+            {
+                cursor = db.rawQuery("SELECT Distinct GrpID,SectionNo from tblPDAQuestGrpMappingMstr  WHERE  flgStoreValidation=1 order by SectionNo", null);// Where PNodeID='"+TSIID+"'
+            }
         }
 
 
@@ -29161,7 +29640,7 @@ String fetchdate=fnGetDateTimeString();
     {
         open();
         String DIdAndDType=fngetWIdAndWType(DistribtrUniqueId);
-        db.execSQL("UPDATE tblWarehouseMstr SET flgRemap=0 WHERE tblWarehouseMstr.NodeID='"+DIdAndDType.split(Pattern.quote("^"))[0]+"' AND tblWarehouseMstr.NodeType='"+DIdAndDType.split(Pattern.quote("^"))[1]+"' AND tblWarehouseMstr.Descr='"+Descr+"'");
+        db.execSQL("UPDATE tblWarehouseMstr SET flgMapped=0 WHERE tblWarehouseMstr.NodeID='"+DIdAndDType.split(Pattern.quote("^"))[0]+"' AND tblWarehouseMstr.NodeType='"+DIdAndDType.split(Pattern.quote("^"))[1]+"' AND tblWarehouseMstr.Descr='"+Descr+"'");
         close();
 
     }
@@ -29228,6 +29707,175 @@ String fetchdate=fnGetDateTimeString();
             cursor2.close();
         }
 
+    }
+
+    public void fnInsertOrUpdate_tblAllServicesCalledSuccessfull(int flgAllServicesCalledOrNot)
+    {
+        open();
+        try {
+            Cursor cursor = db.rawQuery("SELECT * FROM "+ TABLE_tblAllServicesCalledSuccessfull+"" , null);
+            ContentValues initialValues = new ContentValues();
+            initialValues.put("flgAllServicesCalledOrNot", flgAllServicesCalledOrNot);
+            if(cursor.getCount()>0)
+            {
+                db.execSQL("UPDATE tblAllServicesCalledSuccessfull SET flgAllServicesCalledOrNot="+flgAllServicesCalledOrNot);
+            }
+            else
+            {
+                db.insert(TABLE_tblAllServicesCalledSuccessfull, null, initialValues);
+            }
+        }
+        catch(Exception ex)
+        {
+            String ex1=ex.getMessage();
+        }
+        finally {
+            close();
+        }
+    }
+    public LinkedHashMap<String, String> fnGeStoreListAllForSO(int CoverageAreadID,int RouteID)
+    {
+        LinkedHashMap<String, String> hmapStoreLisMstr=new LinkedHashMap<String, String>();
+        open();
+
+
+
+
+        try {
+            Cursor cursor=null;
+            if(CoverageAreadID==0 && RouteID==0)
+            {
+                cursor = db.rawQuery("SELECT StoreID,StoreName,DateAdded,CoverageAreaID,RouteNodeID,StoreCategoryType,StoreSectionCount,flgApproveOrRejectOrNoActionOrReVisit,Sstat,flgOldNewStore,flgRemap,flgSelfStoreNode from tblPreAddedStores Where  Sstat<>4  ORDER BY DistanceNear", null);
+            }
+            else if(CoverageAreadID!=0 && RouteID!=0)
+            {
+                cursor = db.rawQuery("SELECT StoreID,StoreName,DateAdded,CoverageAreaID,RouteNodeID,StoreCategoryType,StoreSectionCount,flgApproveOrRejectOrNoActionOrReVisit,Sstat,flgOldNewStore,flgRemap,flgSelfStoreNode from tblPreAddedStores WHERE CoverageAreadID="+CoverageAreadID+" AND RouteID="+RouteID+" and Sstat<>4 ORDER BY DistanceNear", null);//
+            }
+            else if(CoverageAreadID!=0 && RouteID==0)
+            {
+                cursor = db.rawQuery("SELECT StoreID,StoreName,DateAdded,CoverageAreaID,RouteNodeID,StoreCategoryType,StoreSectionCount,flgApproveOrRejectOrNoActionOrReVisit,Sstat,flgOldNewStore,flgRemap,flgSelfStoreNode from tblPreAddedStores WHERE CoverageAreadID="+CoverageAreadID+" AND Sstat<>4 ORDER BY DistanceNear", null);//
+            }
+            else if(CoverageAreadID==0 && RouteID!=0)
+            {
+                cursor = db.rawQuery("SELECT StoreID,StoreName,DateAdded,CoverageAreaID,RouteNodeID,StoreCategoryType,StoreSectionCount,flgApproveOrRejectOrNoActionOrReVisit,Sstat,flgOldNewStore,flgRemap,flgSelfStoreNode from tblPreAddedStores WHERE RouteID="+RouteID+" AND Sstat<>4 ORDER BY DistanceNear", null);//
+            }
+
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++) {
+                        hmapStoreLisMstr.put((String) cursor.getString(0).toString(),(String) cursor.getString(1).toString()+"^"+(String) cursor.getString(2).toString()+"^"+(String) cursor.getString(3).toString()+"^"+(String) cursor.getString(4).toString()+"^"+(String) cursor.getString(5).toString()+"^"+(String) cursor.getString(6).toString()+"^"+(String) cursor.getString(7).toString()+"^"+(String) cursor.getString(8).toString()+"^"+(String) cursor.getString(9).toString()+"^"+(String) cursor.getString(10).toString()+"^"+(String) cursor.getString(11).toString());
+                        cursor.moveToNext();
+                    }
+                }
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error fnGettblUOMMstr= "+e.toString());
+        }
+        finally
+        {
+
+            close();
+            return hmapStoreLisMstr;
+        }
+    }
+    public int getsectionCountWhileAddingStore()
+    {
+        int sectionCount=0;
+
+        open();
+        try {
+
+//tblQuestIDForOutChannel(GrpQstId int null,QuestID int null,OptID text null,SectionCount int null);";
+            Cursor cur=db.rawQuery("Select SectionCount from tblQuestIDForOutChannel", null);
+            if(cur.getCount()>0)
+            {
+                if(cur.moveToFirst())
+                {
+
+                    sectionCount=cur.getInt(0);
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        finally
+        {
+            close();
+            return sectionCount;
+        }
+    }
+    public LinkedHashMap<String, String> fetch_Route_ListSO(int flgForReportOrStoreListActivity)
+    {
+        open();
+        LinkedHashMap<String, String> hmapRoute = new LinkedHashMap<String, String>();
+        Cursor cursor = db.rawQuery("SELECT RouteID,Route FROM tblRouteMasterWithCoverageMapping",null);
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                    {
+                        if(i==0)
+                        {
+                            if(flgForReportOrStoreListActivity==0) {
+                                hmapRoute.put("All Beats", "0");
+                            }
+                            if(flgForReportOrStoreListActivity==1) {
+                                hmapRoute.put("All Beats", "0");
+                            }
+                        }
+                        hmapRoute.put(cursor.getString(1).toString(),cursor.getString(0).toString());
+                        cursor.moveToNext();
+                    }
+                }
+
+            }
+
+            else
+            {
+                // hmapFSO.put("All FSO's Stores List", "0");
+                if(flgForReportOrStoreListActivity==0) {
+                    hmapRoute.put("All Beats", "0");
+                }
+                if(flgForReportOrStoreListActivity==1) {
+                    hmapRoute.put("All Beats", "0");
+                }
+            }
+            return hmapRoute;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
+    public int fnCheckTableFlagValue(String tableName,String Columnname)
+    {
+        int count=0;
+        open();
+        try {
+            Cursor cursor = db.rawQuery("SELECT "+Columnname+" FROM "+tableName+"", null);
+            ContentValues initialValues = new ContentValues();
+            if(cursor.getCount()>0) {
+                cursor.moveToFirst();
+                count = cursor.getInt(0);
+            }
+        }
+        catch(Exception ex)
+        {
+            String ex1=ex.getMessage();
+        }
+        finally {
+            close();
+        }
+        return count;
     }
 
     public LinkedHashMap<String, String> fetch_Route_List()
@@ -32499,6 +33147,10 @@ close();
 
             try
             {
+                db.execSQL(DATABASE_CREATE_TABLE_tblStoreImageList);
+                db.execSQL(DATABASE_CREATE_tblAllServicesCalledSuccessfull);
+                db.execSQL(DATABASE_CREATE_TABLE_tblCoverageMaster);
+                db.execSQL(DATABASE_CREATE_TABLE_tblRouteMasterWithCoverageMapping);
 
                 db.execSQL(DATABASE_CREATE_TABLE_tblWarehouseMapping);
                 db.execSQL(DATABASE_CREATE_TABLE_tblWarehouseMstr);
@@ -32775,6 +33427,8 @@ close();
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             try
             {
+                db.execSQL("DROP TABLE IF EXISTS tblStoreImageList");
+                db.execSQL("DROP TABLE IF EXISTS tblAllServicesCalledSuccessfull");
                 db.execSQL("DROP TABLE IF EXISTS tblWarehouseMapping");
                 db.execSQL("DROP TABLE IF EXISTS tblWarehouseMstr");
                 db.execSQL("DROP TABLE IF EXISTS tblDsrLocationDetails");
@@ -33886,11 +34540,24 @@ close();
 }
     public void delete_all_storeDetailTables()
     {
-        db.execSQL("DELETE FROM tblUserName");
+     /*   db.execSQL("DELETE FROM tblUserName");
         db.execSQL("DELETE FROM tblStoreCountDetails");
         db.execSQL("DELETE FROM tblPreAddedStores");
         db.execSQL("DELETE FROM tblPreAddedStoresDataDetails");
-        // db.execSQL("DELETE FROM tblLocationDetails");
+        // db.execSQL("DELETE FROM tblLocationDetails");*/
+
+        db.execSQL("DELETE FROM tblUserName");
+        db.execSQL("DELETE FROM tblStoreCountDetails");
+        //db.execSQL("DELETE FROM tblPreAddedStores");
+
+        db.execSQL("DELETE FROM tblCoverageMaster");
+        db.execSQL("DELETE FROM tblRouteMasterWithCoverageMapping");
+        // db.execSQL("DELETE FROM tblStoreImageList");
+        // db.execSQL("DELETE FROM tblStorePaymentStageMapping");
+
+        // db.execSQL("DELETE FROM tblFSOMaster");
+        // db.execSQL("DELETE FROM tblPreAddedStoresDataDetails");
+       /* db.execSQL("DELETE FROM tblLocationDetails");*/
     }
     public long saveTblUserName(String UserName)
     {
@@ -33911,7 +34578,7 @@ close();
 
         return db.insert(DATABASE_TABLE_tblStoreCountDetails, null, initialValues);
     }
-    public long saveTblPreAddedStores(String StoreID,String StoreName,String LatCode,String LongCode,String DateAdded,int flgOldNewStore,int flgReMap,int Sstat,int RouteID,int RouteNodeType)
+    public long saveTblPreAddedStores(String StoreID,String StoreName,String LatCode,String LongCode,String DateAdded,int flgOldNewStore,int flgReMap,int Sstat,int RouteID,int RouteNodeType,int flgApproveOrRejectOrNoActionOrReVisit,int IsStoreDataCompleteSaved,int flgStoreVisitMode)
     {
         ContentValues initialValues = new ContentValues();
 
@@ -33926,6 +34593,9 @@ close();
         initialValues.put("Sstat", Sstat);
         initialValues.put("RouteID", RouteID);
         initialValues.put("RouteNodeType", RouteNodeType);
+        initialValues.put("flgApproveOrRejectOrNoActionOrReVisit", flgApproveOrRejectOrNoActionOrReVisit);
+        initialValues.put("IsStoreDataCompleteSaved", IsStoreDataCompleteSaved);
+        initialValues.put("flgStoreVisitMode", flgStoreVisitMode);
 
 
         return db.insert(DATABASE_TABLE_tblPreAddedStores, null, initialValues);
@@ -34352,7 +35022,7 @@ close();
         try {
 
 
-            cursorE2 = db.rawQuery("SELECT Count(*) from tblStoreList where CoverageAreaNodeID="+coveAreaNodeId+" AND CoverageAreaNodeType="+coverageNodeType, null);
+            cursorE2 = db.rawQuery("SELECT Count(*) from tblStoreList where CoverageAreaNodeID="+coveAreaNodeId+" AND CoverageAreaNodeType="+coverageNodeType +" AND ISNewStore<>1", null);
             if (cursorE2.moveToFirst()) {
 
                 if (cursorE2.getInt(0) > 0) {
@@ -34371,7 +35041,7 @@ close();
         }
     }
     public long savetblDSRCoverageMaster(String CoverageAreaNodeID, String CoverageAreaNodeType, String CoverageArea,
-                                         String PersonNodeID, String PersonNodeType,String PersonName)
+                                         String PersonNodeID, String PersonNodeType,String PersonName,int flgDSRCoverageAssignedToSONode)
     {
         ContentValues initialValues = new ContentValues();
 
@@ -34381,7 +35051,7 @@ close();
         initialValues.put("PersonNodeID", PersonNodeID);
         initialValues.put("PersonNodeType", PersonNodeType);
         initialValues.put("PersonName", PersonName);
-
+        initialValues.put("flgDSRCoverageAssignedToSONode", flgDSRCoverageAssignedToSONode);
 
         return db.insert(Table_tblDSRCoverageMaster_Define, null, initialValues);
     }
@@ -34650,6 +35320,442 @@ close();
 
         }
     }
+
+
+
+
+
+    public void UpdateStoreFlagPreAdded(String sID, int flag2set)
+    {
+        try
+        {
+
+            final ContentValues values = new ContentValues();
+            values.put("Sstat", flag2set);
+
+
+            int affected42 = db.update("tblPreAddedStores", values,"StoreID=?", new String[] { sID });
+
+            int affected21 = db.update("tblOutletQuestAnsMstr", values,"OutletID=?", new String[] { sID });
+
+            int affected23 = db.update("tblNewStoreSalesQuotePaymentDetails", values,"StoreId=?", new String[] { sID });
+
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.toString());
+        }
+
+    }
+
+    public void UpdateStoreImageTableFlag(String sID, int flag2set)
+    {
+
+        try
+        {
+
+            final ContentValues values = new ContentValues();
+            values.put("Sstat", flag2set);
+            int affected2 = db.update("tableImage", values,"StoreID=?", new String[] { sID });
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+    }
+
+    public void fnDeleteUnNeededRecordsFromOtheTables(String StoreID)
+    {
+        try
+        {
+            open();
+            db.execSQL("DELETE FROM tblStoreImageList WHERE  StoreID='"+StoreID+"'");
+            db.execSQL("DELETE FROM tblStorePaymentStageMapping WHERE  StoreID='"+StoreID+"'");
+            db.execSQL("DELETE FROM tblPreAddedStoresDataDetails WHERE  StoreIDDB='"+StoreID+"'");
+            close();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    public HashMap<String, String> checkForStoreIdSstatStrMapping()
+    {
+        open();
+        Cursor cursor=db.rawQuery("Select StoreID,Sstat from tblPreAddedStores where Sstat in(0,1,3,4,5,6)",null);
+        HashMap<String, String> hmapStoreIDSstat= new HashMap<>();
+        if(cursor.getCount()>0)
+        {
+            if(cursor.moveToFirst())
+            {
+                for(int index=0;index<cursor.getCount();index++)
+                {
+                    hmapStoreIDSstat.put(cursor.getString(0), cursor.getString(1));
+                    cursor.moveToNext();
+                }
+            }
+        }
+        close();
+        return hmapStoreIDSstat;
+    }
+    public void fndeleteSbumittedStoreList(int Sstat)
+    {
+        //
+        open();
+        db.execSQL("DELETE FROM tblPreAddedStores WHERE Sstat="+ Sstat);
+        db.execSQL("DELETE FROM tblNewStoreSalesQuotePaymentDetails WHERE Sstat="+ Sstat);
+
+        db.execSQL("DELETE FROM tblOutletQuestAnsMstr WHERE Sstat="+ Sstat);
+
+
+
+        close();
+    }
+    public long fnsavetblCoverageMaster(int CoverageAreaNodeID,int CoverageAreaNodeType,String CoverageArea)
+    {
+
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("CoverageAreaNodeID", CoverageAreaNodeID);
+        initialValues.put("CoverageAreaNodeType", CoverageAreaNodeType);
+        initialValues.put("CoverageArea", CoverageArea);
+
+        return db.insert(DATABASE_TABLE_tblCoverageMaster, null, initialValues);
+    }
+    public long fnsavetblRouteMasterWithCoverageMapping(int CoverageAreaNodeID,int CoverageAreaNodeType,String CoverageArea,int RouteID,int RouteType,String Route)
+    {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("CoverageAreaNodeID", CoverageAreaNodeID);
+        initialValues.put("CoverageAreaNodeType", CoverageAreaNodeType);
+        initialValues.put("CoverageArea", CoverageArea);
+        initialValues.put("RouteID", RouteID);
+        initialValues.put("RouteType", RouteType);
+        initialValues.put("Route", Route);
+
+
+        return db.insert(DATABASE_TABLE_tblRouteMasterWithCoverageMapping, null, initialValues);
+    }
+
+
+
+
+    public LinkedHashMap<String, String> fetch_CoverageArea_List(int flgForReportOrStoreListActivity)
+    {
+        open();
+        LinkedHashMap<String, String> hmapCoverageArea = new LinkedHashMap<>();
+        Cursor cursor = db.rawQuery("SELECT CoverageAreaNodeID,CoverageArea FROM tblCoverageMaster",null);
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                    {
+                        if(i==0)
+                        {
+                            if(flgForReportOrStoreListActivity==0) {
+                                hmapCoverageArea.put("All DSR/Coverage Area", "0");
+                            }
+                            if(flgForReportOrStoreListActivity==1) {
+                                hmapCoverageArea.put("All DSR/Coverage Area", "0");
+                            }
+                        }
+                        hmapCoverageArea.put(cursor.getString(1), cursor.getString(0));
+                        cursor.moveToNext();
+                    }
+                }
+
+            }
+
+            else
+            {
+                // hmapFSO.put("All FSO's Stores List", "0");
+                if(flgForReportOrStoreListActivity==0) {
+                    hmapCoverageArea.put("All DSR/Coverage Area", "0");
+                }
+                if(flgForReportOrStoreListActivity==1) {
+                    hmapCoverageArea.put("All DSR/Coverage Area", "0");
+                }
+            }
+            return hmapCoverageArea;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
+
+    public LinkedHashMap<String, String> fetch_Route_ListWhileStoreListActivity(int flgForReportOrStoreListActivity)
+    {
+        open();
+        LinkedHashMap<String, String> hmapRoute = new LinkedHashMap<>();
+        Cursor cursor = db.rawQuery("SELECT RouteID,Route FROM tblRouteMasterWithCoverageMapping",null);
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                    {
+                        if(i==0)
+                        {
+                            if(flgForReportOrStoreListActivity==0) {
+                                hmapRoute.put("All Beats", "0");
+                            }
+                            if(flgForReportOrStoreListActivity==1) {
+                                hmapRoute.put("All Beats", "0");
+                            }
+                        }
+                        hmapRoute.put(cursor.getString(1), cursor.getString(0));
+                        cursor.moveToNext();
+                    }
+                }
+
+            }
+
+            else
+            {
+                // hmapFSO.put("All FSO's Stores List", "0");
+                if(flgForReportOrStoreListActivity==0) {
+                    hmapRoute.put("All Beats", "0");
+                }
+                if(flgForReportOrStoreListActivity==1) {
+                    hmapRoute.put("All Beats", "0");
+                }
+            }
+            return hmapRoute;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
+
+    public LinkedHashMap<String, String> fetch_CoverageRouteMap_List(int flgForReportOrStoreListActivity,int CoverageAreaNodeID)
+    {
+        open();
+        LinkedHashMap<String, String> hmapCoverageRouteMap_details = new LinkedHashMap<>();
+        Cursor cursor=null;
+        if(CoverageAreaNodeID==0)
+        {
+            cursor = db.rawQuery("SELECT RouteID,Route FROM tblRouteMasterWithCoverageMapping",null);
+        }
+        else
+        {
+            cursor = db.rawQuery("SELECT RouteID,Route FROM tblRouteMasterWithCoverageMapping WHERE CoverageAreaNodeID="+CoverageAreaNodeID,null);
+        }
+
+        try
+        {
+            if(cursor.getCount()>0)
+            {
+                if (cursor.moveToFirst())
+                {
+
+                    for (int i = 0; i <= (cursor.getCount() - 1); i++)
+                    {
+                        if(i==0)
+                        {
+                            if(flgForReportOrStoreListActivity==0) {
+                                hmapCoverageRouteMap_details.put("All Beats", "0");
+                            }
+                            if(flgForReportOrStoreListActivity==1) {
+                                hmapCoverageRouteMap_details.put("All Beats", "0");
+                            }
+                        }
+                        hmapCoverageRouteMap_details.put(cursor.getString(1), cursor.getString(0));
+                        cursor.moveToNext();
+                    }
+                }
+
+            }
+
+            else
+            {
+                // hmapFSO.put("All FSO's Stores List", "0");
+                if(flgForReportOrStoreListActivity==0) {
+                    hmapCoverageRouteMap_details.put("All Beats", "0");
+                }
+                if(flgForReportOrStoreListActivity==1) {
+                    hmapCoverageRouteMap_details.put("All Beats", "0");
+                }
+            }
+            return hmapCoverageRouteMap_details;
+        }
+        finally
+        {
+            cursor.close();
+            close();
+        }
+    }
+
+    public long fnsavetblStoreImageList(String StoreID,String StoreImagename,int ImageType)
+    {
+
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("StoreID", StoreID);
+        initialValues.put("StoreImagename", StoreImagename);
+        initialValues.put("ImageType", ImageType);
+
+        return db.insert(DATABASE_TABLE_tblStoreImageList, null, initialValues);
+    }
+
+    public int CheckTotalStoreCountFormServiceWorker() throws IOException
+    {
+
+        int chkI = 0;
+        Cursor cursorE2=null;
+
+        try
+        {
+            cursorE2 = db.rawQuery("SELECT flgStoreOrder from tblPreAddedStores order by flgStoreOrder descr limit 1", null);
+            if(cursorE2.getCount()>0) {
+                if (cursorE2.moveToFirst()) {
+
+                    if (cursorE2.getInt(0) > 0) {
+                        chkI = cursorE2.getInt(0);
+                    } else {
+                        chkI = 0;
+                    }
+                }
+            }
+
+        } finally
+        {
+            if(cursorE2!=null) {
+                cursorE2.close();
+            }
+
+        }
+        return chkI;
+    }
+    public long fnsaveTblPreAddedStores(String StoreID,String StoreName,String LatCode,String LongCode,String DateAdded,int flgOldNewStore,int Sstat,int CoverageAreaID,int CoverageAreaType,int RouteNodeID,int RouteNodeType,String City,String State,String PinCode,String StoreCategoryType,int StoreSectionCount,int flgApproveOrRejectOrNoActionOrReVisit,String SOLatCode,String SOLongCode,int flgStoreVisitMode,String VisitStartTS,String VisitEndTS,String LocProvider,String Accuracy,String BateryLeftStatus,int IsStoreDataCompleteSaved,String PaymentStage,int flgLocationTrackEnabled,String StoreAddress,String SOAccuracy,int flgRemap,int flgSelfStoreNode)
+    {
+
+        int flgIfStoreHasRecords=0;
+        try {
+            flgIfStoreHasRecords=CheckTotalStoreCountFormServiceWorker();
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        ContentValues initialValues = new ContentValues();
+        long count = 0;
+        try
+        {
+            //tblPreAddedStores(StoreID text null,StoreName text null,LatCode text null," +
+ /*   "LongCode text null,DateAdded text null,DistanceNear int null,flgOldNewStore int null,CoverageAreaID int null,CoverageAreaType int null," +
+            "RouteNodeID int null,RouteNodeType int null,City text null,State text null,PinCode text null,StoreCategoryType text null,StoreSectionCount int null," +
+            "flgApproveOrRejectOrNoActionOrReVisit int null,SOLatCode text null,SOLongCode text null,VisitStartTS text null,VisitEndTS text null," +
+            "LocProvider text null,Accuracy text null,BateryLeftStatus text null,IsStoreDataCompleteSaved int null,PaymentStage text null,flgLocationTrackEnabled int null," +
+            "flgStoreVisitMode int null,Sstat int null)*/
+// StoreSectionCount,int flgApproveOrRejectOrNoActionOrReVisit,String SOLatCode,String SOLongCode,int flgStoreVisitMode,String VisitStartTS,String VisitEndTS,String LocProvider,String Accuracy,String BateryLeftStatus,int IsStoreDataCompleteSaved,String PaymentStage,int flgLocationTrackEnabled)
+            initialValues.put("StoreID", StoreID);
+            initialValues.put("StoreName", StoreName);
+            initialValues.put("LatCode", LatCode);
+            initialValues.put("LongCode", LongCode);
+            initialValues.put("DateAdded", DateAdded);
+            initialValues.put("DistanceNear", 1000);
+            initialValues.put("flgOldNewStore", flgOldNewStore);
+            initialValues.put("Sstat", Sstat);
+            initialValues.put("CoverageAreaID", CoverageAreaID);
+            initialValues.put("CoverageAreaType", CoverageAreaType);
+            initialValues.put("RouteNodeID", RouteNodeID);
+            initialValues.put("RouteNodeType", RouteNodeType);
+            initialValues.put("City", City);
+            initialValues.put("State", State);
+            initialValues.put("PinCode", PinCode);
+
+            initialValues.put("StoreCategoryType", StoreCategoryType);
+            initialValues.put("StoreSectionCount", StoreSectionCount);
+
+            initialValues.put("flgApproveOrRejectOrNoActionOrReVisit", flgApproveOrRejectOrNoActionOrReVisit);
+            initialValues.put("SOLatCode", SOLatCode);
+            initialValues.put("SOLongCode", SOLongCode);
+            initialValues.put("flgStoreVisitMode", flgStoreVisitMode);
+
+            initialValues.put("VisitStartTS", VisitStartTS);
+            initialValues.put("VisitEndTS", VisitEndTS);
+            initialValues.put("LocProvider", LocProvider);
+            initialValues.put("Accuracy", Accuracy);
+            initialValues.put("BateryLeftStatus", BateryLeftStatus);
+            initialValues.put("IsStoreDataCompleteSaved", IsStoreDataCompleteSaved);
+            initialValues.put("PaymentStage", PaymentStage);
+            initialValues.put("flgLocationTrackEnabled", flgLocationTrackEnabled);
+            initialValues.put("StoreAddress", StoreAddress);
+            initialValues.put("SOAccuracy", SOAccuracy);
+            initialValues.put("flgRemap", flgRemap);
+
+            initialValues.put("flgSelfStoreNode", flgSelfStoreNode);
+
+
+            initialValues.put("flgLocationServicesOnOff", 0);
+            initialValues.put("flgGPSOnOff", 0);
+            initialValues.put("flgNetworkOnOff", 0);
+            initialValues.put("flgFusedOnOff", 0);
+            initialValues.put("flgInternetOnOffWhileLocationTracking", 0);
+            initialValues.put("flgRestart", 0);
+
+            initialValues.put("flgStoreOrder", (flgIfStoreHasRecords+1));
+
+
+
+
+            //StoreAddress
+            count= db.insert(DATABASE_TABLE_tblPreAddedStores, null, initialValues);
+
+            System.out.println("Nitish Count ="+count);
+
+            //SOLatCode, SOLongCode,flgStoreVisitMode
+
+        }
+        catch (Exception e)
+        {
+            String abhinav=e.getMessage().toString();
+
+        }
+        return count;
+    }
+
+
+
+    public String  fngettblSOPersonName()
+    {
+        String flag="0";
+        try {
+            open();
+            Cursor cursor = db.rawQuery("SELECT PersonNodeID,PersonNodeType,PersonName from tblUserAuthenticationMstr", null);
+
+            if(cursor.getCount()>0){
+                if (cursor.moveToFirst()){
+                    flag=	cursor.getString(0).toString()+"^"+cursor.getString(1).toString()+"^"+cursor.getString(2).toString();
+                }
+
+            }
+            return flag;
+        }catch(Exception e)
+        {
+
+        }
+
+        finally
+        {
+
+            close();
+            return flag;
+        }
+    }
+
 }
 
 

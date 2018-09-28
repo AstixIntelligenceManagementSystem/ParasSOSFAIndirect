@@ -118,7 +118,7 @@ public String userDate;
 						@Override
 						public void onClick(View v) {
 							
-							Intent intent = new Intent(ViewAddedStore.this, AddNewStore_DynamicSectionWise.class);
+							Intent intent = new Intent(ViewAddedStore.this, AddNewStore_DynamicSectionWiseSO.class);
 							//Intent intent = new Intent(StoreSelection.this, Add_New_Store_NewFormat.class);
 							//Intent intent = new Intent(StoreSelection.this, Add_New_Store.class);
 							intent.putExtra("activityFrom", "ViewAddedStore");

@@ -21,7 +21,17 @@
             android:layout_height="25dp"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="6dp"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/ic_back"
+            android:visibility="visible"/>
+
+       <!-- <ImageView
+            android:id="@+id/img_side_popUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/ic_action" />-->
 <TextView 
     
    android:id="@+id/txtSalessumuryDate"
@@ -43,11 +53,32 @@
 >
 
 </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:background="#A5D1F3"
+        android:orientation="horizontal"
+        android:layout_below="@+id/rtv_hdr"
+        android:visibility="gone"
+        android:id="@+id/dsrinfo">
 
+        <TextView
+            android:id="@+id/dsrName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="DSR Name"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+    </LinearLayout>
     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         android:layout_below="@+id/rtv_hdr" 
+         android:layout_below="@+id/dsrinfo"
          
         android:padding="2dp">
     <TableLayout 

@@ -38,7 +38,7 @@ public class DetailReportSummaryActivity extends BaseActivity
 	TableLayout tbl_inflate;
 
 	LinkedHashMap<String, LinkedHashMap<String, String>> hmapSummaryDataNew=new LinkedHashMap<String, LinkedHashMap<String, String>>();
-
+	int SalesmanNodeId,SalesmanNodeType,flgDataScope=0;
 	String date_value="";
 	String imei="";
 	String rID;
@@ -59,7 +59,7 @@ public class DetailReportSummaryActivity extends BaseActivity
 
 	public String fDate;
 	public String[] AllDataContainer;
-
+	private SharedPreferences sharedPref;
 
 
 	@Override
@@ -131,7 +131,39 @@ public class DetailReportSummaryActivity extends BaseActivity
 		Intent extras = getIntent();
 
 		bck = extras.getIntExtra("bck", 0);
+		sharedPref = getSharedPreferences(CommonInfo.Preference, MODE_PRIVATE);
+		if(sharedPref.contains("CoverageAreaNodeID"))
+		{
+			if(sharedPref.getInt("CoverageAreaNodeID",0)!=0)
+			{
+				CommonInfo.CoverageAreaNodeID=sharedPref.getInt("CoverageAreaNodeID",0);
+				CommonInfo.CoverageAreaNodeType=sharedPref.getInt("CoverageAreaNodeType",0);
+			}
+		}
+		if(sharedPref.contains("SalesmanNodeId"))
+		{
+			if(sharedPref.getInt("SalesmanNodeId",0)!=0)
+			{
+				CommonInfo.SalesmanNodeId=sharedPref.getInt("SalesmanNodeId",0);
+				CommonInfo.SalesmanNodeType=sharedPref.getInt("SalesmanNodeType",0);
+			}
+		}
+		if(sharedPref.contains("flgDataScope"))
+		{
+			if(sharedPref.getInt("flgDataScope",0)!=0)
+			{
+				CommonInfo.flgDataScope=sharedPref.getInt("flgDataScope",0);
 
+			}
+		}
+		if(sharedPref.contains("flgDSRSO"))
+		{
+			if(sharedPref.getInt("flgDSRSO",0)!=0)
+			{
+				CommonInfo.FlgDSRSO=sharedPref.getInt("flgDSRSO",0);
+
+			}
+		}
 
 		if(extras !=null)
 		{
@@ -143,7 +175,9 @@ public class DetailReportSummaryActivity extends BaseActivity
 			//fromPage=extras.getStringExtra("fromPage");
 
 		}
-
+		SalesmanNodeId=CommonInfo.SalesmanNodeId;
+		SalesmanNodeType=CommonInfo.SalesmanNodeType;
+		flgDataScope=CommonInfo.flgDataScope;
 		TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 		imei = tManager.getDeviceId();
 
@@ -294,7 +328,7 @@ public class DetailReportSummaryActivity extends BaseActivity
 
 			try
 			{
-				newservice = newservice.getfnCallspPDAGetDayAndMTDSummary(getApplicationContext(), fDate , imei);
+				newservice = newservice.getfnCallspPDAGetDayAndMTDSummary(getApplicationContext(), fDate , imei,SalesmanNodeId,SalesmanNodeType,flgDataScope);
 
 			}
 			catch (Exception e)

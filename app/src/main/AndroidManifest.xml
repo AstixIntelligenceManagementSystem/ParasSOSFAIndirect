@@ -12,7 +12,7 @@
         android:protectionLevel="signature" />
 
     <!-- Permission to access data from network provider -->
-    <uses-permission android:name="android.permission.BATTERY_STATS"/>
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- Permission for receiveing GCM message -->
@@ -59,7 +59,7 @@
         android:supportsRtl="true"
         android:theme="@style/StorelistTheme">
         <receiver
-            android:name="project.astix.com.parassosfaindirect.BroadcastReceiverOnBootComplete"
+            android:name=".BroadcastReceiverOnBootComplete"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -70,96 +70,119 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="project.astix.com.parassosfaindirect.SplashScreen"
-            android:screenOrientation="portrait"
-            >
+        <activity
+            android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="project.astix.com.parassosfaindirect.AllButtonActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="project.astix.com.parassosfaindirect.StoreSelection"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="project.astix.com.parassosfaindirect.LastVisitDetails"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name="project.astix.com.parassosfaindirect.LastVisitDetailsSecondPart"
-            android:screenOrientation="portrait"/>
-
         <activity
-            android:name="project.astix.com.parassosfaindirect.ProductOrderFilterSearch"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:name=".AllButtonActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.OrderReview"
-            android:windowSoftInputMode="adjustNothing"
-            android:screenOrientation="portrait"/>
-
+            android:name=".StoreSelection"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.ProductOrderEntry"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:name=".LastVisitDetails"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.ProductOrderReview"
-            android:windowSoftInputMode="adjustNothing"
-            android:screenOrientation="portrait"/>
+            android:name=".LastVisitDetailsSecondPart"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.ProductInvoiceReview"
-            android:windowSoftInputMode="adjustNothing"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="project.astix.com.parassosfaindirect.ReturnActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="project.astix.com.parassosfaindirect.SKUWiseSummaryReport_ByTab"
-            android:theme="@style/MyThemeTabWithdarktext"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="project.astix.com.parassosfaindirect.SKUWiseSummaryReportMTD"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="project.astix.com.parassosfaindirect.StoreAndSKUWiseSummaryReport_ByTab"
-            android:theme="@style/MyThemeTabWithdarktext"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="project.astix.com.parassosfaindirect.StoreAndSKUWiseSummaryReportMTD"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="project.astix.com.parassosfaindirect.StoreWiseSummaryReport_ByTab"
-            android:theme="@style/MyThemeTabWithdarktext"
-            android:screenOrientation="portrait"/>
-        <activity android:name="project.astix.com.parassosfaindirect.CheckDatabaseData"
+            android:name=".ProductOrderFilterSearch"
             android:screenOrientation="portrait"
-            />
-
-        <activity android:name="project.astix.com.parassosfaindirect.RemainingStockStatusReport"
-            android:screenOrientation="portrait"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.TargetVsAchievedActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:name=".OrderReview"
             android:screenOrientation="portrait"
-            />
-        <activity android:name="project.astix.com.parassosfaindirect.DistributorCheckInFirstActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="project.astix.com.parassosfaindirect.DistributorCheckInSecondActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.gcm.NotificationActivity"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.LauncherActivity"
+            android:name=".ProductOrderEntry"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ProductOrderReview"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ProductInvoiceReview"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ReturnActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".SKUWiseSummaryReport_ByTab"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeTabWithdarktext" />
+        <activity
+            android:name=".SKUWiseSummaryReportMTD"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".StoreAndSKUWiseSummaryReport_ByTabForAll"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_stores_summary"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeTabWithdarktext" />
+        <activity
+            android:name=".StoreWiseSummaryReport_ByTabForAll"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_stores_summary"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeTabWithdarktext" />
+        <activity
+            android:name=".StoreWiseSummaryReportMTDForAll"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_stores_summary"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".StoreAndSKUWiseSummaryReport_ByTab"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeTabWithdarktext" />
+        <activity
+            android:name=".StoreAndSKUWiseSummaryReportMTD"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".StoreAndSKUWiseSummaryReportMTDForAll"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_stores_summary"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".StoreWiseSummaryReport_ByTab"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyThemeTabWithdarktext" />
+        <activity
+            android:name=".CheckDatabaseData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RemainingStockStatusReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TargetVsAchievedActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DistributorCheckInFirstActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DistributorCheckInSecondActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.gcm.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LauncherActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <!--
         <activity
@@ -181,25 +204,25 @@
         -->
 
         <activity
-            android:name="project.astix.com.parassosfaindirect.ProductOrderFilterSearch_RecycleView"
+            android:name=".ProductOrderFilterSearch_RecycleView"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.DistributorEntryActivity"
+            android:name=".DistributorEntryActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.SyncMaster"
+            android:name=".SyncMaster"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.InvoiceSyncMaster"
+            android:name=".InvoiceSyncMaster"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <!--
         <activity
             android:name=".My_Summary"
@@ -219,19 +242,30 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         -->
-
         <activity
-            android:name="project.astix.com.parassosfaindirect.StoreWiseSummaryReportMTD"
+            android:name=".SKUWiseSummaryReport_ByTabForAll"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_stores_summary"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+            android:theme="@style/MyThemeTabWithdarktext" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.DetailReport_Activity"
+            android:name=".SKUWiseSummaryReportMTDForAll"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_stores_summary"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".StoreWiseSummaryReportMTD"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_stores_summary"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name=".DetailReport_Activity"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_stores_summary"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <!--
         <activity
             android:name=".Add_New_Store"
@@ -269,18 +303,48 @@
         </activity>
         -->
         <activity
-            android:name="project.astix.com.parassosfaindirect.InvoiceStoreSelection"
+            android:name=".InvoiceStoreSelection"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_return"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".WebViewDSRAttendanceReportActivity" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.InvoiceProductList"
+            android:name=".AddNewStore_DynamicSectionWiseSO"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_return"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InvoiceProductList"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_return"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".DetailReportSummaryActivityForAll"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WebViewDSRTrackerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".WebViewDSRDataReportActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".WebViewDSMWiseReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SyncMasterSO"
+            android:configChanges="orientation|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
         <!--
         <activity
             android:name=".WebPageActivity"
@@ -351,16 +415,14 @@
             android:name="com.example.gcm.HomeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:noHistory="true"
-
-            ></activity>
+            android:noHistory="true" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.Add_New_Store_DynamicSectionWise"
+            android:name=".Add_New_Store_DynamicSectionWise"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <!-- Register Broadcast receiver -->
 
         <receiver
@@ -381,21 +443,16 @@
             android:value="@integer/google_play_services_version" />
 
         <service
-            android:name="project.astix.com.parassosfaindirect.AppLocationService"
+            android:name=".AppLocationService"
             android:enabled="true" />
         <service android:name="com.example.gcm.GCMNotificationIntentService" />
 
         <activity
-            android:name="project.astix.com.parassosfaindirect.ViewAddedStore"
+            android:name=".ViewAddedStore"
             android:label="@string/title_activity_view_added_store"
-            android:screenOrientation="portrait"
-            ></activity>
+            android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.AddNewStore_DynamicSectionWise"
-            android:label="@string/title_activity_view_added_store"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name="project.astix.com.parassosfaindirect.QuotationActivity"
+            android:name=".QuotationActivity"
             android:label="@string/title_activity_quotation"
             android:screenOrientation="portrait"
             android:theme="@style/MyThemeTab">
@@ -409,40 +466,42 @@
             -->
         </activity>
         <activity
-            android:name="project.astix.com.parassosfaindirect.Delivery_Details_Activity"
+            android:name=".Delivery_Details_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/detailActivityTheme"></activity>
-        <activity android:name=".DialogActivity_Report"
-            android:theme="@style/marketVisitTheme"/>
+            android:theme="@style/detailActivityTheme" />
+        <activity
+            android:name=".DialogActivity_Report"
+            android:theme="@style/marketVisitTheme" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBYHg5Z8LoRkkOFHtIHIKAEZcpCRJb20V4" />
 
         <service
-            android:name="project.astix.com.parassosfaindirect.GeocodeAddressIntentService"
+            android:name=".GeocodeAddressIntentService"
             android:exported="false" />
-        <activity android:name="project.astix.com.parassosfaindirect.DayStartActivity"  />
 
-        <activity android:name="project.astix.com.parassosfaindirect.SalesValueTarget"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name="project.astix.com.parassosfaindirect.IncentiveActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="project.astix.com.parassosfaindirect.DetailReportSummaryActivity"
-            android:screenOrientation="portrait"
-            ></activity>
+        <activity android:name=".DayStartActivity" />
         <activity
-        android:name="project.astix.com.parassosfaindirect.DistributorMapActivity"
-        android:screenOrientation="portrait" />
-        <activity
-            android:name="project.astix.com.parassosfaindirect.WarehouseMapActivity"
+            android:name=".SalesValueTarget"
             android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.SyncMasterDistributor"
+            android:name=".IncentiveActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.DSR_Registration"
+            android:name=".DetailReportSummaryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DistributorMapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".WarehouseMapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SyncMasterDistributor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DSR_Registration"
             android:screenOrientation="portrait"
             android:theme="@style/StorelistTheme">
 
@@ -455,22 +514,21 @@
             -->
 
         </activity>
-
         <activity
-            android:name="project.astix.com.parassosfaindirect.ActualVisitStock"
+            android:name=".ActualVisitStock"
             android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.StoreClosedActivity"
+            android:name=".StoreClosedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.CollectionActivityNew"
+            android:name=".CollectionActivityNew"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.WebViewActivity"
+            android:name=".WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="project.astix.com.parassosfaindirect.WarehouseCheckInFirstActivity"
+            android:name=".WarehouseCheckInFirstActivity"
             android:screenOrientation="portrait" />
 
         <provider
@@ -483,18 +541,18 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name="project.astix.com.parassosfaindirect.WarehouseCheckInSecondActivity"
+        <activity
+            android:name=".WarehouseCheckInSecondActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            ></activity>
-
-        <activity android:name="project.astix.com.parassosfaindirect.StorelistActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".StorelistActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".DialogActivity_MarketVisit"
-            android:theme="@style/marketVisitTheme"></activity>
-
+            android:theme="@style/marketVisitTheme" />
+        <activity android:name=".WebViewTeamReport"
+           ></activity>
     </application>
 
 </manifest>

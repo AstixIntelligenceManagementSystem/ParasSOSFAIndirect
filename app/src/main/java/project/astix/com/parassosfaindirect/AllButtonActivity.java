@@ -316,7 +316,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
         StockDate = df.format(dateobj);
 
-        int alreadyLocFind=dbengine.fetchtblIsDBRStockSubmitted();
+       /* int alreadyLocFind=dbengine.fetchtblIsDBRStockSubmitted();
         if(alreadyLocFind==0)
         {
             int checkData= dbengine.checkDSRCheckIntblDistributorMapping();
@@ -337,7 +337,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
         else
         {
 
-        }
+        }*/
 
 
     }
@@ -546,7 +546,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                 // check number of files in folder
                 final String [] AllFilesNameNotSync= checkNumberOfFiles(del);
 
-                String xmlfileNames = dbengine.fnGetXMLFile("3");
+                String xmlfileNames = dbengine.fnGetXMLFile("3","1");
               //  String xmlfileNamesStrMap=dbengineSo.fnGetXMLFile("3");
 
                 dbengine.open();
@@ -611,7 +611,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                     FlgRegistered = PersonNameAndFlgRegistered.split(Pattern.quote("^"))[1];
                 }
 
-                if( FlgRegistered.equals("0")&& DsrRegTableCount==0)
+               /* if( FlgRegistered.equals("0")&& DsrRegTableCount==0)
                 {
                     android.app.AlertDialog.Builder alertDialogNoConn = new android.app.AlertDialog.Builder(AllButtonActivity.this);
                     alertDialogNoConn.setTitle(getResources().getString(R.string.genTermNoDataConnection));
@@ -639,7 +639,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
 
                 }
 
-                else{
+                else{*/
 
 
 
@@ -651,7 +651,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
 // check number of files in folder
                     final String [] AllFilesNameNotSync= checkNumberOfFiles(del);
 
-                    String xmlfileNames = dbengine.fnGetXMLFile("3");
+                    String xmlfileNames = dbengine.fnGetXMLFile("3","1");
                     // String xmlfileNamesStrMap=dbengineSo.fnGetXMLFile("3");
 
                     dbengine.open();
@@ -708,7 +708,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
 
 
 
-                }
+                //}
 
             }
         });
@@ -1610,7 +1610,7 @@ public class AllButtonActivity extends BaseActivity implements LocationListener,
                     // code for matching password
                     String reason;
                     TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                    imei = tManager.getDeviceId();
+                   // imei = tManager.getDeviceId();
                     if(CommonInfo.imei.trim().equals(null) || CommonInfo.imei.trim().equals(""))
                     {
                         imei = tManager.getDeviceId();

@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -61,6 +62,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -75,6 +77,9 @@ import java.util.regex.Pattern;
 public class DialogActivity_MarketVisit extends BaseActivity implements LocationListener,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
 
+    ArrayList<String> arrDSRCoverageAssigenedToSO =new  ArrayList<String>();
+    public Button btnMktVisitOnBehalfOFDSR;
+public LinearLayout ll_DialogMarketVisitWholePage;
     int flgOwnRouteClick=0;
     String whereTo = "11";
     ProgressDialog pDialog2;
@@ -266,10 +271,11 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
         getWindow().setLayout(screenWidth, WindowManager.LayoutParams.WRAP_CONTENT);
         setFinishOnTouchOutside(false);
 
-
+        ll_DialogMarketVisitWholePage=(LinearLayout)findViewById(R.id.ll_DialogMarketVisitWholePage);
         final RadioButton rb_myVisit= (RadioButton) findViewById(R.id.rb_myVisit);
         final RadioButton rb_dsrVisit= (RadioButton) findViewById(R.id.rb_dsrVisit);
         final RadioButton rb_jointWorking= (RadioButton) findViewById(R.id.rb_jointWorking);
+        btnMktVisitOnBehalfOFDSR=(Button)findViewById(R.id.btnMktVisitOnBehalfOFDSR);
         if(PageFrom.equals("1"))
         {
             rb_jointWorking.setVisibility(View.GONE);
@@ -279,22 +285,98 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
             rb_jointWorking.setVisibility(View.VISIBLE);
         }
 
-
+       // ll_DialogMarketVisitWholePage.setVisibility(View.VISIBLE);
         final Spinner spinner_dsrVisit= (Spinner) findViewById(R.id.spinner_dsrVisit);
         final Spinner spinner_jointWorking= (Spinner) findViewById(R.id.spinner_jointWorking);
+
 
         Button btn_proceed= (Button) findViewById(R.id.btn_proceed);
         Button btn_cancel= (Button) findViewById(R.id.btn_cancel);
 
         try
         {
+            arrDSRCoverageAssigenedToSO=dbengine.fetch_DSRCoverageAssigenedToSO();
             getDSRDetail();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+        if(arrDSRCoverageAssigenedToSO !=null && arrDSRCoverageAssigenedToSO.size()>0)
+        {
+            btnMktVisitOnBehalfOFDSR.setVisibility(View.VISIBLE);
+            btnMktVisitOnBehalfOFDSR.setTag(arrDSRCoverageAssigenedToSO.get(0)+"^"+arrDSRCoverageAssigenedToSO.get(2)+"^"+arrDSRCoverageAssigenedToSO.get(1));
+            btnMktVisitOnBehalfOFDSR.setText("Market Visit Against("+arrDSRCoverageAssigenedToSO.get(1)+")");
+        }
+        else
+        {
+            btnMktVisitOnBehalfOFDSR.setVisibility(View.GONE);
+        }
+        btnMktVisitOnBehalfOFDSR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                String AssignedCoverageAreaNodeIDType=v.getTag().toString();
+                int AssignedCoverageAreaNodeID =Integer.parseInt(AssignedCoverageAreaNodeIDType.split(Pattern.quote("^"))[0]);
+                int AssignedCoverageAreaNodeType=Integer.parseInt(AssignedCoverageAreaNodeIDType.split(Pattern.quote("^"))[1]);
+                String AssignedCoverageAreaName=AssignedCoverageAreaNodeIDType.split(Pattern.quote("^"))[2];
+
+
+                CommonInfo.CoverageAreaNodeID=AssignedCoverageAreaNodeID;
+                CommonInfo.CoverageAreaNodeType=AssignedCoverageAreaNodeType;
+                CommonInfo.FlgDSRSO=2;
+
+                dbengine.open();
+
+                rID= dbengine.GetActiveRouteIDCrntDSR(AssignedCoverageAreaNodeID,AssignedCoverageAreaNodeType);
+                dbengine.updateActiveRoute(rID, 1);
+                dbengine.close();
+                shardPrefForCoverageArea(AssignedCoverageAreaNodeID,AssignedCoverageAreaNodeType);
+                flgDSRSOSharedPref(2);
+
+                String DSRPersonNodeIdAndNodeType= dbengine.fnGetDSRPersonNodeIdAndNodeType(AssignedCoverageAreaName);
+                int tempSalesmanNodeId=Integer.parseInt(DSRPersonNodeIdAndNodeType.split(Pattern.quote("^"))[0]);
+                int tempSalesmanNodeType=Integer.parseInt(DSRPersonNodeIdAndNodeType.split(Pattern.quote("^"))[1]);
+                shardPrefForSalesman(tempSalesmanNodeId,tempSalesmanNodeType);
+                flgDataScopeSharedPref(2);
+                if(dbengine.isDataAlreadyExist(AssignedCoverageAreaNodeID,AssignedCoverageAreaNodeType))
+                {
+                    dbengine.open();
+                    rID= dbengine.GetActiveRouteIDCrntDSR(AssignedCoverageAreaNodeID,AssignedCoverageAreaNodeType);
+                    dbengine.close();
+
+                    Date date1 = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+                    fDate = sdf.format(date1).trim();
+
+                    // Date date=new Date();
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+                    String fDateNew = sdf1.format(date1);
+                    //fDate = passDate.trim().toString();
+
+
+                    Intent storeIntent = new Intent(DialogActivity_MarketVisit.this, StoreSelection.class);
+                    storeIntent.putExtra("imei", imei);
+                    storeIntent.putExtra("userDate", fDate);
+                    storeIntent.putExtra("pickerDate", fDateNew);
+                    storeIntent.putExtra("rID", rID);
+                    startActivity(storeIntent);
+                    finish();
+
+
+                }
+                else
+                {
+                    flgOwnRouteClick=1;
+                    marketVisitGetRoutesClick();
+                }
+
+
+            }
+        });
+
+
+        //fnSendDirectlyToSelfMarketVisitAndNotShowingOtherOptions();
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -430,7 +512,7 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
 
 
                             String dsrRouteID=hmapdsrIdAndDescr_details.get(SelectedDSRValue);
-
+                            flgOwnRouteClick=1;
                             marketVisitGetRoutesClick();
 
                             /*Intent i = new Intent(DialogActivity_MarketVisit.this, StoreSelection.class);
@@ -582,6 +664,52 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
 
     }
 
+    public void fnSendDirectlyToSelfMarketVisitAndNotShowingOtherOptions()
+    {
+        int routeExist=dbengine.fnGetRouteExistOrNot(0,0);
+        if(routeExist==0)
+        {
+            showAlertForEveryOneIfNoRouteExists("There are no Routes Available for You.");
+           // return;
+        }
+        else {
+
+            dbengine.open();
+
+            rID = dbengine.GetActiveRouteIDCrntDSR(0, 0);
+            dbengine.close();
+            CommonInfo.CoverageAreaNodeID = 0;
+            CommonInfo.CoverageAreaNodeType = 0;
+            CommonInfo.FlgDSRSO = 1;
+
+            shardPrefForCoverageArea(0, 0);
+            flgDSRSOSharedPref(1);
+
+            if (dbengine.isDataAlreadyExist(0, 0)) {
+                Date date1 = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+                fDate = sdf.format(date1).trim();
+
+                // Date date=new Date();
+                SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+                String fDateNew = sdf1.format(date1);
+                //fDate = passDate.trim().toString();
+
+
+                Intent storeIntent = new Intent(DialogActivity_MarketVisit.this, StoreSelection.class);
+                storeIntent.putExtra("imei", imei);
+                storeIntent.putExtra("userDate", fDate);
+                storeIntent.putExtra("pickerDate", fDateNew);
+                storeIntent.putExtra("rID", rID);
+                startActivity(storeIntent);
+                finish();
+            } else {
+                flgOwnRouteClick = 1;
+                marketVisitGetRoutesClick();
+            }
+        }
+    }
+
     private void showSettingsAlert(){
         android.app.AlertDialog.Builder alertDialogGps = new android.app.AlertDialog.Builder(this);
 
@@ -626,6 +754,31 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
         }
     }
 
+
+    private void showAlertForEveryOneIfNoRouteExists(String msg)
+    {
+        //AlertDialog.Builder alertDialogNoConn = new AlertDialog.Builder(new ContextThemeWrapper(LauncherActivity.this, R.style.Dialog));
+        AlertDialog.Builder alertDialogNoConn = new AlertDialog.Builder(DialogActivity_MarketVisit.this);
+
+        alertDialogNoConn.setTitle(R.string.AlertDialogHeaderMsg);
+        alertDialogNoConn.setMessage(msg);
+        alertDialogNoConn.setCancelable(false);
+        alertDialogNoConn.setNeutralButton(R.string.AlertDialogOkButton,new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+
+
+
+
+                 finish();
+            }
+        });
+        alertDialogNoConn.setIcon(R.drawable.info_ico);
+        AlertDialog alert = alertDialogNoConn.create();
+        alert.show();
+    }
     private void showAlertForEveryOne(String msg)
     {
         //AlertDialog.Builder alertDialogNoConn = new AlertDialog.Builder(new ContextThemeWrapper(LauncherActivity.this, R.style.Dialog));
@@ -639,7 +792,11 @@ public class DialogActivity_MarketVisit extends BaseActivity implements Location
             public void onClick(DialogInterface dialog, int which)
             {
                 dialog.dismiss();
-                //finish();
+
+
+
+
+               // finish();
             }
         });
         alertDialogNoConn.setIcon(R.drawable.info_ico);
@@ -1722,7 +1879,7 @@ private void marketVisitGetRoutesClick(){
 
             // ServiceWorker newservice=new ServiceWorker();
 
-          /*  for(int mm = 1; mm<8; mm++) {
+            for(int mm = 1; mm<8; mm++) {
                 if (mm == 1) {
                     newservice = newservice.fnGetStockUploadedStatus(getApplicationContext(), fDate, imei);
 
@@ -1738,7 +1895,7 @@ private void marketVisitGetRoutesClick(){
                     }
 
                 }
-            }*/
+            }
 
 
             return null;
@@ -1750,25 +1907,29 @@ private void marketVisitGetRoutesClick(){
         protected void onPostExecute(Void result)
         {
             super.onPostExecute(result);
-            dismissProgress();
+           // dismissProgress();
 
             flgStockOut= dbengine.fetchtblStockUploadedStatus();
             //  flgStockOut=1;
             if(serviceException)
             {
+                dismissProgress();
                 serviceException=false;
                 showAlertException(getResources().getString(R.string.txtError),getResources().getString(R.string.txtErrorRetrievingData));
-                //    Toast.makeText(AllButtonActivity.this,"Please fill Stock out first for starting your market visit.",Toast.LENGTH_SHORT).show();
-                //  showSyncError();
+                //Toast.makeText(AllButtonActivity.this,"Please fill Stock out first for starting your market visit.",Toast.LENGTH_SHORT).show();
+                //showSyncError();
             }
             else if(flgStockOut==0 && flgOwnRouteClick==1)
             {
+                dismissProgress();
                 flgOwnRouteClick=0;
                 showAlertStockOut(getResources().getString(R.string.genTermNoDataConnection),getResources().getString(R.string.AlertVANStockStockOut)); // message change by Avinash Sir on 3 Aug 2018 on Paras SO SFA
                 //   Toast.makeText(AllButtonActivity.this,"Error while retrieving data.",Toast.LENGTH_SHORT).show();
+
             }
             else if(dbengine.flgConfirmedWareHouse()==0 && flgOwnRouteClick==1)
             {
+                dismissProgress();
                 flgOwnRouteClick=0;
                 showAlertStockOut(getResources().getString(R.string.genTermNoDataConnection),getResources().getString(R.string.AlertVANStockStockValidate));
             }
@@ -1791,6 +1952,7 @@ private void marketVisitGetRoutesClick(){
             public void onClick(DialogInterface dialog,int which)
             {
                 dialog.dismiss();
+                finish();
             }
         });
 
@@ -1813,7 +1975,7 @@ private void marketVisitGetRoutesClick(){
 
 
             // Base class method for Creating ProgressDialog
-            showProgress(getResources().getString(R.string.RetrivingDataMsg));
+            //showProgress(getResources().getString(R.string.RetrivingDataMsg));
 
 
         }
@@ -1854,12 +2016,13 @@ private void marketVisitGetRoutesClick(){
                     if(mm==2)
                     {
 
-                      /*  newservice = newservice.getallProduct(getApplicationContext(), fDate, imei, rID,RouteType);
+                        newservice = newservice.getallProduct(getApplicationContext(), fDate, imei, rID,RouteType);
                         if(newservice.flagExecutedServiceSuccesfully!=2)
                         {
+                            serviceExceptionCode=" for Category and Error Code is : "+newservice.exceptionCode;
                             serviceException=true;
                             break;
-                        }*/
+                        }
                     }
                     if(mm==3)
                     {
