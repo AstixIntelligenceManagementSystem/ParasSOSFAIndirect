@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.astix.Common.CommonInfo;
 
@@ -35,7 +36,7 @@ public class DialogActivity_Report extends BaseActivity
 
     LinkedHashMap<String, String> hmapdsrIdAndDescr_details=new LinkedHashMap<String, String>();
     String[] drsNames;
-
+    TextView txt_WholeReport,txt_dsrReport,txt_DlSkuWise,txt_DL_StoreWise,txt_DL_StoreSKUWise,txt_MTSkuWise,txt_MT_StoreWise,txt_MT_StoreSKUWise;
     public String ReasonId;
     public String ReasonText="NA";
     public static int RowId=0;
@@ -123,21 +124,80 @@ public class DialogActivity_Report extends BaseActivity
         sharedPrefReport = getSharedPreferences("Report", MODE_PRIVATE);
         sharedPref = getSharedPreferences(CommonInfo.Preference, MODE_PRIVATE);
 
-        final RadioButton rb_myReport= (RadioButton) findViewById(R.id.rb_myReport);
-        final RadioButton rb_dsrReport= (RadioButton) findViewById(R.id.rb_dsrReport);
-        final RadioButton rb_WholeReport= (RadioButton) findViewById(R.id.rb_WholeReport);
-        final Spinner spinner_dsrVisit= (Spinner) findViewById(R.id.spinner_dsrVisit);
-
-        final RadioButton rb_dsrAttendance= (RadioButton) findViewById(R.id.rb_dsrAttendance);
-
-
-        final RadioButton rb_distrbtrScope= (RadioButton) findViewById(R.id.rb_distrbtrScope);
-        final Spinner spinner_distrbtrScope= (Spinner) findViewById(R.id.spinner_distrbtrScope);
-
-        Button btn_proceed= (Button) findViewById(R.id.btn_proceed);
+        txt_WholeReport= (TextView) findViewById(R.id.txt_WholeReport);
+                txt_dsrReport= (TextView) findViewById(R.id.txt_dsrReport);
+        txt_DlSkuWise= (TextView) findViewById(R.id.txt_DlSkuWise);
+                txt_DL_StoreWise= (TextView) findViewById(R.id.txt_DL_StoreWise);
+        txt_DL_StoreSKUWise= (TextView) findViewById(R.id.txt_DL_StoreSKUWise);
+                txt_MTSkuWise= (TextView) findViewById(R.id.txt_MTSkuWise);
+        txt_MT_StoreWise= (TextView) findViewById(R.id.txt_MT_StoreWise);
+                txt_MT_StoreSKUWise= (TextView) findViewById(R.id.txt_MT_StoreSKUWise);
         Button btn_cancel= (Button) findViewById(R.id.btn_cancel);
 
-
+        txt_WholeReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","1");
+                startActivity(i);
+            }
+        });
+        txt_dsrReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","2");
+                startActivity(i);
+            }
+        });
+        txt_DlSkuWise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","3");
+                startActivity(i);
+            }
+        });
+        txt_DL_StoreWise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","4");
+                startActivity(i);
+            }
+        });
+        txt_DL_StoreSKUWise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","5");
+                startActivity(i);
+            }
+        });
+        txt_MTSkuWise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","6");
+                startActivity(i);
+            }
+        });
+        txt_MT_StoreWise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","7");
+                startActivity(i);
+            }
+        });
+        txt_MT_StoreSKUWise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
+                i.putExtra("ReportClick","8");
+                startActivity(i);
+            }
+        });
         btn_cancel.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -147,229 +207,7 @@ public class DialogActivity_Report extends BaseActivity
             }
         });
 
-        btn_proceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
 
-                if(rb_myReport.isChecked())
-                {
-                    String SONodeIdAndNodeType= dbengine.fnGetPersonNodeIDAndPersonNodeTypeForSO();
-
-                    int tempSalesmanNodeId=Integer.parseInt(SONodeIdAndNodeType.split(Pattern.quote("^"))[0]);
-                    int tempSalesmanNodeType=Integer.parseInt(SONodeIdAndNodeType.split(Pattern.quote("^"))[1]);
-                    shardPrefForSalesman(tempSalesmanNodeId,tempSalesmanNodeType);
-
-                    flgDataScopeSharedPref(1);
-                    CommonInfo.SalesmanNodeId=0;
-                    CommonInfo.SalesmanNodeType=0;
-                    CommonInfo.flgDataScope=1;
-                    Intent i=new Intent(DialogActivity_Report.this,DetailReportSummaryActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-                else if(rb_WholeReport.isChecked())
-                {
-                    /*String SONodeIdAndNodeType= dbengine.fnGetPersonNodeIDAndPersonNodeTypeForSO();
-
-                    CommonInfo.PersonNodeID=Integer.parseInt(SONodeIdAndNodeType.split(Pattern.quote("^"))[0]);
-                    CommonInfo.PersonNodeType=Integer.parseInt(SONodeIdAndNodeType.split(Pattern.quote("^"))[1]);
-
-                    shardPrefForSalesman(0,0);
-                    flgDataScopeSharedPref(3);
-                    Intent i=new Intent(DialogActivity_Report.this,DetailReportSummaryActivity.class);
-                    startActivity(i);
-                    finish();*/
-                    Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
-                    i.putExtra("ReportClick","1");
-                    startActivity(i);
-                }
-                else if(rb_dsrReport.isChecked())
-                {
-
-                    Intent i = new Intent(DialogActivity_Report.this, WebViewTeamReport.class);
-                    i.putExtra("ReportClick","2");
-                    startActivity(i);
-                  /*  if(!SelectedDSRValue.equals("") && !SelectedDSRValue.equals("Select DSR") && !SelectedDSRValue.equals("No DSR") )
-                    {
-
-                        String DSRNodeIdAndNodeType= dbengine.fnGetDSRPersonNodeIdAndNodeType(SelectedDSRValue);
-                        int tempSalesmanNodeId=Integer.parseInt(DSRNodeIdAndNodeType.split(Pattern.quote("^"))[0]);
-                        int tempSalesmanNodeType=Integer.parseInt(DSRNodeIdAndNodeType.split(Pattern.quote("^"))[1]);
-                        shardPrefForSalesman(tempSalesmanNodeId,tempSalesmanNodeType);
-                        flgDataScopeSharedPref(2);
-
-                        Intent i = new Intent(DialogActivity_Report.this, DetailReportSummaryActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else
-                    {
-                    }*/
-                }
-                else if(rb_distrbtrScope.isChecked())
-                {
-                    if(!SelectedDistrbtrName.equals("") && !SelectedDistrbtrName.equals("Select Distributor") && !SelectedDistrbtrName.equals("No Distributor") )
-                    {
-                        String DbrNodeIdAndNodeType= hmapDistrbtrList.get(SelectedDistrbtrName);
-                        int tempSalesmanNodeId=Integer.parseInt(DbrNodeIdAndNodeType.split(Pattern.quote("^"))[0]);
-                        int tempSalesmanNodeType=Integer.parseInt(DbrNodeIdAndNodeType.split(Pattern.quote("^"))[1]);
-
-                        shardPrefForSalesman(tempSalesmanNodeId,tempSalesmanNodeType);
-
-                        flgDataScopeSharedPref(4);
-                        Intent i = new Intent(DialogActivity_Report.this, DetailReportSummaryActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else
-                    {
-                        showAlertSingleButtonInfo(getResources().getString(R.string.selectDistributorProceeds));
-                    }
-                }
-                else if(rb_dsrAttendance.isChecked())
-                {
-                      Intent i=new Intent(DialogActivity_Report.this,WebViewDSRAttendanceReportActivity.class);
-                      startActivity(i);
-                      finish();
-  }
-                else
-                {
-                   showAlertSingleButtonInfo(getResources().getString(R.string.selectOptionProceeds));
-                }
-            }
-        });
-
-        rb_dsrAttendance.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(rb_dsrAttendance.isChecked())
-                {
-                    rb_dsrReport.setChecked(false);
-                    rb_WholeReport.setChecked(false);
-                    rb_dsrReport.setChecked(false);
-                    spinner_dsrVisit.setVisibility(View.GONE);
-                    rb_distrbtrScope.setChecked(false);
-                    rb_dsrAttendance.setChecked(true);
-                    spinner_distrbtrScope.setVisibility(View.GONE);
-                }
-            }
-        });
-        rb_myReport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(rb_myReport.isChecked())
-                {
-                    rb_dsrReport.setChecked(false);
-                    rb_WholeReport.setChecked(false);
-                    spinner_dsrVisit.setVisibility(View.GONE);
-                    rb_distrbtrScope.setChecked(false);
-                    rb_dsrAttendance.setChecked(false);
-                    spinner_distrbtrScope.setVisibility(View.GONE);
-                }
-            }
-        });
-        rb_WholeReport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(rb_WholeReport.isChecked())
-                {
-                    rb_dsrReport.setChecked(false);
-                    rb_myReport.setChecked(false);
-                    spinner_dsrVisit.setVisibility(View.GONE);
-                    rb_distrbtrScope.setChecked(false);
-                    rb_dsrAttendance.setChecked(false);
-                    spinner_distrbtrScope.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        rb_dsrReport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(rb_dsrReport.isChecked())
-                {
-                    rb_myReport.setChecked(false);
-                    rb_WholeReport.setChecked(false);
-                    rb_distrbtrScope.setChecked(false);
-                    spinner_distrbtrScope.setVisibility(View.GONE);
-                    rb_dsrAttendance.setChecked(false);
-
-                   /* ArrayAdapter adapterCategory=new ArrayAdapter(DialogActivity_Report.this, android.R.layout.simple_spinner_item,drsNames);
-                    adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner_dsrVisit.setAdapter(adapterCategory);
-                    spinner_dsrVisit.setVisibility(View.VISIBLE);
-
-                    spinner_dsrVisit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-                    {
-
-                        @Override
-                        public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3)
-                        {
-                            // TODO Auto-generated method stub
-                            SelectedDSRValue = spinner_dsrVisit.getSelectedItem().toString();
-                           *//**//* ReasonText=spinnerReasonSelected;
-                            int check=dbengine.fetchFlgToShowTextBox(spinnerReasonSelected);
-                            ReasonId=dbengine.fetchReasonIdBasedOnReasonDescr(spinnerReasonSelected);
-                            if(check==0)
-                            {
-                                et_Reason.setVisibility(View.INVISIBLE);
-                            }
-                            else
-                            {
-                                et_Reason.setVisibility(View.VISIBLE);
-                            }*//**//*
-
-
-                            //ReasonId,ReasonText
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> arg0)
-                        {
-                        }
-                    });*/
-
-                }
-            }
-        });
-
-        rb_distrbtrScope.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if(rb_distrbtrScope.isChecked())
-                {
-                    rb_myReport.setChecked(false);
-                    rb_WholeReport.setChecked(false);
-                    rb_dsrReport.setChecked(false);
-                    spinner_dsrVisit.setVisibility(View.GONE);
-                    rb_dsrAttendance.setChecked(false);
-                    ArrayAdapter adapterCategory=new ArrayAdapter(DialogActivity_Report.this, android.R.layout.simple_spinner_item,DbrArray);
-                    adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner_distrbtrScope.setAdapter(adapterCategory);
-                    spinner_distrbtrScope.setVisibility(View.VISIBLE);
-
-                    spinner_distrbtrScope.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-                    {
-                        @Override
-                        public void onItemSelected(AdapterView<?> arg0, View arg1,int arg2, long arg3)
-                        {
-                            SelectedDistrbtrName = spinner_distrbtrScope.getSelectedItem().toString();
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> arg0)
-                        {
-                        }
-                    });
-                }
-            }
-        });
 
 
     }

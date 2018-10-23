@@ -36,6 +36,14 @@ public class WebViewTeamReport extends AppCompatActivity {
     String ImageUrl;
     public String ReportClick="0";
 
+   /* Rpttype	= 1// - SKU wise
+    Rpttype	- 2 - Store wise
+    Rpttype	- 3 - Store-SKU wise
+
+    Periodtype - 1 - Day
+    Periodtype - 2 - MTD*/
+   int Rpttype=0;
+   int Periodtype=0;
     public WebView webView;
     private SharedPreferences sharedPref;
     public boolean onKeyDown(int keyCode, KeyEvent event)
@@ -60,12 +68,36 @@ public class WebViewTeamReport extends AppCompatActivity {
     public void customHeader()
     {
         TextView tv_heading=(TextView) findViewById(R.id.order_detail);
-        if(ReportClick.equals("2"))
+        if(ReportClick.equals("1")){
+            tv_heading.setText(getString(R.string.full_territory));
+        }
+        else if(ReportClick.equals("2"))
         {
             tv_heading.setText(getString(R.string.individual_dsr));
         }
-        else {
-            tv_heading.setText(getString(R.string.full_territory));
+        else if(ReportClick.equals("3"))
+        {
+            tv_heading.setText("Daily "+getString(R.string.txtSKUWise));
+        }
+        else if(ReportClick.equals("4"))
+        {
+            tv_heading.setText("Daily "+getString(R.string.txtStoreWise));
+        }
+        else if(ReportClick.equals("5"))
+        {
+            tv_heading.setText("Daily "+getString(R.string.txtStoreSKUWise));
+        }
+        else if(ReportClick.equals("6"))
+        {
+            tv_heading.setText("MTD "+getString(R.string.txtSKUWise));
+        }
+        else if(ReportClick.equals("7"))
+        {
+            tv_heading.setText("MTD "+getString(R.string.txtStoreWise));
+        }
+        else if(ReportClick.equals("8"))
+        {
+            tv_heading.setText("MTD "+getString(R.string.txtStoreSKUWise));
         }
 
 
@@ -136,10 +168,16 @@ public class WebViewTeamReport extends AppCompatActivity {
                 {
                     ImageUrl= CommonInfo.WebPageUrlTeamReport.trim();
                 }
-                if(ReportClick.equals("1"))
+               else if(ReportClick.equals("1"))
                 {
                     ImageUrl= CommonInfo.WebPageUrlFullTeritory.trim();
                 }
+                else
+                {
+                    ImageUrl= CommonInfo.WebPageDailyMTDReport.trim();
+                }
+
+
                 long syncTIMESTAMP = System.currentTimeMillis();
                 Date datefromat = new Date(syncTIMESTAMP);
                 SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
@@ -149,12 +187,46 @@ public class WebViewTeamReport extends AppCompatActivity {
                 if(ReportClick.equals("2")) {
                     ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&scope=2";
                 }
-                if(ReportClick.equals("1")) {
+                else if(ReportClick.equals("1")) {
                     String txt=dbengine.fngettblSOPersonName();
-
-
-
                     ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2];
+                }
+                else if(ReportClick.equals("3")) {
+                    Rpttype=1;
+                    Periodtype=1;
+                    String txt=dbengine.fngettblSOPersonName();
+                    ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2]+"&Rpttype="+Rpttype+"&Periodtype="+Periodtype;
+                }
+                else if(ReportClick.equals("4")) {
+                    Rpttype=2;
+                    Periodtype=1;
+                    String txt=dbengine.fngettblSOPersonName();
+                    ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2]+"&Rpttype="+Rpttype+"&Periodtype="+Periodtype;
+                }
+                else if(ReportClick.equals("5")) {
+                    Rpttype=3;
+                    Periodtype=1;
+                    String txt=dbengine.fngettblSOPersonName();
+                    ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2]+"&Rpttype="+Rpttype+"&Periodtype="+Periodtype;
+                }
+                else if(ReportClick.equals("6")) {
+                    Rpttype=1;
+                    Periodtype=2;
+                    String txt=dbengine.fngettblSOPersonName();
+                    ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2]+"&Rpttype="+Rpttype+"&Periodtype="+Periodtype;
+                }
+                else if(ReportClick.equals("7")) {
+                    Rpttype=2;
+                    Periodtype=2;
+                    String txt=dbengine.fngettblSOPersonName();
+                    ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2]+"&Rpttype="+Rpttype+"&Periodtype="+Periodtype;
+                }
+                else if(ReportClick.equals("8")) {
+                    Rpttype=3;
+                    Periodtype=2;
+                    String txt=dbengine.fngettblSOPersonName();
+                    ImageUrl = ImageUrl + "imei=" + imei + "&date=" + onlyDate + "&salesnid="+txt.split(Pattern.quote("^"))[0]+"&salesntype="+txt.split(Pattern.quote("^"))[1]+"&scope=3&txt="+txt.split(Pattern.quote("^"))[2]+"&Rpttype="+Rpttype+"&Periodtype="+Periodtype;
+
                 }
                 webView=(WebView) findViewById(R.id.webView);
                 webView.setWebViewClient(new MyBrowser(progressDialog));

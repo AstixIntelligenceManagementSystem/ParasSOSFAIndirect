@@ -300,7 +300,7 @@ public class SplashScreen extends BaseActivity implements  TaskListner
         TelephonyManager tManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         imei = tManager.getDeviceId();
 
-      //imei="354010084603910";
+      imei="868622032054183";
 
       //  imei="356808071065136";
 
@@ -330,7 +330,7 @@ public class SplashScreen extends BaseActivity implements  TaskListner
       // imei="354010084603910";  // paras imei like Godrej
 
        // imei="12345678901234";  // Paras SO IMei
-            imei="352742062583530";
+           // imei="352801088236109";
 
 
         CommonInfo.imei = imei;

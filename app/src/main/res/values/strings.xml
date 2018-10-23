@@ -20,7 +20,8 @@
     <string name="select_report_scope">Summary Reports</string>
     <string name="selectDistributorProceeds">Please select Distributor to Proceed.</string>
     <string name="individual_dsr">Team Report</string>
-    <string name="full_territory">Full Territory</string>
+    <string name="full_territory">Full Territory Summary</string>
+    <string name="overSmry">OverAll Summary</string>
     <string name="distributor_scope">Distributor Scope</string>
     <string name="view_new_added_store">View New Added Store</string>
     <string name="select_attendance_scope">View Attendance Report</string>
@@ -296,9 +297,9 @@
     <string name="txtMTDSummary">MTD\nSummary</string>
     <string name="txtDetailsReport">Details Report:</string>
     <string name="txtTargetvsAchieved">Target vs Achieved</string>
-    <string name="txtSKUWise">SKU\nWise</string>
-    <string name="txtStoreWise">Store\nWise</string>
-    <string name="txtStoreSKUWise">Store-SKU\nWise</string>
+    <string name="txtSKUWise">SKU Wise</string>
+    <string name="txtStoreWise">Store Wise</string>
+    <string name="txtStoreSKUWise">Store-SKU Wise</string>
     <string name="txtTargetCalls">Target Calls</string>
     <string name="txtNotification">Notification</string>
 

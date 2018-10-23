@@ -33,8 +33,8 @@ public class CommonInfo
 	public static String VersionDownloadAPKName="ParasSOSFA.apk";
 	public static String DATABASE_NAME = "DbParasSOSFAApp";
 	public static int AnyVisit = 0;
-	public static int DATABASE_VERSIONID = 17;      // put this field value based on value in table on the server
-	public static String AppVersionID = "1.0";   // put this field value based on value in table on the server
+	public static int DATABASE_VERSIONID = 18;      // put this field value based on value in table on the server
+	public static String AppVersionID = "1.1";   // put this field value based on value in table on the server
 	public static int Application_TypeID = 9; //1=Parag Store Mapping,2=Parag SFA Indirect,3=Parag SFA Direct
 	public static String OrderSyncPath="http://103.20.212.194/ReadXML_ParasLive/DefaultSOSFA.aspx";
 	public static String ImageSyncPath="http://103.20.212.194/ReadXML_ParasImagesLive/Default.aspx";
@@ -75,12 +75,13 @@ public class CommonInfo
 	public static String WebPageUrl="http://103.20.212.194/Parassfa_dev/Mobile/frmRouteTracking.aspx";
 	public static String WebPageUrlTeamReport="http://103.20.212.194/parassfa/Mobile/PDARptTopSummary.aspx?";
 	public static String WebPageUrlFullTeritory="http://103.20.212.194/parassfa/Mobile/PDADayAndMTDSummary.aspx?";
-
+	public static String WebPageDailyMTDReport="http://103.20.212.194/parassfa/Mobile/PDADayAndMTDDetailRpt.aspx?";
 
 	// Its for Dev Path on 194 Server new aaaa
 
 
 /*
+
 	public static final String DistributorMapXMLFolder="ParasSOSFADistributorMapXML";
 	public static final String DistributorStockXMLFolder="ParasSOSFADistributorStockXML";
 	public static final String DistributorCheckInXMLFolder="ParasSOSFADistributorCheckInXML";
@@ -150,7 +151,10 @@ public class CommonInfo
 	public static String WebPageUrl="http://103.20.212.194/Parassfa_dev/Mobile/frmRouteTracking.aspx";
 
 	public static String WebPageUrlTeamReport="http://103.20.212.194/parassfa_dev/Mobile/PDARptTopSummary.aspx?";
-	public static String WebPageUrlFullTeritory="http://103.20.212.194/parassfa_dev/Mobile/PDADayAndMTDSummary.aspx?";*/
+	public static String WebPageUrlFullTeritory="http://103.20.212.194/parassfa_dev/Mobile/PDADayAndMTDSummary.aspx?";
+	public static String WebPageDailyMTDReport="http://103.20.212.194/parassfa_dev/Mobile/PDADayAndMTDDetailRpt.aspx?";
+
+*/
 
 	//
 
